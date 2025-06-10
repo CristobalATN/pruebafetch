@@ -185,22 +185,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Show/hide episodios section based on formato selection
+    // Show/hide sections based on formato selection
     const tipoFormato = document.getElementById('tipoFormato');
     const episodiosSection = document.getElementById('episodiosSection');
+    const lineasNoSerializadasSection = document.getElementById('lineasNoSerializadasSection');
     
-    if (tipoFormato && episodiosSection) {
+    if (tipoFormato) {
         tipoFormato.addEventListener('change', function() {
-            const selectedFormat = this.value;
-            if (selectedFormat === 'Serie (de televisión)' || selectedFormat === 'Telenovela') {
-                episodiosSection.style.display = 'block';
-            } else {
-                episodiosSection.style.display = 'none';
-                // Clear any existing episodio blocks when hiding the section
-                const bloquesContainer = document.getElementById('bloquesEpisodiosContainer');
-                if (bloquesContainer) {
-                    bloquesContainer.innerHTML = '';
-                }
+            const isSerie = this.value === 'serie_tv' || this.value === 'web_serie' || this.value === 'miniserie';
+            episodiosSection.style.display = isSerie ? 'block' : 'none';
+            lineasNoSerializadasSection.style.display = isSerie ? 'none' : 'block';
+            
+            // Si es serie, asegurarse de limpiar el contenedor de líneas no serializadas
+            if (isSerie) {
+                document.getElementById('lineasNoSerializadasContainer').innerHTML = '';
             }
         });
     }
@@ -500,64 +498,78 @@ function generateEpisodiosIndividuales(container, desde, hasta) {
 
 // Add linea de participación
 function addLineaParticipacion(button) {
-    const lineasContainer = button.closest('.subbloque').querySelector('.lineas-participacion');
-    if (!lineasContainer) return;
-    
+    const container = button.closest('.bloque-participacion').querySelector('.lineas-participacion-container');
+    addLineaParticipacionToContainer(container);
+}
+
+// Función para agregar línea de participación a un contenedor específico
+function addLineaParticipacionToContainer(container) {
     const template = document.getElementById('lineaParticipacionTemplate');
-    if (!template) return;
     
-    const clone = template.content.cloneNode(true);
-    const linea = clone.querySelector('.linea-participacion');
-    
-    // Agregar la línea al contenedor
-    lineasContainer.appendChild(linea);
-    
-    // Inicializar el selector de autor
-    const autorSelect = linea.querySelector('.autor');
-    if (autorSelect) {
-        // Si ya hay autores cargados, poblar el select
-        if (listaAutoresGlobal.length > 0) {
-            // Guardar el valor actual si existe
-            const valorActual = autorSelect.value;
-            
-            // Limpiar opciones existentes excepto la primera
-            while (autorSelect.options.length > 1) {
-                autorSelect.remove(1);
-            }
-            
-            // Agregar las opciones ordenadas
-            listaAutoresGlobal.forEach(autor => {
-                const option = new Option(autor, autor);
-                autorSelect.add(option);
+    if (template && container) {
+        const newLine = document.importNode(template.content, true);
+        
+        // Configurar el select de roles
+        const rolSelect = newLine.querySelector('.rol');
+        if (rolSelect) {
+            const roles = ['Autor', 'Compositor', 'Director', 'Guionista', 'Productor'];
+            roles.forEach(rol => {
+                const option = document.createElement('option');
+                option.value = rol;
+                option.textContent = rol;
+                rolSelect.appendChild(option);
             });
-            
-            // Restaurar el valor anterior si existe
-            if (valorActual) {
-                autorSelect.value = valorActual;
+        }
+        
+        // Configurar el select de autores
+        const autorSelect = newLine.querySelector('.autor');
+        if (autorSelect) {
+            // Asegurarse de que los datos de autores estén cargados
+            if (listaAutoresGlobal.length === 0) {
+                cargarAutores();
+            } else {
+                listaAutoresGlobal.forEach(autor => {
+                    const option = document.createElement('option');
+                    option.value = autor;
+                    option.textContent = autor;
+                    autorSelect.appendChild(option);
+                });
+                
+                // Inicializar Select2
+                $(autorSelect).select2({
+                    tags: true,
+                    createTag: createTag,
+                    matcher: matcher
+                });
             }
         }
         
-        // Inicializar Select2
-        $(autorSelect).select2({
-            tags: true,
-            tokenSeparators: [',', ' '],
-            createTag: function(params) {
-                return {
-                    id: params.term,
-                    text: params.term,
-                    newTag: true
-                };
-            }
-        });
+        // Agregar manejador de eventos para el botón de eliminar
+        const removeBtn = newLine.querySelector('.remove-linea');
+        if (removeBtn) {
+            removeBtn.addEventListener('click', function() {
+                removeLineaParticipacion(this);
+            });
+        }
+        
+        container.appendChild(newLine);
     }
-    
-    // Inicializar el selector de rol
-    const rolSelect = linea.querySelector('.rol');
-    if (rolSelect) {
-        $(rolSelect).select2({
-            tags: true,
-            tokenSeparators: [',', ' ']
-        });
+}
+
+// Función para agregar línea de participación no serializada
+function addLineaParticipacionNoSerializada() {
+    const container = document.getElementById('lineasNoSerializadasContainer');
+    if (container) {
+        // Crear un contenedor de líneas de participación si no existe
+        let lineasContainer = container.querySelector('.lineas-participacion-container');
+        if (!lineasContainer) {
+            lineasContainer = document.createElement('div');
+            lineasContainer.className = 'lineas-participacion-container';
+            container.appendChild(lineasContainer);
+        }
+        
+        // Agregar la línea de participación
+        addLineaParticipacionToContainer(lineasContainer);
     }
 }
 
@@ -663,8 +675,35 @@ function collectFormData() {
         // Siempre agregar la fila maestra como primera fila
         resultados.push(primeraFila);
         
-        // Si no hay bloques de episodios, devolver solo la primera fila
+        // Si no hay bloques de episodios, verificar si hay líneas de participación no serializadas
         if (bloquesEpisodios.length === 0) {
+            // Obtener líneas de participación no serializadas
+            const lineasNoSerializadas = [];
+            const lineasContainer = document.querySelector('#lineasNoSerializadasContainer .lineas-participacion-container');
+            
+            if (lineasContainer) {
+                lineasContainer.querySelectorAll('.linea-participacion').forEach(linea => {
+                    const rol = Array.from(linea.querySelectorAll('.rol option:checked')).map(opt => opt.value).join(', ');
+                    const autor = linea.querySelector('.autor')?.value || '';
+                    const porcentaje = linea.querySelector('.porcentaje')?.value || '';
+                    
+                    if (rol && autor && porcentaje) {
+                        lineasNoSerializadas.push({ rol, autor, porcentaje });
+                    }
+                });
+                
+                // Si hay líneas de participación, agregarlas a los resultados
+                if (lineasNoSerializadas.length > 0) {
+                    lineasNoSerializadas.forEach(linea => {
+                        const filaNoSerializada = { ...primeraFila };
+                        filaNoSerializada.rol = linea.rol;
+                        filaNoSerializada.autor = linea.autor;
+                        filaNoSerializada.porcentaje = linea.porcentaje;
+                        resultados.push(filaNoSerializada);
+                    });
+                }
+            }
+            
             return resultados;
         }
         
