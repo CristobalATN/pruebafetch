@@ -620,15 +620,16 @@ function collectFormData() {
     try {
         // Datos generales con manejo de elementos nulos
         const generalData = {
-            tituloOriginal: getElementValue('tituloOriginal'),
-            tipoFormato: getElementValue('tipoFormato'),
-            empresaProductora: getElementValue('empresaProductora'),
-            paisProduccion: getElementValue('paisProduccion'),
-            anioProduccion: getElementValue('anioProduccion'),
+            titulo_original: getElementValue('tituloOriginal'),
+            tipo_formato: getElementValue('tipoFormato'),
+            empresa_productora: getElementValue('empresaProductora'),
+            pais_produccion: getElementValue('paisProduccion'),
+            anio_produccion: getElementValue('anioProduccion'),
             idioma: getElementValue('idioma'),
             actores: getElementValue('actores'),
             directores: getElementValue('directores'),
-            guionistas: getElementValue('guionistas')
+            guionistas: getElementValue('guionistas'),
+            fecha_envio: new Date().toISOString()
         };
         
         // Datos de exhibiciones
@@ -682,9 +683,9 @@ function collectFormData() {
                             episodiosData.push({
                                 ...generalData,
                                 ...(exhibiciones[0] || {}),
-                                temporada: temporada,
-                                numEpisodio: i,
-                                tituloEpisodio: titulos[i] || `Episodio ${i}`,
+                                temporada: temporada || '1',
+                                num_episodio: i,
+                                titulo_episodio: titulos[i] || `Episodio ${i}`,
                                 rol: linea.rol,
                                 autor: linea.autor,
                                 porcentaje: linea.porcentaje,
@@ -701,7 +702,8 @@ function collectFormData() {
             return [{
                 ...generalData,
                 ...(exhibiciones[0] || {}),
-                fechaEnvio: new Date().toISOString()
+                temporada: '1', // Valor por defecto para temporada
+                num_episodio: 1 // Valor por defecto para número de episodio
             }];
         }
         
