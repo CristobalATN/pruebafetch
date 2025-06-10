@@ -570,7 +570,7 @@ function removeLineaParticipacion(button) {
 }
 
 // URL de la API de Power Automate (reemplazar con la URL real)
-const POWER_AUTOMATE_URL = 'https://default0c13096209bc40fc8db89d043ff625.1a.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/b4efa70c80654ec488236ec10a4fb4b4/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-0c130962-09bc-40fc-8db8-9d043ff6251a&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=F1kVR1aS2F84dre8fnUgdPwgBO1UK4uxCl4BIASpkRg';
+const POWER_AUTOMATE_URL = 'https://your-power-automate-url-here.flow.microsoft.com/...';
 
 // Función para mostrar mensajes al usuario
 function showMessage(message, isError = false) {
@@ -729,11 +729,32 @@ async function submitFormData(event) {
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('obraForm');
     if (form) {
-        // Eliminar cualquier manejador de eventos anterior
-        const newForm = form.cloneNode(true);
-        form.parentNode.replaceChild(newForm, form);
+        // Configurar Select2 para los selects existentes
+        $('.select2').select2({
+            tags: true,
+            createTag: function(params) {
+                const term = params.term.trim();
+                if (term === '') {
+                    return null;
+                }
+                return {
+                    id: term,
+                    text: term,
+                    newTag: true
+                };
+            },
+            matcher: function(params, data) {
+                if ($.trim(params.term) === '') {
+                    return data;
+                }
+                if (data.text.toLowerCase().includes(params.term.toLowerCase())) {
+                    return data;
+                }
+                return null;
+            }
+        });
         
-        // Agregar el nuevo manejador
-        newForm.addEventListener('submit', submitFormData);
+        // Manejar el envío del formulario
+        form.addEventListener('submit', submitFormData);
     }
 });
