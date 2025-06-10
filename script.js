@@ -4,6 +4,30 @@ let contadorBloques = 0;
 // Variable global para almacenar la lista de autores
 let listaAutoresGlobal = [];
 
+// Función para crear etiquetas en Select2
+function createTag(params) {
+    const term = params.term.trim();
+    if (term === '') {
+        return null;
+    }
+    return {
+        id: term,
+        text: term,
+        newTag: true
+    };
+}
+
+// Función para buscar coincidencias en Select2
+function matcher(params, data) {
+    if ($.trim(params.term) === '') {
+        return data;
+    }
+    if (data.text.toLowerCase().includes(params.term.toLowerCase())) {
+        return data;
+    }
+    return null;
+}
+
 // Función para actualizar los selects de autores
 function actualizarSelectsAutores() {
     const selects = document.querySelectorAll('.autor:not(.select2-hidden-accessible)');
@@ -841,6 +865,11 @@ async function submitFormData(event) {
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('obraForm');
     if (form) {
+        // Configurar manejador para el botón de agregar línea no serializada
+        const addLineaNoSerializadaBtn = document.getElementById('addLineaNoSerializada');
+        if (addLineaNoSerializadaBtn) {
+            addLineaNoSerializadaBtn.addEventListener('click', addLineaParticipacionNoSerializada);
+        }
         // Configurar Select2 para los selects existentes
         $('.select2').select2({
             tags: true,
