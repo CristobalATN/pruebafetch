@@ -652,12 +652,40 @@ function collectFormData() {
         
         // Procesar líneas de participación generales
         document.querySelectorAll('#lineasParticipacionContainer .linea-participacion').forEach(linea => {
-            const rol = Array.from(linea.querySelectorAll('.rol option:checked')).map(opt => opt.value).join(', ');
-            const autor = linea.querySelector('.autor')?.value || '';
+            // Obtener el valor del select de rol (puede ser múltiple)
+            const roles = [];
+            const selectRol = linea.querySelector('.rol');
+            if (selectRol) {
+                for (let i = 0; i < selectRol.options.length; i++) {
+                    if (selectRol.options[i].selected) {
+                        roles.push(selectRol.options[i].value);
+                    }
+                }
+            }
+            const rol = roles.join(', ');
+            
+            // Obtener el valor del select2 de autor
+            let autor = '';
+            const selectAutor = linea.querySelector('.autor');
+            if (selectAutor) {
+                autor = $(selectAutor).val() || '';
+                // Si es un array (múltiple), unir con comas
+                if (Array.isArray(autor)) {
+                    autor = autor.join(', ');
+                }
+            }
+            
+            // Obtener el valor del input de porcentaje
             const porcentaje = linea.querySelector('.porcentaje')?.value || '';
             
+            console.log('Línea de participación:', { rol, autor, porcentaje });
+            
             if (rol && autor && porcentaje) {
-                generalData.lineas_participacion.push({ rol, autor, porcentaje });
+                generalData.lineas_participacion.push({
+                    rol: rol,
+                    autor: autor,
+                    porcentaje: porcentaje
+                });
             }
         });
         
@@ -697,8 +725,28 @@ function collectFormData() {
             // Obtener líneas de participación
             const lineas = [];
             bloque.querySelectorAll('.linea-participacion').forEach(linea => {
-                const rol = Array.from(linea.querySelectorAll('.rol option:checked')).map(opt => opt.value).join(', ');
-                const autor = linea.querySelector('.autor')?.value || '';
+                // Obtener el valor del select de rol (puede ser múltiple)
+                const roles = [];
+                const selectRol = linea.querySelector('.rol');
+                if (selectRol) {
+                    for (let i = 0; i < selectRol.options.length; i++) {
+                        if (selectRol.options[i].selected) {
+                            roles.push(selectRol.options[i].value);
+                        }
+                    }
+                }
+                const rol = roles.join(', ');
+                
+                // Obtener el valor del select2 de autor
+                let autor = '';
+                const selectAutor = linea.querySelector('.autor');
+                if (selectAutor) {
+                    autor = $(selectAutor).val() || '';
+                    // Si es un array (múltiple), unir con comas
+                    if (Array.isArray(autor)) {
+                        autor = autor.join(', ');
+                    }
+                }
                 const porcentaje = linea.querySelector('.porcentaje')?.value || '';
                 
                 if (rol && autor && porcentaje) {
