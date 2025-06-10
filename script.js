@@ -4,6 +4,29 @@ let contadorBloques = 0;
 // Variable global para almacenar la lista de autores
 let listaAutoresGlobal = [];
 
+// Funciones auxiliares para Select2
+function createTag(params) {
+    const term = $.trim(params.term);
+    if (term === '') {
+        return null;
+    }
+    return {
+        id: term,
+        text: term,
+        newTag: true
+    };
+}
+
+function matcher(params, data) {
+    if ($.trim(params.term) === '') {
+        return data;
+    }
+    if (data.text.toLowerCase().includes(params.term.toLowerCase())) {
+        return data;
+    }
+    return null;
+}
+
 // Función para actualizar los selects de autores
 function actualizarSelectsAutores() {
     const selects = document.querySelectorAll('.autor:not(.select2-hidden-accessible)');
@@ -922,26 +945,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Configurar Select2 para los selects existentes
         $('.select2').select2({
             tags: true,
-            createTag: function(params) {
-                const term = params.term.trim();
-                if (term === '') {
-                    return null;
-                }
-                return {
-                    id: term,
-                    text: term,
-                    newTag: true
-                };
-            },
-            matcher: function(params, data) {
-                if ($.trim(params.term) === '') {
-                    return data;
-                }
-                if (data.text.toLowerCase().includes(params.term.toLowerCase())) {
-                    return data;
-                }
-                return null;
-            }
+            createTag: createTag,
+            matcher: matcher
         });
         
         // Manejar el botón de agregar participación general
