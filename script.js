@@ -601,77 +601,108 @@ function showMessage(message, isError = false) {
     }, 5000);
 }
 
+// Función para obtener el valor de un elemento de forma segura
+function getElementValue(id, defaultValue = '') {
+    const element = document.getElementById(id);
+    return element ? element.value : defaultValue;
+}
+
 // Función para recopilar los datos del formulario en formato JSON
 function collectFormData() {
-    // Datos generales
-    const generalData = {
-        tituloOriginal: document.getElementById('tituloOriginal').value,
-        tipoFormato: document.getElementById('tipoFormato').value,
-        empresaProductora: document.getElementById('empresaProductora').value,
-        paisProduccion: document.getElementById('paisProduccion').value,
-        anioProduccion: document.getElementById('anioProduccion').value,
-        idioma: document.getElementById('idioma').value,
-        actores: document.getElementById('actores').value,
-        directores: document.getElementById('directores').value,
-        guionistas: document.getElementById('guionistas').value
-    };
-    
-    // Datos de exhibiciones
-    const exhibiciones = [];
-    document.querySelectorAll('.exhibicion-item').forEach((item) => {
-        exhibiciones.push({
-            otroTitulo: item.querySelector('.otroTitulo').value,
-            idioma: item.querySelector('.idiomaExhibicion').value,
-            pais: item.querySelector('.paisExhibicion').value,
-            anio: item.querySelector('.anioExhibicion').value
-        });
-    });
-    
-    // Datos de episodios
-    const episodiosData = [];
-    document.querySelectorAll('.bloque-episodios').forEach((bloque) => {
-        const desde = parseInt(bloque.querySelector('.desdeEpisodio').value) || 0;
-        const hasta = parseInt(bloque.querySelector('.hastaEpisodio').value) || 0;
-        const temporada = bloque.querySelector('.temporada-episodio') ? bloque.querySelector('.temporada-episodio').value : '';
+    try {
+        // Datos generales con manejo de elementos nulos
+        const generalData = {
+            tituloOriginal: getElementValue('tituloOriginal'),
+            tipoFormato: getElementValue('tipoFormato'),
+            empresaProductora: getElementValue('empresaProductora'),
+            paisProduccion: getElementValue('paisProduccion'),
+            anioProduccion: getElementValue('anioProduccion'),
+            idioma: getElementValue('idioma'),
+            actores: getElementValue('actores'),
+            directores: getElementValue('directores'),
+            guionistas: getElementValue('guionistas')
+        };
         
-        // Obtener títulos de episodios
-        const titulos = {};
-        bloque.querySelectorAll('.titulo-episodio').forEach(input => {
-            const num = input.getAttribute('data-episodio');
-            titulos[num] = input.value;
-        });
-        
-        // Obtener líneas de participación
-        const lineas = [];
-        bloque.querySelectorAll('.linea-participacion').forEach(linea => {
-            const rol = Array.from(linea.querySelectorAll('.rol option:checked')).map(opt => opt.value).join(', ');
-            const autor = linea.querySelector('.autor').value;
-            const porcentaje = linea.querySelector('.porcentaje').value;
-            
-            if (rol && autor && porcentaje) {
-                lineas.push({ rol, autor, porcentaje });
+        // Datos de exhibiciones
+        const exhibiciones = [];
+        document.querySelectorAll('.exhibicion-item').forEach((item) => {
+            const exhibicion = {
+                otroTitulo: item.querySelector('.otroTitulo')?.value || '',
+                idioma: item.querySelector('.idiomaExhibicion')?.value || '',
+                pais: item.querySelector('.paisExhibicion')?.value || '',
+                anio: item.querySelector('.anioExhibicion')?.value || ''
+            };
+            // Solo agregar si hay al menos un campo con valor
+            if (Object.values(exhibicion).some(val => val)) {
+                exhibiciones.push(exhibicion);
             }
         });
         
-        // Crear una entrada por cada episodio y línea de participación
-        for (let i = desde; i <= hasta; i++) {
-            lineas.forEach(linea => {
-                episodiosData.push({
-                    ...generalData,  // Incluir todos los datos generales
-                    ...(exhibiciones[0] || {}),  // Incluir datos de la primera exhibición si existe
-                    temporada: temporada,
-                    numEpisodio: i,
-                    tituloEpisodio: titulos[i] || `Episodio ${i}`,
-                    rol: linea.rol,
-                    autor: linea.autor,
-                    porcentaje: linea.porcentaje,
-                    fechaEnvio: new Date().toISOString()
+        // Datos de episodios
+        const episodiosData = [];
+        const bloquesEpisodios = document.querySelectorAll('.bloque-episodios');
+        
+        if (bloquesEpisodios.length > 0) {
+            bloquesEpisodios.forEach((bloque) => {
+                const desde = parseInt(bloque.querySelector('.desdeEpisodio')?.value) || 0;
+                const hasta = parseInt(bloque.querySelector('.hastaEpisodio')?.value) || 0;
+                const temporada = bloque.querySelector('.temporada')?.value || '';
+                
+                // Obtener títulos de episodios
+                const titulos = {};
+                bloque.querySelectorAll('.titulo-episodio').forEach(input => {
+                    const num = input.getAttribute('data-episodio');
+                    if (num) titulos[num] = input.value;
                 });
+                
+                // Obtener líneas de participación
+                const lineas = [];
+                bloque.querySelectorAll('.linea-participacion').forEach(linea => {
+                    const rol = Array.from(linea.querySelectorAll('.rol option:checked')).map(opt => opt.value).join(', ');
+                    const autor = linea.querySelector('.autor')?.value || '';
+                    const porcentaje = linea.querySelector('.porcentaje')?.value || '';
+                    
+                    if (rol && autor && porcentaje) {
+                        lineas.push({ rol, autor, porcentaje });
+                    }
+                });
+                
+                // Crear una entrada por cada episodio y línea de participación
+                if (lineas.length > 0) {
+                    for (let i = desde; i <= hasta; i++) {
+                        lineas.forEach(linea => {
+                            episodiosData.push({
+                                ...generalData,
+                                ...(exhibiciones[0] || {}),
+                                temporada: temporada,
+                                numEpisodio: i,
+                                tituloEpisodio: titulos[i] || `Episodio ${i}`,
+                                rol: linea.rol,
+                                autor: linea.autor,
+                                porcentaje: linea.porcentaje,
+                                fechaEnvio: new Date().toISOString()
+                            });
+                        });
+                    }
+                }
             });
         }
-    });
-    
-    return episodiosData.length > 0 ? episodiosData : [{ ...generalData, ...(exhibiciones[0] || {}), fechaEnvio: new Date().toISOString() }];
+        
+        // Si no hay datos de episodios, devolver solo los datos generales
+        if (episodiosData.length === 0) {
+            return [{
+                ...generalData,
+                ...(exhibiciones[0] || {}),
+                fechaEnvio: new Date().toISOString()
+            }];
+        }
+        
+        return episodiosData;
+    } catch (error) {
+        console.error('Error al recopilar datos del formulario:', error);
+        showMessage('Error al procesar los datos del formulario', true);
+        throw error; // Relanzar el error para manejarlo en submitFormData
+    }
 }
 
 // Función para enviar los datos al servidor
