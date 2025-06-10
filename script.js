@@ -569,8 +569,16 @@ function removeLineaParticipacion(button) {
     }
 }
 
-// URL de la API de Power Automate (reemplazar con la URL real)
-const POWER_AUTOMATE_URL = 'https://default0c13096209bc40fc8db89d043ff625.1a.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/b4efa70c80654ec488236ec10a4fb4b4/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-0c130962-09bc-40fc-8db8-9d043ff6251a&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=F1kVR1aS2F84dre8fnUgdPwgBO1UK4uxCl4BIASpkRg';
+// URL de la API de Power Automate
+const POWER_AUTOMATE_URL = 'https://default0c13096209bc40fc8db89d043ff625.1a.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/b4efa70c80654ec488236ec10a4fb4b4/triggers/manual/paths/invoke';
+const POWER_AUTOMATE_PARAMS = {
+    'api-version': '1',
+    'tenantId': 'tId',
+    'environmentName': 'Default-0c130962-09bc-40fc-8db8-9d043ff6251a',
+    'sp': '/triggers/manual/run',
+    'sv': '1.0',
+    'sig': 'F1kVR1aS2F84dre8fnUgdPwgBO1UK4uxCl4BIASpkRg'
+};
 
 // Función para mostrar mensajes al usuario
 function showMessage(message, isError = false) {
@@ -709,12 +717,15 @@ function collectFormData() {
 async function submitFormData(event) {
     event.preventDefault();
     
+    const submitButton = document.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton ? submitButton.textContent : 'Enviar';
+    
     try {
         // Mostrar indicador de carga
-        const submitButton = document.querySelector('button[type="submit"]');
-        const originalButtonText = submitButton.textContent;
-        submitButton.disabled = true;
-        submitButton.textContent = 'Enviando...';
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+        }
         
         // Recopilar datos del formulario
         const formData = collectFormData();
@@ -723,19 +734,37 @@ async function submitFormData(event) {
             throw new Error('No hay datos para enviar. Por favor, complete al menos un episodio.');
         }
         
-        console.log('Datos a enviar:', formData); // Para depuración
+        console.log('Datos a enviar:', formData);
+        
+        // Construir URL con parámetros
+        const url = new URL(POWER_AUTOMATE_URL);
+        Object.entries(POWER_AUTOMATE_PARAMS).forEach(([key, value]) => {
+            url.searchParams.append(key, value);
+        });
+        
+        console.log('URL de la solicitud:', url.toString()); // Para depuración
         
         // Enviar datos al servidor
-        const response = await fetch(POWER_AUTOMATE_URL, {
+        const response = await fetch(url.toString(), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(formData),
+            mode: 'cors' // Importante para peticiones entre dominios
         });
         
         if (!response.ok) {
-            throw new Error(`Error en la respuesta del servidor: ${response.status} ${response.statusText}`);
+            let errorMessage = `Error en la respuesta del servidor: ${response.status} ${response.statusText}`;
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.message || JSON.stringify(errorData);
+            } catch (e) {
+                // Si no se puede parsear la respuesta como JSON, usar el mensaje por defecto
+                console.error('No se pudo parsear la respuesta de error:', e);
+            }
+            throw new Error(errorMessage);
         }
         
         // Mostrar mensaje de éxito
@@ -746,7 +775,7 @@ async function submitFormData(event) {
         
     } catch (error) {
         console.error('Error al enviar los datos:', error);
-        showMessage(`Error: ${error.message}`, true);
+        showMessage(`Error al enviar los datos: ${error.message}`, true);
     } finally {
         // Restaurar el botón
         if (submitButton) {
