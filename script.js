@@ -648,26 +648,22 @@ function collectFormData() {
             }
         });
         
-        // Crear la primera fila con datos generales, exhibiciones y campos requeridos
-        const primeraFila = { 
-            ...generalData,
-            temporada: '1',  // Valor por defecto para la primera fila
-            num_episodio: 1 // Valor por defecto para la primera fila
-        };
+        // Crear la primera fila con solo datos generales y exhibiciones
+        const primeraFila = { ...generalData };
         
         // Agregar exhibiciones a la primera fila
         exhibiciones.forEach((exhib, index) => {
             Object.assign(primeraFila, exhib);
         });
         
-        // Si no hay bloques de episodios, devolver solo la primera fila
+        // Verificar si hay bloques de episodios
         const bloquesEpisodios = document.querySelectorAll('.bloque-episodios');
+        const resultados = [];
+        
+        // Si no hay bloques de episodios, devolver solo la primera fila
         if (bloquesEpisodios.length === 0) {
             return [primeraFila];
         }
-        
-        // Agregar la primera fila a los resultados
-        const resultados = [primeraFila];
         
         // Procesar bloques de episodios
         bloquesEpisodios.forEach((bloque) => {
