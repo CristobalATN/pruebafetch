@@ -629,7 +629,9 @@ function collectFormData() {
             actores: getElementValue('actores'),
             directores: getElementValue('directores'),
             guionistas: getElementValue('guionistas'),
-            fecha_envio: new Date().toISOString()
+            fecha_envio: new Date().toISOString(),
+            // Inicializar array para líneas de participación generales
+            lineas_participacion: []
         };
         
         // Datos de exhibiciones
@@ -648,7 +650,18 @@ function collectFormData() {
             }
         });
         
-        // Crear la primera fila con solo datos generales y exhibiciones
+        // Procesar líneas de participación generales
+        document.querySelectorAll('#lineasParticipacionContainer .linea-participacion').forEach(linea => {
+            const rol = Array.from(linea.querySelectorAll('.rol option:checked')).map(opt => opt.value).join(', ');
+            const autor = linea.querySelector('.autor')?.value || '';
+            const porcentaje = linea.querySelector('.porcentaje')?.value || '';
+            
+            if (rol && autor && porcentaje) {
+                generalData.lineas_participacion.push({ rol, autor, porcentaje });
+            }
+        });
+        
+        // Crear la primera fila con solo datos generales, exhibiciones y participaciones
         const primeraFila = { ...generalData };
         
         // Agregar exhibiciones a la primera fila
@@ -798,6 +811,62 @@ async function submitFormData(event) {
     }
 }
 
+// Función para agregar una línea de participación
+function addLineaParticipacion(button, container = null) {
+    const contenedor = container || button.closest('.lineas-participacion-container');
+    if (!contenedor) return;
+
+    const linea = document.createElement('div');
+    linea.className = 'linea-participacion';
+    
+    linea.innerHTML = `
+        <div class="form-row">
+            <div class="form-group">
+                <label>Rol</label>
+                <select class="rol" multiple>
+                    <option value="Director">Director</option>
+                    <option value="Guionista">Guionista</option>
+                    <option value="Productor">Productor</option>
+                    <option value="Actor">Actor</option>
+                    <option value="Músico">Músico</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Autor</label>
+                <select class="autor select2" style="width: 100%;">
+                    <option value="">Buscar o agregar...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Porcentaje de participación (%)</label>
+                <input type="number" class="porcentaje" min="0" max="100" step="0.01">
+            </div>
+            <div class="form-group">
+                <label>Eliminar</label>
+                <button type="button" class="btn-remove">×</button>
+            </div>
+        </div>
+    `;
+
+    contenedor.appendChild(linea);
+    
+    // Inicializar Select2 para el autor
+    const select = linea.querySelector('.select2');
+    if (select) {
+        $(select).select2({
+            tags: true,
+            createTag: createTag,
+            matcher: matcher
+        });
+    }
+    
+    // Agregar manejador de eventos para el botón de eliminar
+    linea.querySelector('.btn-remove').addEventListener('click', function() {
+        linea.remove();
+    });
+}
+
 // Asignar el manejador de envío del formulario
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('obraForm');
@@ -826,6 +895,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 return null;
             }
         });
+        
+        // Manejar el botón de agregar participación general
+        const addLineaParticipacionGeneralBtn = document.getElementById('addLineaParticipacionGeneral');
+        const lineasParticipacionContainer = document.getElementById('lineasParticipacionContainer');
+        
+        if (addLineaParticipacionGeneralBtn && lineasParticipacionContainer) {
+            addLineaParticipacionGeneralBtn.addEventListener('click', function() {
+                addLineaParticipacion(this, lineasParticipacionContainer);
+            });
+        }
         
         // Manejar el envío del formulario
         form.addEventListener('submit', submitFormData);
