@@ -695,7 +695,7 @@ async function submitFormData(event) {
         console.log('Datos a enviar:', formData); // Para depuración
         
         // Enviar datos al servidor
-        const response = await fetch("https://default0c13096209bc40fc8db89d043ff625.1a.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/b4efa70c80654ec488236ec10a4fb4b4/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-0c130962-09bc-40fc-8db8-9d043ff6251a&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=F1kVR1aS2F84dre8fnUgdPwgBO1UK4uxCl4BIASpkRg", {
+        const response = await fetch(POWER_AUTOMATE_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -729,7 +729,11 @@ async function submitFormData(event) {
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('obraForm');
     if (form) {
-        form.removeEventListener('submit', generateExcel); // Eliminar manejador anterior si existe
-        form.addEventListener('submit', submitFormData);
+        // Eliminar cualquier manejador de eventos anterior
+        const newForm = form.cloneNode(true);
+        form.parentNode.replaceChild(newForm, form);
+        
+        // Agregar el nuevo manejador
+        newForm.addEventListener('submit', submitFormData);
     }
 });
