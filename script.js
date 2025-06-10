@@ -648,8 +648,12 @@ function collectFormData() {
             }
         });
         
-        // Crear la primera fila con datos generales y exhibiciones
-        const primeraFila = { ...generalData };
+        // Crear la primera fila con datos generales, exhibiciones y campos requeridos
+        const primeraFila = { 
+            ...generalData,
+            temporada: '1',  // Valor por defecto para la primera fila
+            num_episodio: 1 // Valor por defecto para la primera fila
+        };
         
         // Agregar exhibiciones a la primera fila
         exhibiciones.forEach((exhib, index) => {
