@@ -1,0 +1,3341 @@
+[
+  {
+    "Autor": "RODRIGO ANDRÉS ACHONDO VERGARA"
+  },
+  {
+    "Autor": "FERNANDO ARAGÓN BETTEO"
+  },
+  {
+    "Autor": "NELSON AVILÉS PIZARRO"
+  },
+  {
+    "Autor": "EUGENIO RAMÓN BELTRÁN URBINA"
+  },
+  {
+    "Autor": "GUSTAVO MARIO CÁNEPA GUZMÁN"
+  },
+  {
+    "Autor": "DANIELLA CASTAGNO AYALA"
+  },
+  {
+    "Autor": "CARLOS ANDRÉS CERDA BUSTAMANTE"
+  },
+  {
+    "Autor": "MARIO COSTA S"
+  },
+  {
+    "Autor": "JUAN CURILEM FINCHEIRA"
+  },
+  {
+    "Autor": "CÉSAR ENRIQUE  DROGUETT HERNÁNDEZ"
+  },
+  {
+    "Autor": "CLAUDIO ARIEL FERNÁNDEZ DESIMONE"
+  },
+  {
+    "Autor": "ARNALDO MADRID GAETE"
+  },
+  {
+    "Autor": "JORGE MARCHANT LAZCANO"
+  },
+  {
+    "Autor": "MARÍA PAULINA MELLADO SUAZO"
+  },
+  {
+    "Autor": "LENIN ISRAEL MERINO YÁÑEZ"
+  },
+  {
+    "Autor": "BENJAMÍN MORGADO CHAPARRO"
+  },
+  {
+    "Autor": "ROBERTO NAVARRETE TRONCOSO"
+  },
+  {
+    "Autor": "CARLOS JAIME SILVA GUTIÉRREZ"
+  },
+  {
+    "Autor": "LUIS GILBERTO SOTO RAMOS"
+  },
+  {
+    "Autor": "LUIS URETA LETELIER"
+  },
+  {
+    "Autor": "GERARDO RENE CACERES PEREA"
+  },
+  {
+    "Autor": "JOSE RICARDO LARRAÍN PINEDO"
+  },
+  {
+    "Autor": "SILVIO CAIOZZI GARCÍA"
+  },
+  {
+    "Autor": "CRISTIÁN ANDRÉS LORCA BALMACEDA"
+  },
+  {
+    "Autor": "ARNALDO VALSECCHI REGAZZOLI"
+  },
+  {
+    "Autor": "LEONARDO KOCKING WINKLER"
+  },
+  {
+    "Autor": "SYLVIA HERNÁNDEZ GUERRA"
+  },
+  {
+    "Autor": "GUSTAVO GRAEF MARINO"
+  },
+  {
+    "Autor": "ANDRÉS WOOD MONTT"
+  },
+  {
+    "Autor": "LUIS ROBERTO  PARRA SANDOVAL (SUC.)"
+  },
+  {
+    "Autor": "ISIDORA AGUIRRE TUPPER"
+  },
+  {
+    "Autor": "JAQUELINE DIRELLY ROUMEAU CRESTA"
+  },
+  {
+    "Autor": "GUSTAVO MEZA WEVAR"
+  },
+  {
+    "Autor": "FRANCISCO  FLORES DEL CAMPO (SUC.)"
+  },
+  {
+    "Autor": "JUAN GALVARINO RADRIGAN ROJAS"
+  },
+  {
+    "Autor": "ANTONIO ACEVEDO HERNANDEZ"
+  },
+  {
+    "Autor": "CAROLINA ELIZABETH JEREZ BERENGUER"
+  },
+  {
+    "Autor": "RODOLFO TOSTO MAZZINI"
+  },
+  {
+    "Autor": "JUAN PABLO BASTIDAS BURCKHARDT"
+  },
+  {
+    "Autor": "EMMANUEL VALENTE  BECERRA MANES"
+  },
+  {
+    "Autor": "SERGIO LUIS GUZMÁN ORTEGA"
+  },
+  {
+    "Autor": "JAIME FERNÁNDEZ MARTÍNEZ"
+  },
+  {
+    "Autor": "LUIS ARCHIBALDO DE LOURDES ADVIS VITAGLICH"
+  },
+  {
+    "Autor": "ALEJANDRO ANGELINI WIEDMAN"
+  },
+  {
+    "Autor": "NÉSTOR CASTAGNO BERNHARDT"
+  },
+  {
+    "Autor": "MARCO ANTONIO DE LA PARRA CALDERÓN"
+  },
+  {
+    "Autor": "FERNANDO JOSSEAU ETEROVIC"
+  },
+  {
+    "Autor": "ELÍAS OSVALDO (MARIO CRUZ) MARTÍNEZ GATICA"
+  },
+  {
+    "Autor": "HERMÓGENES MÉNDEZ IBARRA"
+  },
+  {
+    "Autor": "DOMINGO (TESSIER) MIHOVILOVIC RAJCEVIC"
+  },
+  {
+    "Autor": "ROMUALDO ALBERTO PÉREZ SAAVEDRA"
+  },
+  {
+    "Autor": "HERNÁN ALBERTO QUINTANILLA MÉNDEZ"
+  },
+  {
+    "Autor": "HERNÁN DEL CARMEN RIVERA LETELIER"
+  },
+  {
+    "Autor": "PEDRO ARTURO ZLATAR BECERRA"
+  },
+  {
+    "Autor": "RAQUEL DEL CARMEN RAMÍREZ SHEPHERD"
+  },
+  {
+    "Autor": "SERGIO ANTONIO FUENTES ZAMORANO"
+  },
+  {
+    "Autor": "MIGUEL ERNESTO LITTIN CUCUMIDES"
+  },
+  {
+    "Autor": "RICARDO DE LA CASTILLEJA TERRAZAS"
+  },
+  {
+    "Autor": "SERGIO ERNESTO AROLDO ORTEGA ALVARADO"
+  },
+  {
+    "Autor": "OSCAR SUC. CASTRO ZÚÑIGA"
+  },
+  {
+    "Autor": "VERÓNICA SOFÍA ODDO PARRAGUEZ"
+  },
+  {
+    "Autor": "ANDRÉS ALEJANDRO SIEVEKING CAMPANO"
+  },
+  {
+    "Autor": "ANDRÉS LORENZO PÉREZ ARAYA"
+  },
+  {
+    "Autor": "MABEL (MAITÉ FERNÁNDEZ) FERNÁNDEZ CHALÁ"
+  },
+  {
+    "Autor": "FERNANDO ELEODORO CUADRA PINTO"
+  },
+  {
+    "Autor": "FERNANDO GALLARDO HERESMAN"
+  },
+  {
+    "Autor": "RODRIGO ANDRÉS BASTIDAS URRUTIA"
+  },
+  {
+    "Autor": "JORGE (SUC) DIAZ GUTIERREZ"
+  },
+  {
+    "Autor": "SERGIO LUIS VODANOVIC PISTELLI"
+  },
+  {
+    "Autor": "ROBERTO ALEJANDRO ANCAVIL YÁÑEZ"
+  },
+  {
+    "Autor": "TOBÍAS BARROS ALFONSO"
+  },
+  {
+    "Autor": "TATIANA GLORIA GAVIOLA ARTIGAS"
+  },
+  {
+    "Autor": "JOSÉ RENÉ INOSTROZA VALENZUELA"
+  },
+  {
+    "Autor": "CLAUDIA ANDREA MENA VARGAS"
+  },
+  {
+    "Autor": "SANTIAGO ARNALDO MENDOZA FLORES"
+  },
+  {
+    "Autor": "HÉCTOR NOGUERA ILLANES"
+  },
+  {
+    "Autor": "CHRISTIAN ORLANDO ORTEGA TORRES"
+  },
+  {
+    "Autor": "ANDRÉS GONZALO ULLOA RADRIGÁN"
+  },
+  {
+    "Autor": "MARÍA DE LA LUZ URRIOLA GONZÁLEZ"
+  },
+  {
+    "Autor": "EGON WOLFF GROBLER"
+  },
+  {
+    "Autor": "SERGIO EDUARDO BRAVO PEMJEAN"
+  },
+  {
+    "Autor": "ALDO VITTORIO CINTOLESI RUZ"
+  },
+  {
+    "Autor": "JUAN MATEO IRIBARREN ARRIETA"
+  },
+  {
+    "Autor": "GUILLERMO EDGARDO PALLACÁN ROMERO"
+  },
+  {
+    "Autor": "ALVARO GONZALO RUDOLPHY FONTAINE"
+  },
+  {
+    "Autor": "CRISTIÁN ANDRÉS SOTO MUÑOZ"
+  },
+  {
+    "Autor": "RAMÓN GRIFFERO SANCHEZ"
+  },
+  {
+    "Autor": "LAURA MARIA RAQUEL PIZARRO URRUTIA"
+  },
+  {
+    "Autor": "PERLA MARGARITA DEVOTO GARCES"
+  },
+  {
+    "Autor": "PATRICIA DEL CARMEN ARAYA NAVARRO"
+  },
+  {
+    "Autor": "LUIS CHRISTIAN CHAPARRO FARIÑA"
+  },
+  {
+    "Autor": "MAITE CHAPERO MACAYA"
+  },
+  {
+    "Autor": "ALEJANDRO EDUARDO GOIC JEREZ"
+  },
+  {
+    "Autor": "MARIA EUGENIA LORENZINI PIZARRO"
+  },
+  {
+    "Autor": "MONICA IRIS PEREZ VERA"
+  },
+  {
+    "Autor": "FLAVIA MINERVA RADRIGAN ARAYA"
+  },
+  {
+    "Autor": "REMIGIO FERNANDO REMEDY CASTILLO"
+  },
+  {
+    "Autor": "ADOLFO ALEXANDER ARAUS ANDRADE"
+  },
+  {
+    "Autor": "RENÉ NIBALDO ARCOS LEVI"
+  },
+  {
+    "Autor": "ALEJANDRO JOSE CABRERA OLEA"
+  },
+  {
+    "Autor": "VIVIANA BEATRIZ GALLARDO MAGALLAN"
+  },
+  {
+    "Autor": "CAROLINA FRANCISCA GOMEZ RIQUELME"
+  },
+  {
+    "Autor": "RODRIGO IGNACIO GONZALEZ RUBIO"
+  },
+  {
+    "Autor": "SYLVIA DINORA GUTIERREZ DIAZ"
+  },
+  {
+    "Autor": "MALCOLM RODRIGO LEIVA GEBHARD"
+  },
+  {
+    "Autor": "MARIO CIUDAD OLAVE PARADA"
+  },
+  {
+    "Autor": "OSCAR RICARDO ORTIZ REBOLLEDO"
+  },
+  {
+    "Autor": "MARIA TERESA PASCAL BARAYON"
+  },
+  {
+    "Autor": "LUIS HERNAN PEÑA JOFRE"
+  },
+  {
+    "Autor": "ALFREDO RATES SALCEDO"
+  },
+  {
+    "Autor": "EDMUNDO JAVIER(pedro urdemales) VALDEBENITO GONZALEZ"
+  },
+  {
+    "Autor": "CARLOS MAURICIO GRAVES DERPICH"
+  },
+  {
+    "Autor": "HUGO SALVADOR MORALES TORRES"
+  },
+  {
+    "Autor": "ALVARO HUGO SCARAMELLI ESCALONA"
+  },
+  {
+    "Autor": "JORGE OCTAVIO (Suc) TEILLIER SANDOVAL"
+  },
+  {
+    "Autor": "NELSON VILLAGRA GARRIDO"
+  },
+  {
+    "Autor": "BEGOÑA ZABALA AGUIRRE"
+  },
+  {
+    "Autor": "LILIANA PIERA BRESCIA CLERICI"
+  },
+  {
+    "Autor": "FELIPE CASTRO FONES"
+  },
+  {
+    "Autor": "BENJAMIN GALEMIRI GATEÑO"
+  },
+  {
+    "Autor": "SERGIO ROLANDO OLIVARES CONTRERAS"
+  },
+  {
+    "Autor": "RAUL LUCIANO OSORIO PEREZ"
+  },
+  {
+    "Autor": "PATRICIO ALFONSO SOLOVERA GALLARDO"
+  },
+  {
+    "Autor": "JAIME RAMON LORCA GONZALEZ"
+  },
+  {
+    "Autor": "JUAN CARLOS ZAGAL REYES"
+  },
+  {
+    "Autor": "PAULINA ROSANNA HUNT PRECHT"
+  },
+  {
+    "Autor": "ANDRES OROS BERGERET"
+  },
+  {
+    "Autor": "MALUCHA PINTO SOLARI"
+  },
+  {
+    "Autor": "LUIS CESAR ROSENMANN DERESINKY"
+  },
+  {
+    "Autor": "MARCELA ANTONIETA TERRA FLORES"
+  },
+  {
+    "Autor": "ALEJANDRO EDUARDO TREJO ZAPATA"
+  },
+  {
+    "Autor": "ALFREDO CASTRO GOMEZ"
+  },
+  {
+    "Autor": "RODRIGO ERNESTO CRUZ GARRIDO"
+  },
+  {
+    "Autor": "ELSA POBLETE BUSTAMANTE"
+  },
+  {
+    "Autor": "PAMELA ALEJANDRA SORIANO MACHIAVELLO"
+  },
+  {
+    "Autor": "GILBERTO ANTONIO VILLARROEL ESCOBAR"
+  },
+  {
+    "Autor": "NICANOR SEGUNDO PARRA SANDOVAL"
+  },
+  {
+    "Autor": "SEBASTIÁN ALARCÓN RAMÍREZ"
+  },
+  {
+    "Autor": "LARISSA CONTRERAS BRIONES"
+  },
+  {
+    "Autor": "ENRIQUE DELANO FALCON"
+  },
+  {
+    "Autor": "ALBERTO ENRIQUE OLGUÍN DURÁN"
+  },
+  {
+    "Autor": "CLAUDIO ESTEBAN SAPIAIN GUTIERREZ"
+  },
+  {
+    "Autor": "FUNDACION NERUDA"
+  },
+  {
+    "Autor": "DESIDERIO ARENAS CHARLIN"
+  },
+  {
+    "Autor": "CLARA ALEJANDRA FARIAS KOHNENKAMPF"
+  },
+  {
+    "Autor": "CARLOS ALBERTO GALOFRE CORDERO"
+  },
+  {
+    "Autor": "ROSSANA IVETTE GIL SALVO"
+  },
+  {
+    "Autor": "MARIO VALENTIN RAYO PRIETO"
+  },
+  {
+    "Autor": "ROBERTO MARIO ROJAS PEREZ"
+  },
+  {
+    "Autor": "HORACIO JULIO JAVIER SALINAS ALVAREZ"
+  },
+  {
+    "Autor": "VIVIANA MARIA STUARDO OJALVO"
+  },
+  {
+    "Autor": "FRANCISCO JAVIER ZAÑARTU GUZMAN"
+  },
+  {
+    "Autor": "RAMON MARTIN URRUTIA AGUILO"
+  },
+  {
+    "Autor": "DAVID TOBIAS COSTA ARELLANO"
+  },
+  {
+    "Autor": "TOMAS ANGUITA BOIZARD"
+  },
+  {
+    "Autor": "LUIS ARTURO MERINO REYES"
+  },
+  {
+    "Autor": "JORGE LUIS RAMIREZ AVILA"
+  },
+  {
+    "Autor": "CLAUDIA CECILIA SALDIVIA VEGA"
+  },
+  {
+    "Autor": "NISSIM SHARIM PAZ"
+  },
+  {
+    "Autor": "LUCIA ALEJANDRA DE LA SOTTA MARTINEZ"
+  },
+  {
+    "Autor": "OSCAR ANDRES GONZALEZ BOSQUE"
+  },
+  {
+    "Autor": "ANDREA PAZ MIRANDA SILVA"
+  },
+  {
+    "Autor": "MARICARMEN  NAVAJAS RODRÍGUEZ"
+  },
+  {
+    "Autor": "CAMILA CRISTINA  LANDON VÍO"
+  },
+  {
+    "Autor": "MANUEL ALEJANDRO  NIETO FARFAN"
+  },
+  {
+    "Autor": "CRISTINA PAZ BERTRAN MI"
+  },
+  {
+    "Autor": "XIMENA MARGARITA  CARRERA VENEGAS"
+  },
+  {
+    "Autor": "MARÍA CRISTINA  TOCCO VOLPE"
+  },
+  {
+    "Autor": "SEBASTIAN ALFONSO  ARRAU HERUD"
+  },
+  {
+    "Autor": "PABLO ROLANDO  BASUALTO MARTÍNEZ DE PINILLOS"
+  },
+  {
+    "Autor": "JAIME ALFONSO  MIRANDA CORDERO"
+  },
+  {
+    "Autor": "FRANCIS NATHALIE  GÁLVEZ LEDESMA"
+  },
+  {
+    "Autor": "JOSÉ NICOLÁS  ALEGRÍA CARRASCO"
+  },
+  {
+    "Autor": "MARÍA SOLEDAD  PÉREZ PEÑA"
+  },
+  {
+    "Autor": "ROBERTO LUIS  NICOLINI BARISON"
+  },
+  {
+    "Autor": "GASTÓN ENRIQUE  VON DEM BUSSCHE ARANDA"
+  },
+  {
+    "Autor": "MANUELA MAYA  INFANTE GÜELL"
+  },
+  {
+    "Autor": "MARTÍN ANDRÉS  ERAZO PERALES"
+  },
+  {
+    "Autor": "JOSÉ ENRIQUE  PINEDA DEVIA"
+  },
+  {
+    "Autor": "JORGE  EDWARDS VALDÉS"
+  },
+  {
+    "Autor": "JUANCO TORRES TORRES"
+  },
+  {
+    "Autor": "RODRIGO MISAEL  GIJÓN MONTENEGRO"
+  },
+  {
+    "Autor": "JUVENAL RODRIGO  MUÑOZ SAEZ"
+  },
+  {
+    "Autor": "LUZ MARÍA GEMITA YACOMETTI CASTRO"
+  },
+  {
+    "Autor": "MARÍA ELENA  OVALLE GUZMÁN"
+  },
+  {
+    "Autor": "GIOVANNA DEL CARMEN  HERNÁNDEZ YÁÑEZ"
+  },
+  {
+    "Autor": "FERNANDO ENRIQUE  MENESES MOLINA"
+  },
+  {
+    "Autor": "DANIELA PIA  LILLO TRAVERSO"
+  },
+  {
+    "Autor": "CAROLINA ANDREA CUTURRUFO CONTADOR"
+  },
+  {
+    "Autor": "INÉS MARGARITA  STRANGER RODRIGUEZ"
+  },
+  {
+    "Autor": "MARCELO JAVIER  PÉREZ ANGULO"
+  },
+  {
+    "Autor": "DAVID ALEJANDRO  NAVARRO TURRES"
+  },
+  {
+    "Autor": "RODRIGO SEBASTIÁN SANTA MARÍA TURPIE"
+  },
+  {
+    "Autor": "PEDRO ANTONIO VILLAGRA SANTANA"
+  },
+  {
+    "Autor": "MIGUEL  FRANK VEGA (CONAPRAN)"
+  },
+  {
+    "Autor": "CRISTIAN MARIO  GARCÍA-HUIDOBRO LIRA"
+  },
+  {
+    "Autor": "SYLVIA DEL CARMEN HOJMAN ANDRADE"
+  },
+  {
+    "Autor": "EMILIO FRANKLIN CAICEDO PERALTA"
+  },
+  {
+    "Autor": "ROBERTO ANDRES MATUS ARAVENA"
+  },
+  {
+    "Autor": "ROSA ARES CHIVERTO"
+  },
+  {
+    "Autor": "BENITO RAMÓN ESCOBAR VILA"
+  },
+  {
+    "Autor": "PATRICIA MARIA GONZÁLEZ ALVAREZ"
+  },
+  {
+    "Autor": "ORLANDO LUBBERT BARRA"
+  },
+  {
+    "Autor": "GABRIELA BEATRIZ  RECABARREN BAHAMONDE"
+  },
+  {
+    "Autor": "MARCEL DARIO VENEGAS VALENZUELA"
+  },
+  {
+    "Autor": "IGNACIO JAIME ACHURRA DÍAZ"
+  },
+  {
+    "Autor": "ERICK MANUEL BELLIDO YÁÑEZ"
+  },
+  {
+    "Autor": "SEBASTIÁN SEVES SANTIBÁÑEZ"
+  },
+  {
+    "Autor": "BORIS VINCENZO QUERCIA MARTINIC"
+  },
+  {
+    "Autor": "FRANCISCO JAVIER RIVEROS BASOALTO"
+  },
+  {
+    "Autor": "HELEN GUERRERO IBÁÑEZ"
+  },
+  {
+    "Autor": "ALEXIS MORENO MUÑOZ"
+  },
+  {
+    "Autor": "GRISSEL FABIOLA MOREIRA ALFARO"
+  },
+  {
+    "Autor": "FELIPE IGNACIO SEPÚLVEDA BURGOS"
+  },
+  {
+    "Autor": "ANDREA VERA PUZ"
+  },
+  {
+    "Autor": "PAMELA ALEJANDRA ARECHETA PÉREZ"
+  },
+  {
+    "Autor": "MARÍA JOSÉ PARGA SAAVEDRA"
+  },
+  {
+    "Autor": "JUAN DIEGO GARRETÓN LABBÉ"
+  },
+  {
+    "Autor": "ALEJANDRO JOSÉ  ROJAS TELLEZ"
+  },
+  {
+    "Autor": "LUIS FELIPE FONCEA OLIVARES"
+  },
+  {
+    "Autor": "VICTORIA LARRAÍN"
+  },
+  {
+    "Autor": "ANDREA MORO WINSLOW"
+  },
+  {
+    "Autor": "MARCELO JAVIER SÁNCHEZ DELGADO"
+  },
+  {
+    "Autor": "JORGE BELISARIO GUERRA BAEZA"
+  },
+  {
+    "Autor": "LUIS ALBERTO  BARRALES GUZMÁN"
+  },
+  {
+    "Autor": "CHAÑARAL ORTEGA MIRANDA"
+  },
+  {
+    "Autor": "CRISTIAN PATRICIO LEIGHTON CERDA"
+  },
+  {
+    "Autor": "LUCÍA ALEJANDRA  DE LA MAZA CABRERA"
+  },
+  {
+    "Autor": "ALINE PAULINA SANHUEZA COMTE"
+  },
+  {
+    "Autor": "PAULINA DEL CARMEN GARCIA ALFONSO"
+  },
+  {
+    "Autor": "GUSTAVO ADOLFO FRIAS REYES"
+  },
+  {
+    "Autor": "JUAN IGNACIO ARGIRO"
+  },
+  {
+    "Autor": "PAOLA ANDREA COLL ARMINGOL"
+  },
+  {
+    "Autor": "PABLO INSUNZA RODRÍGUEZ"
+  },
+  {
+    "Autor": "JAIME LAUTARO  LANFRANCO SALAS"
+  },
+  {
+    "Autor": "ELENA  MUÑÓZ BRAVO"
+  },
+  {
+    "Autor": "SEBASTIAN MORENO MARDONES"
+  },
+  {
+    "Autor": "IVÁN PABLO OSNOVIKOFF DEVET"
+  },
+  {
+    "Autor": "GONZÁLO CÉSAR SCHONFFELDT VERGARA"
+  },
+  {
+    "Autor": "RODRIGO IVÁN SEPÚLVEDA SEPÚLVEDA"
+  },
+  {
+    "Autor": "LISSETTE CECILIA VILLEGAS ALFARO"
+  },
+  {
+    "Autor": "ADALBERTO ALEX GAUNA"
+  },
+  {
+    "Autor": "DANIELA ALEJANDRA CAPONA PEREZ"
+  },
+  {
+    "Autor": "PATRICIO ALEJANDRO CONTRERAS PAVEZ"
+  },
+  {
+    "Autor": "DANIEL PATRICIO MUÑOZ BRAVO"
+  },
+  {
+    "Autor": "CARMEN LUZ PAROT ALONSO"
+  },
+  {
+    "Autor": "CESAR ANDRES CHACANA MATKOVIC"
+  },
+  {
+    "Autor": "BEATRIZ EUGENIA ROSSELOT IRIARTE"
+  },
+  {
+    "Autor": "SERGIO VICENTE CASTILLA DE MAJER VALDERRAMA"
+  },
+  {
+    "Autor": "JUAN PABLO SAEZ REY"
+  },
+  {
+    "Autor": "IVAN OCTAVIO ALVAREZ DE ARAYA KANTEROVITZ"
+  },
+  {
+    "Autor": "GASTÓN ANDRÉS ANCELOVICI ARDITTI"
+  },
+  {
+    "Autor": "PETER CHASKEL BENKO"
+  },
+  {
+    "Autor": "CRISTIAN MARCELO RIOSECO ZUÑIGA"
+  },
+  {
+    "Autor": "PEDRO PATRICIO JIMENEZ GALLARDO"
+  },
+  {
+    "Autor": "PAULA DEL FIERRO DEL RIO"
+  },
+  {
+    "Autor": "RODRIGO CRISTIAN ANTONIO MARTINEZ ITURRIAGA"
+  },
+  {
+    "Autor": "JULIO CESAR ROJAS GUTIERREZ"
+  },
+  {
+    "Autor": "MARIA ESTER ENRIQUETA EDWARDS ORREGO"
+  },
+  {
+    "Autor": "PATRICIO OROSTEGUI PONCE"
+  },
+  {
+    "Autor": "JORGE WASHINGTON PEÑA HEN"
+  },
+  {
+    "Autor": "OSVALDO TORRES VELIZ"
+  },
+  {
+    "Autor": "CRISTIAN ANTONIO ANTONCICH VELASCO"
+  },
+  {
+    "Autor": "SEBASTIAN ABRAXAS LAYSECA ROJAS"
+  },
+  {
+    "Autor": "MIGUEL FERNANDO TORO BASCUÑAN"
+  },
+  {
+    "Autor": "ANA MARIA HARCHA CORTES"
+  },
+  {
+    "Autor": "MARIA SOLEDAD LAGOS RIVERA (DR.KASSAI GEB )"
+  },
+  {
+    "Autor": "SYLVIA ORIETA ESCAMEZ CARRASCO"
+  },
+  {
+    "Autor": "MARCELO EUGENIO PERTIER LACALLE"
+  },
+  {
+    "Autor": "GLORIA ANGELICA SIMONETTI MOZZARELLI"
+  },
+  {
+    "Autor": "ELIZABETH EUGENIA VERA MARIPANGUI"
+  },
+  {
+    "Autor": "RENEE IVONNE FIGUEROA SALAS"
+  },
+  {
+    "Autor": "MILENA REBECA GRASS KLEINER"
+  },
+  {
+    "Autor": "MARCO ANTONIO TAPIA MORENO"
+  },
+  {
+    "Autor": "ANDREAS BODENHÖFER ALEXANDER"
+  },
+  {
+    "Autor": "LUIS RIVANO SANDOVAL"
+  },
+  {
+    "Autor": "MAURICIO SALOMON ALAMO ALAMO"
+  },
+  {
+    "Autor": "FRANCISCO IGNACIO HERVE ESPEJO"
+  },
+  {
+    "Autor": "JAIME VADELL AMION"
+  },
+  {
+    "Autor": "RAOUL HERNAN PINNO"
+  },
+  {
+    "Autor": "JOSÉ NICOLAS YOVANE MONETTA"
+  },
+  {
+    "Autor": "ALEJANDRO RAFAEL MORENO JASHES"
+  },
+  {
+    "Autor": "HEIDRUN MARIA BREIER"
+  },
+  {
+    "Autor": "RODRIGO ALBERTO VERA SAMSON"
+  },
+  {
+    "Autor": "CRISTIAN PEDRO FERNANDEZ REUMAY"
+  },
+  {
+    "Autor": "JOSÉ IGNACIO GARCÍA SALAZAR"
+  },
+  {
+    "Autor": "FLORENCIA ROMERO MORALES"
+  },
+  {
+    "Autor": "PAOLO ANTONIO CONTE NADEAU"
+  },
+  {
+    "Autor": "LUIS ALBERTO  MUÑOZ TAMAYO"
+  },
+  {
+    "Autor": "NADYA XIMENA RAMIREZ IBAÑEZ"
+  },
+  {
+    "Autor": "RODRIGO ORLANDO NEIRA CATALAN"
+  },
+  {
+    "Autor": "ROMNI MARCELO RIQUELME MARQUEZ"
+  },
+  {
+    "Autor": "JULIETA ARTEAGA AGUIRRE"
+  },
+  {
+    "Autor": "HERNAN MESCHI VELASCO"
+  },
+  {
+    "Autor": "MARIA MARCELA PARADA POBLETE"
+  },
+  {
+    "Autor": "MARIA EUGENIA ZÁRATE HERNÁNDEZ"
+  },
+  {
+    "Autor": "NICOLAS OCTAVIO OYOLA MONREAL"
+  },
+  {
+    "Autor": "OSCAR FABIAN CONTRERAS LÓPEZ"
+  },
+  {
+    "Autor": "CARMEN GLORIA SANCHEZ DUQUE"
+  },
+  {
+    "Autor": "CARLOS ERNESTO ANTONIO GONZALEZ ESCALANTE"
+  },
+  {
+    "Autor": "SEBASTIAN ERRAZURIZ RODRIGUEZ"
+  },
+  {
+    "Autor": "PAOLA GIANNINI VAL"
+  },
+  {
+    "Autor": "BORIS ABEL CERDA ARAYA"
+  },
+  {
+    "Autor": "MARIO FRANCISCO OBREGON CHAMORRO"
+  },
+  {
+    "Autor": "JESSICA CANELO MORALES"
+  },
+  {
+    "Autor": "CRISTIAN ANDRES ARAVENA ARAVENA"
+  },
+  {
+    "Autor": "MARTIN CELIS GOMEZ"
+  },
+  {
+    "Autor": "NEDA BRKIC MOSKOVIC"
+  },
+  {
+    "Autor": "JESUS CODINA ORIA"
+  },
+  {
+    "Autor": "HANS RODRIGO HORTA TORRES"
+  },
+  {
+    "Autor": "JORGE ALFREDO GAJARDO GARCIA"
+  },
+  {
+    "Autor": "ALEJANDRO FRANCO RIVERA"
+  },
+  {
+    "Autor": "MARCELO HERNÁNDEZ ROSAS"
+  },
+  {
+    "Autor": "SERGIO ALFREDO MADRID GAYMER"
+  },
+  {
+    "Autor": "RICARDO HUGO ALTMAN"
+  },
+  {
+    "Autor": "TANIA FABIOLA TAMAYO GREZ"
+  },
+  {
+    "Autor": "MARIA JOSE GALLEGUILLOS PINTO"
+  },
+  {
+    "Autor": "ALINKA GARCIA REGALADO"
+  },
+  {
+    "Autor": "ANDRES TELIAS ROMERO"
+  },
+  {
+    "Autor": "FRANCISCA ALEJANDRA BERNARDI RUIZ"
+  },
+  {
+    "Autor": "JOSE FRANCISCO FONSECA ALONSO DE SOUZA"
+  },
+  {
+    "Autor": "MARIA JOSEFINA FERNANDEZ CINTOLESI"
+  },
+  {
+    "Autor": "GONZALO PERALTA CORDERO"
+  },
+  {
+    "Autor": "VICTOR ENRIQUE CARRASCO MIRANDA"
+  },
+  {
+    "Autor": "DAVID ALEJANDRO  BUSTOS MUÑOZ"
+  },
+  {
+    "Autor": "PATRICIA PAOLA FERNANDEZ SILANES"
+  },
+  {
+    "Autor": "CATHERINE JAVIERA MAZOYER MENA"
+  },
+  {
+    "Autor": "ANA MARIA LOPEZ MONTANER"
+  },
+  {
+    "Autor": "PABLO ADOLFO JEREZ ARAYA"
+  },
+  {
+    "Autor": "MARINA SUSANA LANDE"
+  },
+  {
+    "Autor": "DANIEL ANDRES HENRIQUEZ RODRIGUEZ"
+  },
+  {
+    "Autor": "TOMAS JERONIMO ESPINOSA BERTRAN"
+  },
+  {
+    "Autor": "KAREN CONNOLLY ANDERSON"
+  },
+  {
+    "Autor": "ROSARIO VALENZUELA GUIRALDES"
+  },
+  {
+    "Autor": "PAUL NORMAN LANDON PUGH"
+  },
+  {
+    "Autor": "SISSI IRENE FUENTEALBA CABELLO"
+  },
+  {
+    "Autor": "ERIKA NEDJELKA CORBALAN STIEPOVIC"
+  },
+  {
+    "Autor": "JORGE CRISTIAN OLGUIN CID"
+  },
+  {
+    "Autor": "PAULA ESPERANZA CALDERON ORTIZ"
+  },
+  {
+    "Autor": "CARLOS NELSON PINTO SEPULVEDA"
+  },
+  {
+    "Autor": "NELSON MIGUEL PEDRERO JELDRES"
+  },
+  {
+    "Autor": "MARIANO ARTURO ANDRADE GONZALEZ"
+  },
+  {
+    "Autor": "PABLO ALEJANDRO PERELMAN IDE"
+  },
+  {
+    "Autor": "EDGARDO VIERECK SALINAS"
+  },
+  {
+    "Autor": "ROSANA LANDALUCE RUBIO"
+  },
+  {
+    "Autor": "JIMMY ABRAHAM DACCARETT EL HAZIN"
+  },
+  {
+    "Autor": "JOSE MIGUEL ORELLANA DIAZ"
+  },
+  {
+    "Autor": "SANTIAGO ANDRES RAMIREZ CORVALAN"
+  },
+  {
+    "Autor": "DAUNO TOTORO TAULIS"
+  },
+  {
+    "Autor": "DIEGO FONTECILLA GARCIA"
+  },
+  {
+    "Autor": "FERNANDO WALTER KLICHE HERMIDA"
+  },
+  {
+    "Autor": "DAVID QUINTANA"
+  },
+  {
+    "Autor": "ANDREA PAZ PELEGRI KRISTIC"
+  },
+  {
+    "Autor": "MAURICIO ANDRES QUEVEDO PINTO"
+  },
+  {
+    "Autor": "JORGE ENRIQUE LOPEZ VIDAL"
+  },
+  {
+    "Autor": "CRISTIAN RUIZ GUTIERREZ"
+  },
+  {
+    "Autor": "IVAN HUMBERTO DUVAUCHELLE CONCHA"
+  },
+  {
+    "Autor": "GABRIELA ESTER SCHANZ FISCHER"
+  },
+  {
+    "Autor": "ALEJANDRA CECILIA RUBIO JERIA"
+  },
+  {
+    "Autor": "HECTOR ROLANDO VALENZUELA ARIAS"
+  },
+  {
+    "Autor": "RAMON PATRICIO NUÑEZ VILLARROEL"
+  },
+  {
+    "Autor": "FRANCISCO JAVIER GREENE PEREZ"
+  },
+  {
+    "Autor": "ENRIQUE ALBERTO ARTIGAS GRANDI"
+  },
+  {
+    "Autor": "AMAYA ENRIQUE ROJAS ARNAL"
+  },
+  {
+    "Autor": "LEANDRO ANDRES SAN MARTIN GERALNIK"
+  },
+  {
+    "Autor": "NICOLAS ALFREDO ERNESTO HAMMERSCHLAG VICUÑA"
+  },
+  {
+    "Autor": "PABLO ENRIQUE MANTILLA RAYO"
+  },
+  {
+    "Autor": "MARIA TRINIDAD JIMENEZ GILI"
+  },
+  {
+    "Autor": "IVAN EITHEL SALAS MOYA"
+  },
+  {
+    "Autor": "CLAUDIA PAZ VILLARROEL GARRIDO"
+  },
+  {
+    "Autor": "SERGIO ANDRES DIAZ MORA"
+  },
+  {
+    "Autor": "MARCELO ALEJANDRO CASTAÑON QUIROZ"
+  },
+  {
+    "Autor": "ANDREA ALEJANDRA PINTO JIMENEZ"
+  },
+  {
+    "Autor": "CLAUDIA BARRIL REJMAN"
+  },
+  {
+    "Autor": "MARCELA BEATRIZ MAHALUF RECASENS"
+  },
+  {
+    "Autor": "MACARENA PAZ SALINAS SCHMIDT"
+  },
+  {
+    "Autor": "VICENTE ALEJANDRO BIANCHI MURUA"
+  },
+  {
+    "Autor": "NICOLAS EDUARDO BENAVIDES MORAGA"
+  },
+  {
+    "Autor": "RICARDO TOMAS VIEYRA CIFUENTES"
+  },
+  {
+    "Autor": "HERNAN PATRICIO FUENTES CRUZ"
+  },
+  {
+    "Autor": "NICOLAS ESPINOZA CURIMIL"
+  },
+  {
+    "Autor": "JOSE HERIBERTO CORNEJO ALIAGA"
+  },
+  {
+    "Autor": "MARCELA SOLEDAD VELASQUEZ MEZA"
+  },
+  {
+    "Autor": "GUILLERMO FELIPE CALDERON LABRA"
+  },
+  {
+    "Autor": "CARLA GABRIELA DANIELA VALDOVINOS GALLARDO"
+  },
+  {
+    "Autor": "ANTONIA SANTA MARÍA MONCKEBERG"
+  },
+  {
+    "Autor": "EDUARDO ANDRES PAVEZ GOYE"
+  },
+  {
+    "Autor": "JUAN OSVALDO BRAVO CARDENAS"
+  },
+  {
+    "Autor": "FERNANDO PUIGGROS GARCIA"
+  },
+  {
+    "Autor": "JUAN PABLO LOPEZ GARUTI"
+  },
+  {
+    "Autor": "GIANFRANCO ROLLERI O'RYAN"
+  },
+  {
+    "Autor": "HENRY ARIEL GALINDO PETTORINO"
+  },
+  {
+    "Autor": "DIEGO IGNACIO NIÑO RAMIREZ"
+  },
+  {
+    "Autor": "JOSE SANTOS MALDONADO LAMPEREIN"
+  },
+  {
+    "Autor": "GONZALO JUSTINIANO RODRÍGUEZ"
+  },
+  {
+    "Autor": "MARIA PAULINA CORREA CORNEJO"
+  },
+  {
+    "Autor": "SANDRA GABRIELA CEPEDA ACEVEDO"
+  },
+  {
+    "Autor": "ADELA PAOLA BOLTANSKY BRENNER"
+  },
+  {
+    "Autor": "PEDRO IGNACIO VIDAL KAULEN"
+  },
+  {
+    "Autor": "GONZALO ANDRES LOSADA PFEIL"
+  },
+  {
+    "Autor": "MAXIMILIANO LAVIN CONCHA"
+  },
+  {
+    "Autor": "MARIA DE LA LUZ CROXATTO DIAZ"
+  },
+  {
+    "Autor": "JUAN CRISTOBAL DIAZ TORO"
+  },
+  {
+    "Autor": "LUIS ROBERTO  PONCE TORRES"
+  },
+  {
+    "Autor": "BARBARA LARENAS TORO"
+  },
+  {
+    "Autor": "DANIEL ANDRES OSORIO GOMEZ"
+  },
+  {
+    "Autor": "VALERIA  VARGAS NUÑEZ"
+  },
+  {
+    "Autor": "ANDREA FRANCO MARIN"
+  },
+  {
+    "Autor": "KARLA FRACESCA MONGE SOTO"
+  },
+  {
+    "Autor": "MARCELO LEONART TOMAS"
+  },
+  {
+    "Autor": "GONZALO MAZA HENRIQUEZ"
+  },
+  {
+    "Autor": "DIEGO HERNANDO ROUGIER"
+  },
+  {
+    "Autor": "MARIA SOLEDAD VILLAVICENCIO PARADA"
+  },
+  {
+    "Autor": "JUAN PABLO VILLALABEITIA ROA"
+  },
+  {
+    "Autor": "ANA  SOTO MARIN"
+  },
+  {
+    "Autor": "GUILLERMO RIGOBERTO VALENZUELA ARAYA"
+  },
+  {
+    "Autor": "RODRIGO EDUARDO ROMAN ALVAREZ"
+  },
+  {
+    "Autor": "PABLO ESTEBAN ARANDA ROJAS"
+  },
+  {
+    "Autor": "JUAN MANUEL BENNETT BALLACEY"
+  },
+  {
+    "Autor": "SERGIO ARRAU CASTILLO"
+  },
+  {
+    "Autor": "IVAN ABDON INSUNZA FERNANDEZ"
+  },
+  {
+    "Autor": "MARIA LUISA PORTUONDO VILA"
+  },
+  {
+    "Autor": "LORENE ANGELICA PRIETO GONZALEZ"
+  },
+  {
+    "Autor": "TOMAS HUMBERTO EDUARDO VIDIELLA BAIGORROTEGUI"
+  },
+  {
+    "Autor": "INES MARIA CARDONE SOLARI"
+  },
+  {
+    "Autor": "ALEJANDRA LOREDANA SAAVEDRA ARANEDA"
+  },
+  {
+    "Autor": "BENJAMÍN RENE AGUIRRE UREY"
+  },
+  {
+    "Autor": "ESTELA DE LA LUZ VERGARA PASTRIAN"
+  },
+  {
+    "Autor": "AMELIA BANDE ECHEVERRIA"
+  },
+  {
+    "Autor": "SERGIO ALEX ENRIQUE SARMIENTO MONJE"
+  },
+  {
+    "Autor": "CATALINA ISABEL DE LA PARRA LOPEZ"
+  },
+  {
+    "Autor": "ANA EMILIA NOGUERA BERGER"
+  },
+  {
+    "Autor": "CLAUDIO ANTONIO ESPINOZA BUSTAMANTE"
+  },
+  {
+    "Autor": "RODRIGO ANDRÉS OSSANDON ESTEFO"
+  },
+  {
+    "Autor": "DANIEL CASTRO STEINERT"
+  },
+  {
+    "Autor": "FELIPE ANTONIO ROJAS ABARCA"
+  },
+  {
+    "Autor": "JAIME ESTEBAN MORALES ORELLANA"
+  },
+  {
+    "Autor": "CONSTANZA LUCIA FERNANDEZ BERTRAND"
+  },
+  {
+    "Autor": "FELIPE OSSANDÓN ESTEFO"
+  },
+  {
+    "Autor": "CARLOS FIDEL OPORTO FUENZALIDA"
+  },
+  {
+    "Autor": "SANDRA PAMELA ARRIAGADA NUÑEZ"
+  },
+  {
+    "Autor": "RICARDO ANDRES PASTENE BEYTIA"
+  },
+  {
+    "Autor": "PATRICIO LUIS HEIM ROJAS"
+  },
+  {
+    "Autor": "RODRIGO ALEXIS CUEVAS GALLEGOS"
+  },
+  {
+    "Autor": "GABRIEL PATRICIO SILVA-RIESCO OJEDA"
+  },
+  {
+    "Autor": "MARIA ISABEL GARCIA-HUIDOBRO MORODER"
+  },
+  {
+    "Autor": "LORENA ALEJANDRA GIACHINO TORRENS"
+  },
+  {
+    "Autor": "JUAN CARLOS NICOLAS MENA CARRILLO"
+  },
+  {
+    "Autor": "PABLO SIDDHARTHA RIQUELME RICHEDA"
+  },
+  {
+    "Autor": "MARCELA ALEJANDRA CEA JACQUES"
+  },
+  {
+    "Autor": "BASTIAN BODENHÖFER ALEXANDER"
+  },
+  {
+    "Autor": "JAVIERA ISABEL CONTADOR VALENZUELA"
+  },
+  {
+    "Autor": "RONALD ANDRES CORTEZ TAPIA"
+  },
+  {
+    "Autor": "MARCO ANTONIO MONSALVE ULLOA"
+  },
+  {
+    "Autor": "JORGE EDUARDO SPRINGINSFELD VERGARA"
+  },
+  {
+    "Autor": "JAIME LUIS MC MANUS MENUEL"
+  },
+  {
+    "Autor": "FRANCO GONZALO CID NEIRA"
+  },
+  {
+    "Autor": "PEDRO GAJARDO ESCOBAR"
+  },
+  {
+    "Autor": "ESTEBAN LARRAÍN ROA"
+  },
+  {
+    "Autor": "ANDRES ANTONIO KALAWSKI ISLA"
+  },
+  {
+    "Autor": "OSCAR VICTORIANO GODOY RIOS"
+  },
+  {
+    "Autor": "DANIEL ALEJANDRO LAGUNA GUTIERREZ"
+  },
+  {
+    "Autor": "MARIA LUISA HURTADO DE TORO"
+  },
+  {
+    "Autor": "RAFAEL ANTONIO ALBARRAN MARTINEZ"
+  },
+  {
+    "Autor": "DAVIDZA MARIA PINCHEIRA VASQUEZ"
+  },
+  {
+    "Autor": "ALVARO ANDRES VIGUERA HAYDEN"
+  },
+  {
+    "Autor": "PAULA CAROLINA FERNANDEZ OLEA"
+  },
+  {
+    "Autor": "ANDRES EDIAP OSSIO"
+  },
+  {
+    "Autor": "MARIO ANIBAL VALDOVINOS TORO"
+  },
+  {
+    "Autor": "MAITE PATRICIA LANCHARES PÉREZ"
+  },
+  {
+    "Autor": "JOSE IGNACIO VALENZUELA GUIRALDES"
+  },
+  {
+    "Autor": "TOMAS FELIPE CUBILLOS PUELMA"
+  },
+  {
+    "Autor": "ANDRES RODRIGO CARDENAS GODOY"
+  },
+  {
+    "Autor": "ROMINA MARGOT MENA BIOLLEY"
+  },
+  {
+    "Autor": "ALEJANDRO CESAR CASTILLO TIRADO"
+  },
+  {
+    "Autor": "DANIELA ANDREA SANHUEZA CABA"
+  },
+  {
+    "Autor": "CLAUDIO DI GIROLAMO CARLINI"
+  },
+  {
+    "Autor": "CAMILO SALINAS CEPEDA"
+  },
+  {
+    "Autor": "ANDREA VELASCO ALESSANDRI"
+  },
+  {
+    "Autor": "BENJAMIN WESTFALL MANSILLA"
+  },
+  {
+    "Autor": "YUSEF GERGES RUMIE ARQUEROS"
+  },
+  {
+    "Autor": "MARIA DEL PILAR SORDO MARTINEZ"
+  },
+  {
+    "Autor": "ARTURO ALEJANDRO RUIZ-TAGLE GONZALEZ"
+  },
+  {
+    "Autor": "VIVIANA  FLORES RAMIREZ"
+  },
+  {
+    "Autor": "CARLOS ARANGUIZ ZUÑIGA"
+  },
+  {
+    "Autor": "ALEJANDRO ANDRÉS MIRANDA RAPOSO"
+  },
+  {
+    "Autor": "JOSE RAFAEL ARAYA PIÑEIRA"
+  },
+  {
+    "Autor": "JORGE LOPEZ SOTOMAYOR"
+  },
+  {
+    "Autor": "IGNACIO  AGÜERO PIWONKA"
+  },
+  {
+    "Autor": "RICARDO CARRASCO FARFAN"
+  },
+  {
+    "Autor": "ANDRES RODRIGO WAISSBLUTH WEINSTEIN"
+  },
+  {
+    "Autor": "JUAN PABLO AGUILERA JUSTINIANO"
+  },
+  {
+    "Autor": "ESTEBAN ANTONIO SKARMETA VRANICIC"
+  },
+  {
+    "Autor": "NICOLAS ANDRES BELMAR MOYA"
+  },
+  {
+    "Autor": "MARISOL CAROLINA VALENZUELA HOHMANN"
+  },
+  {
+    "Autor": "DANIELA PAZ RIQUELME ALDUNATE"
+  },
+  {
+    "Autor": "VALENTINA FRANCISCA MELLONI BULJEVIC"
+  },
+  {
+    "Autor": "ANA MARIA CARDENAS ZUÑIGA"
+  },
+  {
+    "Autor": "GUILLERMO RODRIGO ASTE VON BENNEWITZ"
+  },
+  {
+    "Autor": "ANGELO OLIVIER HERNANDEZ"
+  },
+  {
+    "Autor": "GABRIEL EDUARDO SEPÚLVEDA CORRADINI"
+  },
+  {
+    "Autor": "FREDDY HUERTA HUERTA SIERRA"
+  },
+  {
+    "Autor": "JORGE LUIS LOBOS MEDEL"
+  },
+  {
+    "Autor": "JUAN PABLO GIMENO VOGEL"
+  },
+  {
+    "Autor": "ANGELA IVONNE GARRIDO SAAVEDRA"
+  },
+  {
+    "Autor": "NICOLAS LUCIANO TORRES BARAONA"
+  },
+  {
+    "Autor": "JORGE MAUREIRA VILCHES"
+  },
+  {
+    "Autor": "FRANCISCO BOBADILLA VENEGAS"
+  },
+  {
+    "Autor": "MARCELO ERNESTO SIMONETTI UGARTE"
+  },
+  {
+    "Autor": "GONZALO MATIAS SEPÚLVEDA NÚÑEZ"
+  },
+  {
+    "Autor": "JOSE MIGUEL PAVEZ CANDELA"
+  },
+  {
+    "Autor": "JUAN CLAUDIO BURGOS DROGUETT"
+  },
+  {
+    "Autor": "MARIA CAROLINA REBOLLEDO VERA"
+  },
+  {
+    "Autor": "MARIA PAZ  SEPULVEDA BALABAN"
+  },
+  {
+    "Autor": "JOSE FRANCISCO GARCIA ELICETCHE"
+  },
+  {
+    "Autor": "RODRIGO CORDOVA REQUENA"
+  },
+  {
+    "Autor": "ELIZABETH GUZMAN FLORES"
+  },
+  {
+    "Autor": "CLAUDIA MARIANNE KEMPER SOTO"
+  },
+  {
+    "Autor": "EMILIE URBAS"
+  },
+  {
+    "Autor": "ALVARO GUILLERMO CABRERA SILVA"
+  },
+  {
+    "Autor": "JUAN PABLO SALLATO MANDIOLA"
+  },
+  {
+    "Autor": "JAVIER IGNACIO IBARRA LETELIER"
+  },
+  {
+    "Autor": "CARLOS ARTURO BORQUEZ WILSON"
+  },
+  {
+    "Autor": "SEBASTIAN LELIO WATT"
+  },
+  {
+    "Autor": "JOSÉ PABLO ALVAREZ FIGUEROA"
+  },
+  {
+    "Autor": "JORGE ALBERTO MARTINEZ FLORES"
+  },
+  {
+    "Autor": "MAURICIO CELEDON BAÑADOS"
+  },
+  {
+    "Autor": "DAVID BENAVENTE PINOCHET"
+  },
+  {
+    "Autor": "FRANCISCA SAMY KELLER AVILA"
+  },
+  {
+    "Autor": "MACARENA PAOLA BOSAC"
+  },
+  {
+    "Autor": "LUIS ROBERTO VERA VARGAS"
+  },
+  {
+    "Autor": "MAURICIO ADRIAN BARRIA JARA"
+  },
+  {
+    "Autor": "VICTOR FERNANDO JIMENEZ ATKIN"
+  },
+  {
+    "Autor": "MARIA EUGENIA NAVARRO RODRIGUEZ"
+  },
+  {
+    "Autor": "CAMILA YMAY GONZALEZ ORTIZ"
+  },
+  {
+    "Autor": "MARIA FRANCISCA FUENZALIDA MOURE"
+  },
+  {
+    "Autor": "INGRID ISENSEE CID"
+  },
+  {
+    "Autor": "MACARENA SAQUEL MARTINEZ"
+  },
+  {
+    "Autor": "PAULA ANDREA GONZALEZ SEGUEL"
+  },
+  {
+    "Autor": "LORETO CRISTINA VALENZUELA VALDIVIA"
+  },
+  {
+    "Autor": "MARIA LUZ JIMENEZ ORMEÑO"
+  },
+  {
+    "Autor": "MARIA SOLEDAD  ALONSO ROSALES"
+  },
+  {
+    "Autor": "PABLO SALVADOR PAREDES MUÑOZ"
+  },
+  {
+    "Autor": "CRISTIAN ENRIQUE SOTO MARABOLI"
+  },
+  {
+    "Autor": "PABLO NICOLAS MENDOZA TOPAZ"
+  },
+  {
+    "Autor": "GONZALO PABLO ORTIZ JACOB"
+  },
+  {
+    "Autor": "DANIEL RAMIREZ MIRANDA"
+  },
+  {
+    "Autor": "CLAUDIO CESAR REYES ALTAMIRANO"
+  },
+  {
+    "Autor": "COLOMBA  TRUJILLO PEÑA"
+  },
+  {
+    "Autor": "JOSÉ MIGUEL DE LA CRUZ JARA"
+  },
+  {
+    "Autor": "HECTOR ALEJANDRO ESCUDERO VERDUGO"
+  },
+  {
+    "Autor": "FERNANDO JOSÉ DELGADO GONZALEZ"
+  },
+  {
+    "Autor": "FRANCO MARIO RUIZ VICENCIO"
+  },
+  {
+    "Autor": "LUISA MARCELA GAMBOA ROJAS"
+  },
+  {
+    "Autor": "HUGO ALEJANDRO MEJIAS PINILLA"
+  },
+  {
+    "Autor": "GERARDO CHRISTIAN OETTINGER SEARLE"
+  },
+  {
+    "Autor": "PEDRO HUMBERTO RUMINOT ARANEDA"
+  },
+  {
+    "Autor": "RODRIGO SALVADOR SALINAS MARAMBIO"
+  },
+  {
+    "Autor": "FABRIZIO ANTONIO COPANO VERA"
+  },
+  {
+    "Autor": "SERGIO ORLANDO FREIRE DIAZ"
+  },
+  {
+    "Autor": "FELIPE ROBERTO NUÑEZ GONZALEZ"
+  },
+  {
+    "Autor": "YERKO TOMISLAV TOLIC CANCINO"
+  },
+  {
+    "Autor": "JOSE BENJAMIN AGUAYO RIVERA"
+  },
+  {
+    "Autor": "GOPAL JOSE IBARRA ROA"
+  },
+  {
+    "Autor": "PABLO ANDRES FERNANDEZ MARTINEZ"
+  },
+  {
+    "Autor": "CAMILA  URETA RIVAS"
+  },
+  {
+    "Autor": "RODRIGO MARCELO SOTO VILLARROEL"
+  },
+  {
+    "Autor": "CARLOS ALBERTO CONCHA VENEGAS"
+  },
+  {
+    "Autor": "DANIELA TERESITA MARAMBIO GRANIC"
+  },
+  {
+    "Autor": "ROGER HORACIO LANDAETA GARCIA"
+  },
+  {
+    "Autor": "ANDREA PAZ HENRIQUEZ GARATE"
+  },
+  {
+    "Autor": "CRISTÓBAL AUGUSTO TRONCOSO ORELLANA"
+  },
+  {
+    "Autor": "FERNANDO SAEZ GARCÍA"
+  },
+  {
+    "Autor": "DAVID ALEJANDRO  GAJARDO GUMERA"
+  },
+  {
+    "Autor": "FRANCISCO ELICEO LLANCAQUEO PONTIGO"
+  },
+  {
+    "Autor": "GABRIEL PRIETO ESCOBAR"
+  },
+  {
+    "Autor": "PATRICIO STRAHOVSKY VILLAGRAN"
+  },
+  {
+    "Autor": "PATRICIO GABRIEL VILLALOBOS INDO"
+  },
+  {
+    "Autor": "PATRICIO HERNAN VALDERRAMA ARCE"
+  },
+  {
+    "Autor": "HÉCTOR MAURICIO MORALES BETTANCOUR"
+  },
+  {
+    "Autor": "AMARILIS COLOMBA ROJAS ARNAL"
+  },
+  {
+    "Autor": "CLAUDIO RODOLFO MERLET LOYOLA"
+  },
+  {
+    "Autor": "ROMINA ANDREA HERRERA MONASTERIO"
+  },
+  {
+    "Autor": "JUAN ENRIQUE SALINAS ODGER"
+  },
+  {
+    "Autor": "MIRIAM RUTH MARGARETHE HEARD"
+  },
+  {
+    "Autor": "JORGE LUIS ALIAGA HINOJOSA"
+  },
+  {
+    "Autor": "EDGARDO BRUNA BENITEZ"
+  },
+  {
+    "Autor": "ANDREA PIA JIRON CATALAN"
+  },
+  {
+    "Autor": "ALVARO DIAZ GONZALEZ"
+  },
+  {
+    "Autor": "LORENA DEL PILAR PENJEAN CARDENAS"
+  },
+  {
+    "Autor": "CLAUDIA CARLA ECHENIQUE SAAVEDRA"
+  },
+  {
+    "Autor": "MIGUEL SCHAPIRA"
+  },
+  {
+    "Autor": "RODRIGO EDUARDO BAZAES NIETO"
+  },
+  {
+    "Autor": "RICARDO ERNESTO GALLEGUILLOS VILLALOBOS"
+  },
+  {
+    "Autor": "FRANCIS LISETTE ARAYA PINAR"
+  },
+  {
+    "Autor": "VALESKA SOLANGE RIVERA OSORIO"
+  },
+  {
+    "Autor": "BARBARA CAROLINA GONZALEZ GONZALEZ"
+  },
+  {
+    "Autor": "JULIO ALFREDO PINCHEIRA PARRA"
+  },
+  {
+    "Autor": "DENISSE SOFIA JORQUERA RAMIREZ"
+  },
+  {
+    "Autor": "LUIS EDUARDO ARANEDA ALVAREZ"
+  },
+  {
+    "Autor": "GALA CATALINA FERNANDEZ FRESARD"
+  },
+  {
+    "Autor": "CARMEN VIVIANA AROS RAMIREZ"
+  },
+  {
+    "Autor": "PABLO ANDRES GARRIDO KREBS"
+  },
+  {
+    "Autor": "GABRIELA BANDERAS MONTALVA"
+  },
+  {
+    "Autor": "PEDRO PABLO PEIRANO OLATE"
+  },
+  {
+    "Autor": "CESAR OLIVIER ESPINOZA ARAYA"
+  },
+  {
+    "Autor": "SEBASTIAN PABLO CARRASCO HEAP"
+  },
+  {
+    "Autor": "ISMAEL ODDO MENDEZ"
+  },
+  {
+    "Autor": "JAVIER ESTEBAN ZORO SUTTON"
+  },
+  {
+    "Autor": "ALVARO  SAEZ RAMIREZ"
+  },
+  {
+    "Autor": "MARIA FERNANDA CARRASCO BLANCAIRE"
+  },
+  {
+    "Autor": "PATRICIO ERICH PIMIENTA GALLARDO"
+  },
+  {
+    "Autor": "JOSE MIGUEL MIRANDA ABALOS"
+  },
+  {
+    "Autor": "HUGO PATRICIO OSORIO RIVEROS"
+  },
+  {
+    "Autor": "CAMILA CELIS FERNANDEZ"
+  },
+  {
+    "Autor": "BEGOÑA UGALDE PASCUAL"
+  },
+  {
+    "Autor": "PABLO CRISTIAN QUEZADA TORRES"
+  },
+  {
+    "Autor": "TITO FERNANDO GONZALEZ GARCIA"
+  },
+  {
+    "Autor": "EDUARDO RAMON BARRIL VILLALOBOS"
+  },
+  {
+    "Autor": "GERMAN ARIEL SILVA SAAVEDRA"
+  },
+  {
+    "Autor": "CLAUDIA CONCETTA GHITALDO GUTIERREZ"
+  },
+  {
+    "Autor": "ELISABETTA SILVIA ANGELA PERUT BOZZOLO"
+  },
+  {
+    "Autor": "SEGUNDO ABRAHAM SANHUEZA LOPEZ"
+  },
+  {
+    "Autor": "CLAUDIA DI GIROLAMO QUESNEY"
+  },
+  {
+    "Autor": "VICTOR BERNARDO FAUNDEZ GODOY"
+  },
+  {
+    "Autor": "MARCO ANTONIO ZAMBRANO PONTIGO"
+  },
+  {
+    "Autor": "MARIA DE LA LUZ CUEVAS SOTO"
+  },
+  {
+    "Autor": "ALINE KUPPENHEIM GUALTIERI"
+  },
+  {
+    "Autor": "GUILLERMO HENRY WARD GOMEZ"
+  },
+  {
+    "Autor": "RUBEN EDUARDO VASQUEZ CAVIERES"
+  },
+  {
+    "Autor": "JUAN PABLO GONZALEZ CORTÉS"
+  },
+  {
+    "Autor": "MARÍA LORENA FIGUEROA REYES"
+  },
+  {
+    "Autor": "ANDREA GUTIERREZ VASQUEZ"
+  },
+  {
+    "Autor": "JOSE LUIS CONTRERAS CARRIEL"
+  },
+  {
+    "Autor": "MARÍA CONSTANZA BECKER MARDONES"
+  },
+  {
+    "Autor": "ANDREA MARÍA LIHN CARRASCO"
+  },
+  {
+    "Autor": "MACARENA PAOLA ASTETE FERNANDEZ"
+  },
+  {
+    "Autor": "JONAS MONTECINOS OCHOA"
+  },
+  {
+    "Autor": "SEBASTIAN ANDRES RIOS MONTECINOS"
+  },
+  {
+    "Autor": "CAROLINA ELISA OLEA LAGOS"
+  },
+  {
+    "Autor": "TRINIDAD DEL ROSARIO GONZALEZ JANSANA"
+  },
+  {
+    "Autor": "SALLY PATRICIA CAMPUSANO TORRES"
+  },
+  {
+    "Autor": "HORACIO OSCAR VIDELA MONTERO"
+  },
+  {
+    "Autor": "ESTEBAN ALBERTO ALEJANDRO CERDA AZUA"
+  },
+  {
+    "Autor": "RONALD HEIM LABRA"
+  },
+  {
+    "Autor": "DANIELA  MAHANA REYES"
+  },
+  {
+    "Autor": "MARIA VERONICA DUARTE LOVELUCK"
+  },
+  {
+    "Autor": "ANGELO NICOLAS SOLARI PARRA"
+  },
+  {
+    "Autor": "CAMILA DE LOS ANGELES PARIS DIAZ"
+  },
+  {
+    "Autor": "TOMAS HANS PREUSS HERRERA"
+  },
+  {
+    "Autor": "VANNIA ANDRE ANCIC PEÑA"
+  },
+  {
+    "Autor": "MARCELLO FLORENCCIO MARTINEZ ZUÑIGA"
+  },
+  {
+    "Autor": "MARCO ANTONIO LAYERA NAVARRO"
+  },
+  {
+    "Autor": "VICTOR ALBERTO ROJAS ZENTENO"
+  },
+  {
+    "Autor": "FRANCISCO JAVIER KREBS BRAHM"
+  },
+  {
+    "Autor": "RAÚL ARMANDO ZURITA CANESSA"
+  },
+  {
+    "Autor": "VÍCTOR EDUARDO CÁCERES DÍAZ"
+  },
+  {
+    "Autor": "DANIEL ANDRES MARABOLI BERNALES"
+  },
+  {
+    "Autor": "SAMANTA ELENA PIZARRO ALISTE"
+  },
+  {
+    "Autor": "JOSÉ ANDRÉS PEÑA TRONCOSO"
+  },
+  {
+    "Autor": "CAMILO FRANCISCO CANDIA BARAHONA"
+  },
+  {
+    "Autor": "SEBASTIAN IGNACIO MEZZANO BARAHONA"
+  },
+  {
+    "Autor": "PATRICIO ENRIQUE GUTIERREZ LATORRE"
+  },
+  {
+    "Autor": "VALENTINA MILLARAY PAVEZ PIZARRO"
+  },
+  {
+    "Autor": "RODRIGO ANDRES FERNANDEZ LABRA"
+  },
+  {
+    "Autor": "ALEJANDRO PINTO ORMEÑO"
+  },
+  {
+    "Autor": "HERVAL ROSSANO ABREU GUERRERO"
+  },
+  {
+    "Autor": "ÁLVARO PACHECO BASCUÑAN"
+  },
+  {
+    "Autor": "ENRIQUE RODRIGO AEDO GALLARDO"
+  },
+  {
+    "Autor": "CRISTOBAL JOSE PIZARRO SCHKOLNIK"
+  },
+  {
+    "Autor": "CLAUDIA SOLANGE HIDALGO JIMENEZ"
+  },
+  {
+    "Autor": "MARIA CONSUELO HOLZAPFEL OSSA"
+  },
+  {
+    "Autor": "JOSE TOMÁS GONZALEZ JANSANA"
+  },
+  {
+    "Autor": "SERGIO HERNAN DIAZ JOFRE"
+  },
+  {
+    "Autor": "MOISES ALBERTO NORAMBUENA NACHARI"
+  },
+  {
+    "Autor": "OSCAR PATRICIO GARCES CONTRERAS"
+  },
+  {
+    "Autor": "CARLOS ALBERTO NUÑEZ CARDENAS"
+  },
+  {
+    "Autor": "TOMAS KAULEN DIAZ"
+  },
+  {
+    "Autor": "MARÍA IZQUIERDO HUNEEUS"
+  },
+  {
+    "Autor": "PAULA CONSTANZA TORRES OLIVARES"
+  },
+  {
+    "Autor": "JAVIER IGNACIO REBOLLEDO ESCOBAR"
+  },
+  {
+    "Autor": "MARIA EUGENIA CORONADO FERRER"
+  },
+  {
+    "Autor": "PAOLA BEATRIZ ASTE VON BENNEWITZ"
+  },
+  {
+    "Autor": "PEDRO OCTAVIO MILLAR GUTIERREZ"
+  },
+  {
+    "Autor": "BARBARA DANIELA SALAS GRUHNE"
+  },
+  {
+    "Autor": "VABBIE VESNA MARTINEZ HERMOSILLA"
+  },
+  {
+    "Autor": "LEONARDO ELIAN GONZALEZ TORRES"
+  },
+  {
+    "Autor": "ROMY LETICIA REYES CONTADOR"
+  },
+  {
+    "Autor": "LORETO ANDREA CONCHA INOSTROZA"
+  },
+  {
+    "Autor": "FRANCISCO JAVIER ALBORNOZ FARIAS"
+  },
+  {
+    "Autor": "FELIPE MARTINEZ TORRES"
+  },
+  {
+    "Autor": "ROBERTO CONTADOR PEÑA"
+  },
+  {
+    "Autor": "RODRIGO CONTRERAS VALENZUELA"
+  },
+  {
+    "Autor": "SEBASTIAN IGNACIO RODRIGUEZ DIAZ"
+  },
+  {
+    "Autor": "ALDO FELIX LABARRA LAPAZ"
+  },
+  {
+    "Autor": "GUSTAVO BECERRA GAETE"
+  },
+  {
+    "Autor": "TRINIDAD PIRIZ CORREA"
+  },
+  {
+    "Autor": "JUAN PABLO MIRANDA NAVARRO"
+  },
+  {
+    "Autor": "JUAN DAVID RODRIGUEZ GONZALEZ"
+  },
+  {
+    "Autor": "JUAN FRANCISCO FLORES AHUMADA"
+  },
+  {
+    "Autor": "NATALIA DONOSO DONOSO"
+  },
+  {
+    "Autor": "CLAUDIA CAROLINA ARAYA ALARCON"
+  },
+  {
+    "Autor": "OSCAR CASTRO RAMIREZ"
+  },
+  {
+    "Autor": "DIEGO NOGUERA BERGER"
+  },
+  {
+    "Autor": "MIGUEL ACEITON CORTES"
+  },
+  {
+    "Autor": "CARLOS ANDRÉS HUAICO GARATE"
+  },
+  {
+    "Autor": "RODRIGO MARCELO BASTIDAS DIAZ"
+  },
+  {
+    "Autor": "VANESSA MERIEL CLAUDIA MILLER BRESCIA"
+  },
+  {
+    "Autor": "LUIS MARCELO BAILEY VILLALON"
+  },
+  {
+    "Autor": "TAMARA CANALES ECHEVERRIA"
+  },
+  {
+    "Autor": "LUIS GONZALEZ DIAZ"
+  },
+  {
+    "Autor": "MAURICIO DIOCARES CASTILLO"
+  },
+  {
+    "Autor": "JUAN CRISTOBAL MEZA GUZMAN"
+  },
+  {
+    "Autor": "MAGDALENA MAX-NEEF DE AMESTI"
+  },
+  {
+    "Autor": "CAROLA JAVIERA SANDOVAL GOUBET"
+  },
+  {
+    "Autor": "ISIDORA ROBESON QUENSE"
+  },
+  {
+    "Autor": "LAURA ELIANA FUENTES MATUS"
+  },
+  {
+    "Autor": "ISIDORA MARIA STEVENSON BORDEU"
+  },
+  {
+    "Autor": "LORENA VICTORIA HERRERA PHILLIPS"
+  },
+  {
+    "Autor": "MONSERRAT FEDRA QUEZADA ANTEQUERA"
+  },
+  {
+    "Autor": "CARLOS EDUARDO GONZALEZ GUZMAN"
+  },
+  {
+    "Autor": "JOSE VICENTE DIAZ ROJAS"
+  },
+  {
+    "Autor": "FELIPE ALEJANDRO VERGARA CATALAN"
+  },
+  {
+    "Autor": "EDUARDO JESUS ORTIZ MORA"
+  },
+  {
+    "Autor": "FELIPE IGNACIO VALDES CARRAHA"
+  },
+  {
+    "Autor": "LAURA FRANCISCA DAROCH MELO"
+  },
+  {
+    "Autor": "FRANCISCO JAVIER AHUMADA RUBIO"
+  },
+  {
+    "Autor": "GUILLERMO RODOLFO EISNER SAGUES"
+  },
+  {
+    "Autor": "ESTEBAN ANDRES OYARZUN GRAU"
+  },
+  {
+    "Autor": "ANIBAL ENRIQUE PINTO SOLARI"
+  },
+  {
+    "Autor": "CRISTIAN MAURICIO CONCHA ARANEDA"
+  },
+  {
+    "Autor": "ANDREA LAURA GIADACH CRISTENSEN"
+  },
+  {
+    "Autor": "CARLOS MANUEL AEDO CASARINO"
+  },
+  {
+    "Autor": "ANSELMO ANTONIO UGARTE POBLETE"
+  },
+  {
+    "Autor": "CATHERINNE CREASE BOSSANS GUGGISBERG"
+  },
+  {
+    "Autor": "FRANCISCO JAVIER GORMAZ ARTEAGA"
+  },
+  {
+    "Autor": "BOSCO ISMAEL CAYO ALVAREZ"
+  },
+  {
+    "Autor": "FERNANDO  GUZZONI COX"
+  },
+  {
+    "Autor": "PABLO FRANCISCO GREENE FLATEN"
+  },
+  {
+    "Autor": "IRENE BUSTAMANTE ROJAS"
+  },
+  {
+    "Autor": "NELSON VERGARA PAVEZ"
+  },
+  {
+    "Autor": "DANIEL IGNACIO BAEZA SILVA"
+  },
+  {
+    "Autor": "CRISTIAN ANDRÉS FLORES REBOLLEDO"
+  },
+  {
+    "Autor": "CLAUDIA ANDREA CORDERO HERRERA"
+  },
+  {
+    "Autor": "ALVARO  ANDRE ZAMORANO DONOSO"
+  },
+  {
+    "Autor": "GUSTAVO ADOLFO GUZMAN GAJARDO"
+  },
+  {
+    "Autor": "NICOLAS OSVALDO RODRIGUEZ COVARRUBIAS"
+  },
+  {
+    "Autor": "THOMAS BENTIN"
+  },
+  {
+    "Autor": "MARTÍN ALONSO ANDRADE REYES"
+  },
+  {
+    "Autor": "ANDREA PAZ ANDREU MUÑOZ"
+  },
+  {
+    "Autor": "AMELIE CLARISSE FRANCOISE VIDEAU"
+  },
+  {
+    "Autor": "VIVIANA MARLENE PLAGGES MARTINEZ"
+  },
+  {
+    "Autor": "MOISES ALEJANDRO ANGULO MATAMALA"
+  },
+  {
+    "Autor": "NICOLÁS SERGIO FERNANDOIS FERNANDOIS"
+  },
+  {
+    "Autor": "ANDREA PEREDA NEGRONI"
+  },
+  {
+    "Autor": "GABRIELA ANTONIA ARROYO CIFUENTES"
+  },
+  {
+    "Autor": "ISABEL ALEJANDRA FONSECA ALOMAR"
+  },
+  {
+    "Autor": "SONIA ENRIQUETA URIBE ROJAS"
+  },
+  {
+    "Autor": "ROBERTO FARIAS MORALES"
+  },
+  {
+    "Autor": "DANIEL MARCELO PEZOA SAN MARTIN"
+  },
+  {
+    "Autor": "MARIANA SOLEDAD MUÑOZ GRIFFITH"
+  },
+  {
+    "Autor": "EMA LORENA PINTO LABRA"
+  },
+  {
+    "Autor": "PATRICIO FELIPE ALARCON ROJAS"
+  },
+  {
+    "Autor": "JOSE ANTONIO OSSES VALDES"
+  },
+  {
+    "Autor": "FRANCISCO JAVIER CELHAY BALMACEDA"
+  },
+  {
+    "Autor": "FELIPE JOSÉ ZEGERS RISOPATRON"
+  },
+  {
+    "Autor": "LORETO  CORREA PERALTA"
+  },
+  {
+    "Autor": "CHRISTIAN AGUSTIN PÉREZ BOBADILLA"
+  },
+  {
+    "Autor": "MARCIA ALEJANDRA CESPED LAPLECHADE"
+  },
+  {
+    "Autor": "LUCIANO ANDRÉS CERDA SILVA"
+  },
+  {
+    "Autor": "CONSTANZA DEL PILAR MANRIQUEZ BERGENFREID"
+  },
+  {
+    "Autor": "MARIO JAVIER UBEIRA PONCE"
+  },
+  {
+    "Autor": "ENRIQUE ANTONIO FAUNDEZ VILLALOBOS"
+  },
+  {
+    "Autor": "FERNANDO ALBERTO MENA ROJAS"
+  },
+  {
+    "Autor": "PATRICIO ALEJANDRO DIAZ ARELLANO"
+  },
+  {
+    "Autor": "LUIS EUDORO ENRIQUE INDA GOYCOOLEA"
+  },
+  {
+    "Autor": "MARCELO ANDRÉS VERGARA MARTÍNEZ"
+  },
+  {
+    "Autor": "OSCAR FABIÁN CARMONA INOSTROZA"
+  },
+  {
+    "Autor": "ANGELA CAROLINA ACUÑA VERA"
+  },
+  {
+    "Autor": "XIMENA RIVAS HANSEN"
+  },
+  {
+    "Autor": "MARCELO IGNACIO PAREDES ZAMBRANO"
+  },
+  {
+    "Autor": "NELSON VILLAGRA ROMAN"
+  },
+  {
+    "Autor": "PABLO ANDRES SEPULVEDA GODOY"
+  },
+  {
+    "Autor": "LUIS CATALAN BARRIENTOS"
+  },
+  {
+    "Autor": "JORGE CASTRO CONTRERAS"
+  },
+  {
+    "Autor": "CRISTIAN LÓPEZ ARRIAZA"
+  },
+  {
+    "Autor": "CRISTIAN BUSTAMANTE MUÑOZ"
+  },
+  {
+    "Autor": "CAMILA MIRANDA GACITUA"
+  },
+  {
+    "Autor": "CAROLINA VANLERBERGHE MOLINET"
+  },
+  {
+    "Autor": "ROBERTO VEGA SUCCHETTI"
+  },
+  {
+    "Autor": "FERNANDO ANDRES MILAGROS VERA"
+  },
+  {
+    "Autor": "JAIME VASQUEZ VASQUEZ"
+  },
+  {
+    "Autor": "MAURICIO BUSTOS SANTELICES"
+  },
+  {
+    "Autor": "GUILLERMO BECAR AYALA"
+  },
+  {
+    "Autor": "CARLA CECILIA ROMERO MARTINEZ"
+  },
+  {
+    "Autor": "CESAR EDUARDO PACHECO PINO"
+  },
+  {
+    "Autor": "OMAR ANDRES MORAN REYES"
+  },
+  {
+    "Autor": "PABLO EMILIO TEILLIER CONTRERAS"
+  },
+  {
+    "Autor": "MANUEL ALEJANDRO  NUÑEZ GUTIERREZ"
+  },
+  {
+    "Autor": "LEONARDO YAÑEZ MUÑOZ"
+  },
+  {
+    "Autor": "CARLOS DAVID BLEYCHER SANDOVAL"
+  },
+  {
+    "Autor": "ALEJANDRA LORENA MUÑOZ PEREZ"
+  },
+  {
+    "Autor": "FLORENCIA MARTINEZ ECHEVERRIA"
+  },
+  {
+    "Autor": "LORENA BELEN ABARZA CASTILLO"
+  },
+  {
+    "Autor": "MARIA IGNACIA ALLAMAND LYON"
+  },
+  {
+    "Autor": "NATALIA ANDREA GREZ SEMPLER"
+  },
+  {
+    "Autor": "IVY ANDREA REYES ROJAS"
+  },
+  {
+    "Autor": "DANIEL AMARÚ LÓPEZ CAMPBELL"
+  },
+  {
+    "Autor": "DIEGO VARAS FUENTEALBA"
+  },
+  {
+    "Autor": "DAVID ARANCIBIA URZUA"
+  },
+  {
+    "Autor": "ALVARO PATRICIO MORALES LIFSCHITZ"
+  },
+  {
+    "Autor": "EDURNE MIRIAM RANKIN GARCIA"
+  },
+  {
+    "Autor": "CRISTOBAL ANTONIO FERNANDEZ SUAREZ"
+  },
+  {
+    "Autor": "YAMILA CELESTE REYNA"
+  },
+  {
+    "Autor": "MARINA ESTRELLA MUTIS PARRA"
+  },
+  {
+    "Autor": "EDUARDO NICOLAS CANCINO SAID"
+  },
+  {
+    "Autor": "CAMILA ANDREA LE-BERT DEL CAMPO"
+  },
+  {
+    "Autor": "MURIEL ANDREA MIRANDA GACITUA"
+  },
+  {
+    "Autor": "FELIPE ANDRES HINOJOSA RIFFART"
+  },
+  {
+    "Autor": "SEBASTIAN NICOLAS ARACENA FUENTES"
+  },
+  {
+    "Autor": "ANDRES EDUARDO GALLARDO BALLACEY"
+  },
+  {
+    "Autor": "LUIS GUILLERMO VILLALOBOS MANZANO"
+  },
+  {
+    "Autor": "PABLO NICOLAS YAÑEZ GUZMAN"
+  },
+  {
+    "Autor": "JAIME ANDRES ABARZÚA IBACETA"
+  },
+  {
+    "Autor": "JOSE PABLO MANZI CEMBRANO"
+  },
+  {
+    "Autor": "JULIAN MARRAS BRONFMAN"
+  },
+  {
+    "Autor": "VICTOR HORACIO  PACHECO ADASME"
+  },
+  {
+    "Autor": "HUGO RENE JARA MORALES"
+  },
+  {
+    "Autor": "EDICIONES MARCELA PAZ SA"
+  },
+  {
+    "Autor": "MOIRA MILLER BRESCIA"
+  },
+  {
+    "Autor": "ANDRÉS NUÑEZ MORA"
+  },
+  {
+    "Autor": "MANUEL GONZALO SANCHEZ SANCHEZ"
+  },
+  {
+    "Autor": "CAMILO IGNACIO CATEPILLAN TESSI"
+  },
+  {
+    "Autor": "GONZALO MEZA GUZMAN"
+  },
+  {
+    "Autor": "MACARENA INES BAEZA DE LA FUENTE"
+  },
+  {
+    "Autor": "MARIA JOSE PIZARRO PEREZ"
+  },
+  {
+    "Autor": "GABRIELA LARRAÍN SOLER"
+  },
+  {
+    "Autor": "CRISTIAN ESTEBAN MANCILLA CELIS"
+  },
+  {
+    "Autor": "GUSTAVO EDUARDO VALDIVIESO SCHOLZ"
+  },
+  {
+    "Autor": "MARIA VALENTINA VALLEJOS MARTINEZ"
+  },
+  {
+    "Autor": "EDUARDO GUILLERMO CARRASCO PIRARD"
+  },
+  {
+    "Autor": "MARIA CAROLINA QUINTANA CERPA"
+  },
+  {
+    "Autor": "PAMELA ALEJANDRA ARRIAGADA STAMBUK"
+  },
+  {
+    "Autor": "DIANA FRACZINET CRISTI"
+  },
+  {
+    "Autor": "DANIEL ALEJANDRO SALAS GIRALDI"
+  },
+  {
+    "Autor": "DIEGO ANDRÉS BELMAR HENRIQUEZ"
+  },
+  {
+    "Autor": "TANIA VARINIA ROJAS BENVENUTO"
+  },
+  {
+    "Autor": "FRANCISCO JAVIER MEDINA DONOSO"
+  },
+  {
+    "Autor": "CARLA ANDREA CASTRO GONZALEZ"
+  },
+  {
+    "Autor": "LUIS MARTIN HUERTA TORRES"
+  },
+  {
+    "Autor": "VISNU RICHI FERNANDO IBARRA ROA"
+  },
+  {
+    "Autor": "MILLARAY PAZ LOBOS GARCÍA"
+  },
+  {
+    "Autor": "KARLA JAVIERA GUETTNER CAMPAÑA"
+  },
+  {
+    "Autor": "ALEJANDRO JAVIER GONZALEZ LEGRAND"
+  },
+  {
+    "Autor": "JOSE LUIS VIDAL CABELLO"
+  },
+  {
+    "Autor": "PABLO NICOLAS AGUIRRE CONCHA"
+  },
+  {
+    "Autor": "SANTIAGO CRISTOBAL MENEGHELLO ACEVEDO"
+  },
+  {
+    "Autor": "PAULA  GOMEZ VERA"
+  },
+  {
+    "Autor": "RAFAEL  LIZANA VALDIVIA"
+  },
+  {
+    "Autor": "RENATA ESTELA PUELMA MÜLLER"
+  },
+  {
+    "Autor": "SANTIAGO FARAH CELIS"
+  },
+  {
+    "Autor": "GIANCARLO VALDEBENITO GONZALEZ"
+  },
+  {
+    "Autor": "MARÍA CECILIA ASTORGA ARREDONDO"
+  },
+  {
+    "Autor": "GEORGIA DEL CAMPO ANDRADE"
+  },
+  {
+    "Autor": "DIEGO IGNACIO HINOJOSA RIFFART"
+  },
+  {
+    "Autor": "FLORENCIA PILAR SALGADO HENRIQUEZ"
+  },
+  {
+    "Autor": "MIGUEL ANGEL BREGANTE GARCIA"
+  },
+  {
+    "Autor": "RODRIGO ANDRES BELMAR HENRIQUEZ"
+  },
+  {
+    "Autor": "TOMAS ENRIQUE PINEDO DOMINGUEZ"
+  },
+  {
+    "Autor": "ANA MARIA  (SUC.LUIS RIVANO) RIVANO MONETA"
+  },
+  {
+    "Autor": "MARIE COURVASIER"
+  },
+  {
+    "Autor": "SANTIAGO  JARA ASTABURUAGA"
+  },
+  {
+    "Autor": "FRANCISCO VITTORIO GEDDA ORTIZ"
+  },
+  {
+    "Autor": "NORMA DE LAS MERCEDES MEZA LOPEZ"
+  },
+  {
+    "Autor": "CAMILA FERNANDA OLFOS BESNIER"
+  },
+  {
+    "Autor": "IVAN EDUARDO FERNANDEZ VIDAL"
+  },
+  {
+    "Autor": "CATALINA CONSTANZA PALMA ORELLANA"
+  },
+  {
+    "Autor": "ISAAC RENZO BRICEÑO"
+  },
+  {
+    "Autor": "RAIMUNDO FRANCISCO GUZMAN GONZALEZ"
+  },
+  {
+    "Autor": "BENJAMIN BRAVO LUENGO"
+  },
+  {
+    "Autor": "FANNY  FREGNI DA SILVA"
+  },
+  {
+    "Autor": "NICOLAS XAVIER BOSMAN CIBIE"
+  },
+  {
+    "Autor": "MAITE ALBERDI SOTO"
+  },
+  {
+    "Autor": "CLAUDIO ANDRES SANTANA BORQUEZ"
+  },
+  {
+    "Autor": "MARIA DE LA LUZ ALMEYDA ARCE"
+  },
+  {
+    "Autor": "FELIPE ROLANDO MONTERO CID"
+  },
+  {
+    "Autor": "CAMILA PAZ ISABEL KARL DUMONT"
+  },
+  {
+    "Autor": "RICARDO FERNANDO STUARDO FUENTEALBA"
+  },
+  {
+    "Autor": "RODRIGO IGNACIO BACIGALUPE LAZO"
+  },
+  {
+    "Autor": "ROBERTO EMILIO RIVEROS JIMENEZ"
+  },
+  {
+    "Autor": "PAMELA  BERNARDITA GUZMAN BOHEME"
+  },
+  {
+    "Autor": "MIGUEL OSCAR STUARDO CAMPOS"
+  },
+  {
+    "Autor": "TAMARA FERREIRA CACERES"
+  },
+  {
+    "Autor": "LUIS MARCELO GONZALEZ ACUÑA"
+  },
+  {
+    "Autor": "JAIME ALEJANDRO MUÑOZ MORALES"
+  },
+  {
+    "Autor": "ISIS KRAUSHAAR HENRIQUEZ"
+  },
+  {
+    "Autor": "FABIAN SKARMETA PREPERSKI"
+  },
+  {
+    "Autor": "SAMIRA ABUHUMOR SKONIC"
+  },
+  {
+    "Autor": "MARIA JOSE GOMEZ TORRES"
+  },
+  {
+    "Autor": "JORGE LEIVA CASTRO"
+  },
+  {
+    "Autor": "LIBERTO ORLANDO CHAMORRO GALDAMES"
+  },
+  {
+    "Autor": "EMILIA VERONICA GONZALEZ VALLEJOS"
+  },
+  {
+    "Autor": "CARMEN PRIETO MONREAL"
+  },
+  {
+    "Autor": "FERNANDO LARRAÍN DEL TORO"
+  },
+  {
+    "Autor": "CARLA ANDREA FUENTES ABU ABBARAH"
+  },
+  {
+    "Autor": "LUIS PATRICIO GUENEL SOTO"
+  },
+  {
+    "Autor": "PAULA ANTONIA  BARRAZA CEPEDA"
+  },
+  {
+    "Autor": "ROCIO  TERROBA AEDO"
+  },
+  {
+    "Autor": "PAULA MORALES FERNANDES"
+  },
+  {
+    "Autor": "ADELA SECALL CORVALAN"
+  },
+  {
+    "Autor": "SAMIRA ABUMOHOR SKOLIN"
+  },
+  {
+    "Autor": "FREDDY GAZALI PEDRAZA"
+  },
+  {
+    "Autor": "MARTIN IGNACIO ARECHAGA BUSQUETS"
+  },
+  {
+    "Autor": "OMAR PINO RIVAS"
+  },
+  {
+    "Autor": "FELIPE PEÑA VENEGAS"
+  },
+  {
+    "Autor": "EMILIANA ARAYA SERON"
+  },
+  {
+    "Autor": "MARIO HERNÁN CORNEJO VEGA"
+  },
+  {
+    "Autor": "CLAUDIO BARBAS BARBAS"
+  },
+  {
+    "Autor": "CAMILA ROJAS COLINA"
+  },
+  {
+    "Autor": "PAOLA CECILIA LUCERO MORALES"
+  },
+  {
+    "Autor": "FELIPE IGNACIO JAROBA LARENAS"
+  },
+  {
+    "Autor": "JAVIERA PAZ RAMIREZ LOSADA"
+  },
+  {
+    "Autor": "ANTONIO ZISIS ALTAMIRANO"
+  },
+  {
+    "Autor": "JOSE LUIS CACERES DUPRE"
+  },
+  {
+    "Autor": "NICOLAS BOTTO GARCIA"
+  },
+  {
+    "Autor": "MARIO CARREÑO MARTINEZ"
+  },
+  {
+    "Autor": "CLAUDIA VALENZUELA PARADA"
+  },
+  {
+    "Autor": "MÓNICA VALENZUELA VENEGAS"
+  },
+  {
+    "Autor": "JUAN PABLO IBAÑEZ FIGUEROA"
+  },
+  {
+    "Autor": "HUMBERTO ESPINOZA MONTENEGRO"
+  },
+  {
+    "Autor": "DANAE SMITH PEREZ"
+  },
+  {
+    "Autor": "JUAN PABLO TRONCOSO CHANDÍA"
+  },
+  {
+    "Autor": "NICOLAS LASCAR CORTES"
+  },
+  {
+    "Autor": "NATALIA HERVIAS LEAL"
+  },
+  {
+    "Autor": "SAMANTHA MANZUR ARANDA"
+  },
+  {
+    "Autor": "RODRIGO CHAVERINI HERNANDEZ"
+  },
+  {
+    "Autor": "INGRID FIERRO TORRES"
+  },
+  {
+    "Autor": "ROBERTO  CAYUQUEO MARTINEZ"
+  },
+  {
+    "Autor": "JUAN CARLOS CARUZ SERRA"
+  },
+  {
+    "Autor": "JUAN PABLO NUÑEZ TORO"
+  },
+  {
+    "Autor": "MARIA CRISTINA TAPiES GOUDENBERG"
+  },
+  {
+    "Autor": "CAMILA LOPEZ PUEBLA"
+  },
+  {
+    "Autor": "DIANA VALERIA SIGNORELLI MELLER"
+  },
+  {
+    "Autor": "CAROLINA DE LA MAZA MELGAREJO"
+  },
+  {
+    "Autor": "SEBASTIAN SAN JUAN STADEN"
+  },
+  {
+    "Autor": "PABLO ILABACA GONZALEZ"
+  },
+  {
+    "Autor": "JOSEP RAMIÓ SANZANA"
+  },
+  {
+    "Autor": "ALVARO HENRIQUEZ PETTINELLI"
+  },
+  {
+    "Autor": "PAUILO ROJAS PINO"
+  },
+  {
+    "Autor": "CARLA ZUÑIGA MORALES"
+  },
+  {
+    "Autor": "HERNÁN COSTABAL JERIA"
+  },
+  {
+    "Autor": "DAVID CLAUDIO SOTO CARRASCO"
+  },
+  {
+    "Autor": "LORENA ERPEL"
+  },
+  {
+    "Autor": "CLAUDIO RODRIGUEZ SILVA"
+  },
+  {
+    "Autor": "PAULO FERNÁNDEZ CARROZA"
+  },
+  {
+    "Autor": "SEBASTIAN ASTUR DE LA CUESTA GORMAZ"
+  },
+  {
+    "Autor": "LARRY FIGUEROA CARDENAS"
+  },
+  {
+    "Autor": "PAULINA VILLALOBOS ROJAS"
+  },
+  {
+    "Autor": "ALEJANDRO ALBORNOZ ROJAS"
+  },
+  {
+    "Autor": "MARIA  BETANIA GONZALEZ FERNANDEZ"
+  },
+  {
+    "Autor": "TERESITA IACOBELLI DELPIANO"
+  },
+  {
+    "Autor": "CONSTANZA PEREZ SCHEUCH"
+  },
+  {
+    "Autor": "PABLO UBIERGO ALBARRACIN"
+  },
+  {
+    "Autor": "CRISTIAN NUÑEZ CRISTINO"
+  },
+  {
+    "Autor": "CATERINA GHITALDO MONTENEGRO"
+  },
+  {
+    "Autor": "CARLA BOLGERI CONDEMANN"
+  },
+  {
+    "Autor": "MARIA PAZ  EYZAGUIRRE MUÑOZ"
+  },
+  {
+    "Autor": "VICENTE YAÑEZ FUENZALIDA"
+  },
+  {
+    "Autor": "SERGIO MORA DIAZ"
+  },
+  {
+    "Autor": "CAROLINA CORREA HERRERA"
+  },
+  {
+    "Autor": "GIANPAOLO MARTELLI BARRIOS"
+  },
+  {
+    "Autor": "SEBASTIAN BUZETA UNDURRAGA"
+  },
+  {
+    "Autor": "SOFIA ZAGAL GARCÍA"
+  },
+  {
+    "Autor": "ANTONIO ZAGAL PIZARRO"
+  },
+  {
+    "Autor": "MAURICIO LOPEZ FERNANDEZ"
+  },
+  {
+    "Autor": "IGNACIO  LYON LÓPEZ"
+  },
+  {
+    "Autor": "IARA RAYEN CID DEL RIO"
+  },
+  {
+    "Autor": "VERONICA BRUNA"
+  },
+  {
+    "Autor": "MABEL SEPÚLVEDA PEREZ"
+  },
+  {
+    "Autor": "HUGO COVARRUBIAS ALVAREZ"
+  },
+  {
+    "Autor": "NATACHA ZURITA FLORES"
+  },
+  {
+    "Autor": "DARWIN MARTINEZ LONDOÑO"
+  },
+  {
+    "Autor": "VICTOR HUGO VIDANGOSSY GONZALEZ"
+  },
+  {
+    "Autor": "MILENA BASTIDAS MUÑOZ"
+  },
+  {
+    "Autor": "ALVARO ANTONIO CEPPI ASTUDILLO"
+  },
+  {
+    "Autor": "MARTÍN ALEJANDRO BENAVIDES NUÑEZ"
+  },
+  {
+    "Autor": "FELIPE MARTINEZ GUIDICELLI"
+  },
+  {
+    "Autor": "PABLO PEREDA BEUCHAT"
+  },
+  {
+    "Autor": "CRISTIÁN ENRIQUE LOUIT NEVISTIC"
+  },
+  {
+    "Autor": "CARLOS ALBERTO ULISSE LUZ"
+  },
+  {
+    "Autor": "NATALIA MARIA PEREDA CASTRO"
+  },
+  {
+    "Autor": "ISIDORA MARRAS BRONFMAN"
+  },
+  {
+    "Autor": "ANDREA CORDONES SANTOS"
+  },
+  {
+    "Autor": "PAULA CAMILA LOPEZ JULLIAN"
+  },
+  {
+    "Autor": "SILVIA MARIN FUENTES"
+  },
+  {
+    "Autor": "ROCIO  RADRIGAN MARIN"
+  },
+  {
+    "Autor": "SANTIAGO LUIS SERRANO ESTRADA"
+  },
+  {
+    "Autor": "FRANCISCA ESPINOZA CANALES"
+  },
+  {
+    "Autor": "ORLANDO TORRES OSORIO"
+  },
+  {
+    "Autor": "ASTRID QUINTANA FUENTEALBA"
+  },
+  {
+    "Autor": "EMERSON ARIAS LARA"
+  },
+  {
+    "Autor": "JOAQUIN MONTECINOS ORTIZ"
+  },
+  {
+    "Autor": "JUAN SARAVIA JIMENEZ"
+  },
+  {
+    "Autor": "MARIANELA FUENZALIDA GALVEZ"
+  },
+  {
+    "Autor": "JUAN PABLO SEPULVEDA ALIAGA"
+  },
+  {
+    "Autor": "JONATHAN CUCHACOVICH MIKENBERG"
+  },
+  {
+    "Autor": "JOSEFINA CAMUS ZUÑIGA"
+  },
+  {
+    "Autor": "ALBERTO WILSON"
+  },
+  {
+    "Autor": "PABLO ILLANES TAPIA"
+  },
+  {
+    "Autor": "EBANA GARIN CORONEL"
+  },
+  {
+    "Autor": "CARLA HIGUERAS QUERO"
+  },
+  {
+    "Autor": "JUAN PABLO CONDON"
+  },
+  {
+    "Autor": "HERNÁN NICOLÁS ALEMPARTE BICKELL"
+  },
+  {
+    "Autor": "MATIAS STAGNARO CECCONI"
+  },
+  {
+    "Autor": "RODRIGO ALEJANDRO TORO SOLOVERA"
+  },
+  {
+    "Autor": "JONATHAN PATRICIO SALINAS SALAZAR"
+  },
+  {
+    "Autor": "VICENTE CUADROS INFANTE"
+  },
+  {
+    "Autor": "VICENTE LARROULET PHILIPPI"
+  },
+  {
+    "Autor": "MARCOS ALEJANDRO ARAYA VALDIVIA"
+  },
+  {
+    "Autor": "JUAN GILBERTO RODRIGUEZ ZUÑIGA"
+  },
+  {
+    "Autor": "DAMIÁN NOGUERA BERGER"
+  },
+  {
+    "Autor": "RAIMUNDO JOSÉ STEVENSON VERGARA"
+  },
+  {
+    "Autor": "FRANCISCO MOREIRA"
+  },
+  {
+    "Autor": "JAVIER EDUARDO ORDOÑEZ PALMA"
+  },
+  {
+    "Autor": "MILENA VODANOVIC JOHNSON"
+  },
+  {
+    "Autor": "PATRICIO IVAN GONZALEZ KUHLMANN"
+  },
+  {
+    "Autor": "NELSON IVAN VARGAS VALENCIA"
+  },
+  {
+    "Autor": "SEBASTIÁN ARAYA SERRANO"
+  },
+  {
+    "Autor": "CHRISTINE ANGELICA LUCAS STEGMANN"
+  },
+  {
+    "Autor": "JULIO CESAR JORQUERA ARRIAGADA"
+  },
+  {
+    "Autor": "ALEJANDRO HANS BRUNA SILVA"
+  },
+  {
+    "Autor": "VICTOR DIONISIO HUERTA GONZALEZ"
+  },
+  {
+    "Autor": "FELIPE ARRATIA DIAZ"
+  },
+  {
+    "Autor": "CLAUDIO LÓPEZ DE LÉRIDA VICUÑA"
+  },
+  {
+    "Autor": "BERNARDITA OJEDA SALAS"
+  },
+  {
+    "Autor": "LEONARDO MIHOVILOVIC CASTRO"
+  },
+  {
+    "Autor": "MAXIMO GEDDA QUIROGA"
+  },
+  {
+    "Autor": "GABRIEL RAMMSY SKOKNIC"
+  },
+  {
+    "Autor": "BARBARA DELLA SCHIAVA FIGUEROA"
+  },
+  {
+    "Autor": "JUAN CARLOS GEDDA ORTiZ"
+  },
+  {
+    "Autor": "RAÚL FERNANDO GUTIERREZ SAN MARTÍN"
+  },
+  {
+    "Autor": "CARLOS FELIPE BORQUEZ AGUILAR"
+  },
+  {
+    "Autor": "ALDO AGUSTIN OVIEDO TEJO"
+  },
+  {
+    "Autor": "MARCELO ALBERTO NAVARRO FRANCKE"
+  },
+  {
+    "Autor": "DANILO LUIS MILLA ARAYA"
+  },
+  {
+    "Autor": "HARDY  COTAL SALAMANCA"
+  },
+  {
+    "Autor": "MARIA VERONICA SAQUEL MEDIANO"
+  },
+  {
+    "Autor": "CARLOS ALBERTO SAAVEDRA CERDA"
+  },
+  {
+    "Autor": "CLAUDIA MARGARITA BAWLITZA GRANADO"
+  },
+  {
+    "Autor": "HERNAN MARCELO LARA CONTRERAS"
+  },
+  {
+    "Autor": "PAULA ANDREA PARRA BRUNA"
+  },
+  {
+    "Autor": "RICARDO NELSON OLIVARES VALDES"
+  },
+  {
+    "Autor": "NICOLÁS ROBERTO BASCUÑAN MORALES"
+  },
+  {
+    "Autor": "DANIELA CAROLINA SCHALCHLI VERDUGO"
+  },
+  {
+    "Autor": "OCTAVIO GABRIEL OSHEE SQUICCIARINI"
+  },
+  {
+    "Autor": "MACARENA CAROLINA ANDREWS BARRAZA"
+  },
+  {
+    "Autor": "DANIEL ESTEBAN GALLO ORREGO"
+  },
+  {
+    "Autor": "MARA ARACELI IBACETA COLLAO"
+  },
+  {
+    "Autor": "JULIA MARIA MUÑOZ ACUÑA"
+  },
+  {
+    "Autor": "MANUELA ALEJANDRA OYARZUN GRAU"
+  },
+  {
+    "Autor": "RODRIGO MORALES SALAZAR"
+  },
+  {
+    "Autor": "HECTOR MANUEL CERDA RIOS"
+  },
+  {
+    "Autor": "MARIA EUGENIA RENCORET RIOS"
+  },
+  {
+    "Autor": "JAIME NICOLAS CANALES MENESES"
+  },
+  {
+    "Autor": "FELIPE ALEJANDRO ZAMBRANO MIGUIELES"
+  },
+  {
+    "Autor": "ISABEL VICTORIA ROSEMBLATT BONO"
+  },
+  {
+    "Autor": "DANTE LEONART FERNANDEZ"
+  },
+  {
+    "Autor": "ENRIQUE ANDRÉS ORTEGA CORTEZ"
+  },
+  {
+    "Autor": "SEBASTIAN ANDRÉS BADILLA CASTRO"
+  },
+  {
+    "Autor": "MARCELO ALEJANDRO BERNOUS ARAYA"
+  },
+  {
+    "Autor": "MARIA BELEN ARENAS FIGUEROA"
+  },
+  {
+    "Autor": "MANUEL ALEJANDRO  SOTO HERRERA"
+  },
+  {
+    "Autor": "HUGO ANDRES CASTILLO MARCHANT"
+  },
+  {
+    "Autor": "MANUEL PABLO VIAL PEÑAILILLO"
+  },
+  {
+    "Autor": "EDUARDO ANTONIO GAMBOA ORDOÑEZ"
+  },
+  {
+    "Autor": "TOMÁS ALLENDES MARTÍNEZ"
+  },
+  {
+    "Autor": "BENJAMÍN ESTEBAN FUENTES CONTRERAS"
+  },
+  {
+    "Autor": "JOAQUIN ANDRÉS MATAMALA VALENZUELA"
+  },
+  {
+    "Autor": "JAVIER ALEJANDRO CABIESES MARTÍNEZ"
+  },
+  {
+    "Autor": "EMILIO ROMERO ARANCIBIA"
+  },
+  {
+    "Autor": "RODOLFO ANDRÉS GARATE CISTERNAS"
+  },
+  {
+    "Autor": "SANTIAGO GASTÓN O'RYAN PRAT"
+  },
+  {
+    "Autor": "IGNACIO ANDRÉS DIAZ LIZANA"
+  },
+  {
+    "Autor": "JUAN PABLO ABALO CEA"
+  },
+  {
+    "Autor": "RICHARD GERARDO BEZZAZA VERGARA"
+  },
+  {
+    "Autor": "CAROLINA NICOLE OLIVARES ARAYA"
+  },
+  {
+    "Autor": "CAMILO ESTEFFANO LEIVA JIMENEZ"
+  },
+  {
+    "Autor": "MAURICIO FELIPE VACA VALENZUELA"
+  },
+  {
+    "Autor": "MARIA LUZ ANGELICA CASTRO PALMA"
+  },
+  {
+    "Autor": "JAVIERA PEÓN-VEIGA PETRIC"
+  },
+  {
+    "Autor": "EDUARDO BARTOLOMÉ EGUIGUREN"
+  },
+  {
+    "Autor": "JOSÉ MIGUEL PARODI VALENZUELA"
+  },
+  {
+    "Autor": "RODRIGO ANDRÉS SOBARZO DE LARRAECHEA"
+  },
+  {
+    "Autor": "RUBÉN MARCELO CUEVAS SEPÚLVEDA"
+  },
+  {
+    "Autor": "TERESA DE JESÚS ALCAÍNO CAVIEDES"
+  },
+  {
+    "Autor": "MAURICIO ANDRÉS LUCERO MOYA"
+  },
+  {
+    "Autor": "MARÍA FERNANDA LEMA GAC"
+  },
+  {
+    "Autor": "SERGIO IGNACIO GARCÍA JOPIA"
+  },
+  {
+    "Autor": "FRANCESCA TASSARA LEVY"
+  },
+  {
+    "Autor": "MAURICIO CORREA VILLASECA"
+  },
+  {
+    "Autor": "DANIELA BUNSTER BAEZA"
+  },
+  {
+    "Autor": "FRANCISCO ELÍAS FUENTES MARDONES"
+  },
+  {
+    "Autor": "ISIDORA ITUARTE ARAYA"
+  },
+  {
+    "Autor": "TOMÁS CAMILO ANDRÉS HENRIQUEZ MURGAS"
+  },
+  {
+    "Autor": "FRANCISCA CASTILLO COUVE"
+  },
+  {
+    "Autor": "RODRIGO ANDRÉS URRUTIA GUTIÉRREZ"
+  },
+  {
+    "Autor": "MARCELO LORENZO LOMBARDERO"
+  },
+  {
+    "Autor": "FELIPE ANDRES DIAZ ARRAZTIO"
+  },
+  {
+    "Autor": "MATIAS IGNACIO DALMAZZO ORTIZ"
+  },
+  {
+    "Autor": "FELIPE JOSE ATENAS MUÑOZ"
+  },
+  {
+    "Autor": "GUILLERMO ANDRES UGALDE RIVAS"
+  },
+  {
+    "Autor": "DAN JAIME CONTRERAS MENA"
+  },
+  {
+    "Autor": "CARLOS CAMILO BRIONES PINO"
+  }
+]
