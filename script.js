@@ -660,9 +660,12 @@ function collectFormData() {
         const bloquesEpisodios = document.querySelectorAll('.bloque-episodios');
         const resultados = [];
         
+        // Siempre agregar la fila maestra como primera fila
+        resultados.push(primeraFila);
+        
         // Si no hay bloques de episodios, devolver solo la primera fila
         if (bloquesEpisodios.length === 0) {
-            return [primeraFila];
+            return resultados;
         }
         
         // Procesar bloques de episodios
