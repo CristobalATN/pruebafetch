@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Declaración de Obras Audiovisuales</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header-with-logo">
+            <img src="assets/Logo-Fondo-Transparente@3x(1).png" alt="Logo" class="logo">
+            <h1>Declaración de Obras Audiovisuales</h1>
+        </div>
+        <form id="obraForm">
+            <!-- Sección 1: Datos Generales -->
+            <section class="form-section">
+                <h2>Datos Generales</h2>
+                <div class="form-group">
+                    <label for="tituloOriginal">Título original <span class="required">*</span></label>
+                    <input type="text" id="tituloOriginal" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipoFormato">Tipo de formato <span class="required">*</span></label>
+                    <select id="tipoFormato" required>
+                        <option value="">Seleccione...</option>
+                        <option value="Largometraje">Largometraje</option>
+                        <option value="Cortometraje">Cortometraje</option>
+                        <option value="Telefilm">Telefilm</option>
+                        <option value="Culebrón / Serie cómica">Culebrón / Serie cómica</option>
+                        <option value="Serie (de televisión)">Serie (de televisión)</option>
+                        <option value="Telenovela">Telenovela</option>
+                        <option value="Documentary/Factual Series">Documentary/Factual Series</option>
+                        <option value="Programa de televisión">Programa de televisión</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="empresaProductora">Empresa productora <span class="required">*</span></label>
+                    <select id="empresaProductora" class="select2" required>
+                        <option value="">Buscar o agregar...</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="paisProduccion">País de producción</label>
+                    <select id="paisProduccion" class="select2">
+                        <option value="">Buscar o agregar...</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="anioProduccion">Año de producción <span class="required">*</span></label>
+                    <input type="number" id="anioProduccion" min="1900" max="2100" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="idioma">Idioma</label>
+                    <select id="idioma">
+                        <option value="">Seleccione...</option>
+                        <option value="Español">Español</option>
+                        <option value="Inglés">Inglés</option>
+                        <option value="Francés">Francés</option>
+                        <option value="Alemán">Alemán</option>
+                        <option value="Italiano">Italiano</option>
+                        <option value="Portugués">Portugués</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="actores">Actores</label>
+                    <input type="text" id="actores" placeholder="Separar nombres con comas">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="directores">Directores</label>
+                    <input type="text" id="directores" placeholder="Separar nombres con comas">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="guionistas">Guionistas</label>
+                    <input type="text" id="guionistas" placeholder="Separar nombres con comas">
+                </div>
+
+            </section>
+
+            <!-- Sección de Exhibición Internacional -->
+            <section class="form-section" id="exhibicionSection">
+                <div class="section-header">
+                    <h2>Exhibición internacional de la obra</h2>
+                    <button type="button" class="btn btn-secondary" id="addExhibicion">+ Agregar Exhibición</button>
+                </div>
+                <div id="exhibicionesContainer">
+                    <!-- Exhibiciones se agregarán aquí dinámicamente -->
+                </div>
+            </section>
+
+
+            <!-- Sección de Bloques de Episodios (inicialmente oculta) -->
+            <section class="form-section" id="episodiosSection" style="display: none;">
+                <div class="section-header">
+                    <h2>Bloques de Episodios</h2>
+                    <button type="button" class="btn btn-secondary" id="addBloqueEpisodios">+ Agregar Bloque</button>
+                </div>
+                <div id="bloquesEpisodiosContainer">
+                    <!-- Bloques de episodios se agregarán aquí dinámicamente -->
+                </div>
+            </section>
+
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Generar Excel</button>
+                <button type="reset" class="btn btn-secondary">Limpiar Formulario</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Templates -->
+    <template id="exhibicionTemplate">
+        <div class="exhibicion-item">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Otro título</label>
+                    <input type="text" class="otroTitulo">
+                </div>
+                <div class="form-group">
+                    <label>Idioma</label>
+                    <select class="idiomaExhibicion">
+                        <option value="">Seleccione...</option>
+                        <option value="Español">Español</option>
+                        <option value="Inglés">Inglés</option>
+                        <option value="Francés">Francés</option>
+                        <option value="Alemán">Alemán</option>
+                        <option value="Italiano">Italiano</option>
+                        <option value="Portugués">Portugués</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>País de exhibición</label>
+                    <select class="paisExhibicion select2">
+                        <option value="">Buscar o agregar...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Canal / Plataforma / Sala</label>
+                    <select class="canalExhibicion select2">
+                        <option value="">Buscar o agregar...</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" class="btn-remove">Eliminar</button>
+        </div>
+    </template>
+
+    <template id="bloqueEpisodiosTemplate">
+        <div class="bloque-episodios">
+            <div class="bloque-header">
+                <div class="bloque-title">
+                    <h3>Bloque de Episodios</h3>
+                    <div class="help-tooltip">
+                        <span class="help-icon">?</span>
+                        <div class="tooltip-content">
+                            <h4>Instrucciones para declarar episodios:</h4>
+                            <p>En cada bloque de episodios, registra el intervalo de capítulos que comparten los mismos autores, roles y porcentajes de participación.</p>
+                            <p>Esto te permitirá agrupar episodios con características similares y simplificar la declaración.</p>
+                            <p>Si existen episodios con distinta participación de autores o porcentajes, crea un nuevo bloque para reflejar esa diferencia.</p>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn-remove">Eliminar Bloque</button>
+            </div>
+            
+            <!-- Subbloque 1: Intervalo de episodios -->
+            <div class="subbloque">
+                <h4>Intervalo de episodios</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Temporada</label>
+                        <input type="number" class="temporada" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Desde episodio</label>
+                        <input type="number" class="desdeEpisodio" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Hasta episodio</label>
+                        <input type="number" class="hastaEpisodio" min="1">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Subbloque 2: Líneas de participación -->
+            <div class="subbloque">
+                <div class="subbloque-header">
+                    <h4>Líneas de participación</h4>
+                    <button type="button" class="btn btn-small" onclick="addLineaParticipacion(this)">+ Agregar Línea</button>
+                </div>
+                <div class="lineas-participacion">
+                    <!-- Líneas de participación se agregarán aquí dinámicamente -->
+                </div>
+            </div>
+            
+            <!-- Subbloque 3: Títulos de episodios -->
+            <div class="subbloque">
+                <h4>Títulos de episodios</h4>
+                <div class="episodios-individuales">
+                    <!-- Campos individuales de episodios se generarán dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="lineaParticipacionTemplate">
+        <div class="linea-participacion">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Rol</label>
+                    <select class="rol" multiple>
+                        <option value="Actor">Actor</option>
+                        <option value="Director">Director</option>
+                        <option value="Guionista">Guionista</option>
+                        <option value="Productor">Productor</option>
+                        <option value="Músico">Músico</option>
+                        <option value="Fotógrafo">Fotógrafo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Autor</label>
+                    <select class="autor select2">
+                        <option value="">Buscar o agregar...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>% Participación <span class="required">*</span></label>
+                    <input type="number" class="porcentaje" min="0" max="100" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn-remove" onclick="removeLineaParticipacion(this)">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
