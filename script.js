@@ -698,7 +698,7 @@ function collectFormData() {
                 for (let i = desde; i <= hasta; i++) {
                     lineas.forEach(linea => {
                         const filaEpisodio = {
-                            ...generalData,
+                            // Solo incluir datos específicos del episodio
                             temporada: temporada,
                             num_episodio: i,
                             titulo_episodio: titulos[i] || `Episodio ${i}`,
