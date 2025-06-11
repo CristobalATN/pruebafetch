@@ -40,15 +40,15 @@
 
                 <div class="form-group">
                     <label for="empresaProductora">Empresa productora <span class="required">*</span></label>
-                    <select id="empresaProductora" class="select2" required>
-                        <option value="">Buscar o agregar...</option>
+                    <select id="empresaProductora" class="select2" multiple="multiple" required>
+                        <!-- Las opciones se cargarán dinámicamente -->
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="paisProduccion">País de producción</label>
-                    <select id="paisProduccion" class="select2">
-                        <option value="">Buscar o agregar...</option>
+                    <select id="paisProduccion" class="select2" multiple="multiple">
+                        <!-- Las opciones se cargarán dinámicamente -->
                     </select>
                 </div>
 
@@ -94,7 +94,10 @@
             <!-- Sección 2: Exhibición Internacional -->
             <section id="exhibicionSection" class="form-section">
                 <div class="section-header">
-                    <h2>Exhibición internacional de la obra</h2>
+                    <div>
+                        <h2>Exhibición internacional de la obra <span class="optional-badge">(Opcional)</span></h2>
+                        <p class="help-text">Complete esta sección solo si la obra ha tenido exhibición internacional. No es obligatorio completar este apartado.</p>
+                    </div>
                     <button type="button" class="btn btn-secondary" id="addExhibicion">+ Agregar Exhibición</button>
                 </div>
                 <div id="exhibicionesContainer">
@@ -105,7 +108,18 @@
             <!-- Sección de Líneas de Participación (para obras no serializadas) -->
             <section id="lineasNoSerializadasSection" class="form-section" style="display: none;">
                 <div class="section-header">
-                    <h2>Líneas de Participación</h2>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <h2>Líneas de Participación</h2>
+                        <div class="help-tooltip" style="margin-top: 0.25rem;">
+                            <span class="help-icon">?</span>
+                            <div class="tooltip-content">
+                                <h4>Instrucciones para declarar líneas de participación:</h4>
+                                <p>En cada línea de participación, registra el rol, autor y porcentaje correspondiente a cada participante en la obra.</p>
+                                <p>Recuerda que la suma de los porcentajes para un mismo rol no puede superar el 100%.</p>
+                                <p>Si necesitas agregar participantes con diferentes roles, crea una nueva línea para cada uno.</p>
+                            </div>
+                        </div>
+                    </div>
                     <button type="button" class="btn btn-secondary" id="addLineaNoSerializada">+ Agregar Línea</button>
                 </div>
                 <div id="lineasNoSerializadasContainer">
@@ -196,7 +210,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Temporada</label>
-                        <input type="number" class="temporada" min="1" value="1">
+                        <input type="number" class="temporada" min="1" placeholder="N°">
                     </div>
                     <div class="form-group">
                         <label>Desde episodio</label>
@@ -212,8 +226,19 @@
             <!-- Subbloque 2: Líneas de participación -->
             <div class="subbloque">
                 <div class="subbloque-header">
-                    <h4>Líneas de participación</h4>
-                    <button type="button" class="btn btn-small" onclick="addLineaParticipacion(this)">+ Agregar Línea</button>
+                    <div class="bloque-title">
+                        <h4>Líneas de participación</h4>
+                        <div class="help-tooltip">
+                            <span class="help-icon">?</span>
+                            <div class="tooltip-content">
+                                <h4>Instrucciones para declarar líneas de participación:</h4>
+                                <p>En cada línea de participación, registra el rol, autor y porcentaje correspondiente a cada participante en la obra.</p>
+                                <p>Recuerda que la suma de los porcentajes para un mismo rol no puede superar el 100%.</p>
+                                <p>Si necesitas agregar participantes con diferentes roles, crea una nueva línea para cada uno.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-small btn-add-linea">+ Agregar Línea</button>
                 </div>
                 <div class="lineas-participacion">
                     <!-- Líneas de participación se agregarán aquí dinámicamente -->
@@ -235,13 +260,8 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>Rol</label>
-                    <select class="rol" multiple>
-                        <option value="Actor">Actor</option>
-                        <option value="Director">Director</option>
-                        <option value="Guionista">Guionista</option>
-                        <option value="Productor">Productor</option>
-                        <option value="Músico">Músico</option>
-                        <option value="Fotógrafo">Fotógrafo</option>
+                    <select class="rol select2" style="width: 100%;">
+                        <!-- Las opciones se cargarán dinámicamente desde el JSON -->
                     </select>
                 </div>
                 <div class="form-group">
