@@ -4,7 +4,55 @@ let contadorBloques = 0;
 // Variable global para almacenar la lista de autores
 let listaAutoresGlobal = [];
 
-// Función para crear etiquetas en Select2
+// Variable global para almacenar la lista de países
+let listaPaisesGlobal = [];
+
+// Variable global para almacenar la lista de empresas productoras
+let listaProductorasGlobal = [];
+
+// Función para limpiar completamente el formulario
+function limpiarFormulario() {
+    console.log('Iniciando limpieza del formulario...');
+    
+    // Limpiar campos de entrada estándar
+    const form = document.getElementById('obraForm');
+    if (!form) return;
+    
+    // Resetear el formulario (esto maneja los campos estándar)
+    form.reset();
+    
+    // Limpiar campos Select2
+    $('select[data-select2-id]').val(null).trigger('change');
+    
+    // Limpiar contenedores dinámicos
+    const contenedoresDinamicos = [
+        'bloquesEpisodiosContainer',
+        'exhibicionesContainer',
+        'lineasNoSerializadasContainer'
+    ];
+    
+    contenedoresDinamicos.forEach(id => {
+        const contenedor = document.getElementById(id);
+        if (contenedor) {
+            console.log(`Limpiando contenedor: ${id}`);
+            contenedor.innerHTML = '';
+        }
+    });
+    
+    // Reiniciar contadores
+    contadorBloques = 0;
+    
+    // Forzar actualización de visibilidad de secciones
+    const tipoFormato = document.getElementById('tipoFormato');
+    if (tipoFormato) {
+        console.log('Actualizando visibilidad de secciones...');
+        tipoFormato.dispatchEvent(new Event('change'));
+    }
+    
+    console.log('Formulario limpiado correctamente');
+}
+
+// Funciones globales para Select2
 function createTag(params) {
     const term = params.term.trim();
     if (term === '') {
@@ -17,7 +65,6 @@ function createTag(params) {
     };
 }
 
-// Función para buscar coincidencias en Select2
 function matcher(params, data) {
     if ($.trim(params.term) === '') {
         return data;
@@ -170,6 +217,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Initialize when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Prevenir caracteres no numéricos en campos de tipo número
+    function handleNumericInput(e) {
+        // Solo aplicar a inputs de tipo número o con clase 'porcentaje'
+        if (e.target.type === 'number' || e.target.classList.contains('porcentaje')) {
+            // Guardar la posición del cursor
+            const start = e.target.selectionStart;
+            const end = e.target.selectionEnd;
+            
+            // Eliminar cualquier carácter que no sea número
+            let newValue = e.target.value.replace(/[^0-9]/g, '');
+            
+            // Manejar campo de año (id="anioProduccion")
+            if (e.target.id === 'anioProduccion') {
+                // Limitar a 4 dígitos
+                newValue = newValue.slice(0, 4);
+                
+                // Validar rango de año (1900-2100)
+                if (newValue.length === 4) {
+                    const year = parseInt(newValue, 10);
+                    if (year < 1900) newValue = '1900';
+                    if (year > 2100) newValue = '2100';
+                }
+            } 
+            // Manejar otros campos numéricos
+            else if (e.target.required && newValue === '') {
+                newValue = '0';
+            }
+            
+            // Actualizar el valor
+            e.target.value = newValue;
+            
+            // Restaurar la posición del cursor
+            e.target.setSelectionRange(start, end);
+        }
+    }
+    
+    // Prevenir teclas no numéricas en campos numéricos
+    function preventInvalidKeys(e) {
+        // Solo aplicar a inputs de tipo número o con clase 'porcentaje'
+        if (e.target.type === 'number' || e.target.classList.contains('porcentaje')) {
+            // Permitir teclas de control (backspace, delete, tab, escape, enter, etc.)
+            if ([8, 9, 13, 27, 46].includes(e.keyCode) || 
+                // Permitir: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+                (e.ctrlKey === true && [65, 67, 86, 88].includes(e.keyCode)) ||
+                // Permitir: home, end, left, right, up, down
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                return;
+            }
+            
+            // Solo permitir números (0-9)
+            if ((e.keyCode < 48 || e.keyCode > 57) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        }
+    }
+    
+    // Agregar event listeners
+    document.addEventListener('keydown', preventInvalidKeys);
+    document.addEventListener('input', handleNumericInput);
+    
     // Inicializar Select2 para elementos select mejorados
     $('.select2').select2({
         tags: true,
@@ -214,17 +321,60 @@ document.addEventListener('DOMContentLoaded', function() {
     const episodiosSection = document.getElementById('episodiosSection');
     const lineasNoSerializadasSection = document.getElementById('lineasNoSerializadasSection');
     
-    if (tipoFormato) {
-        tipoFormato.addEventListener('change', function() {
-            const isSerie = this.value === 'serie_tv' || this.value === 'web_serie' || this.value === 'miniserie';
-            episodiosSection.style.display = isSerie ? 'block' : 'none';
-            lineasNoSerializadasSection.style.display = isSerie ? 'none' : 'block';
+    function actualizarVisibilidadSecciones() {
+        if (!tipoFormato) return;
+        
+        const valorFormato = tipoFormato.value;
+        const esSerie = valorFormato === 'Serie (de televisión)' || valorFormato === 'Telenovela' || 
+                      valorFormato === 'Culebrón / Serie cómica' || valorFormato === 'Documentary/Factual Series' ||
+                      valorFormato === 'Programa de televisión';
+        
+        console.log('Tipo de formato seleccionado:', valorFormato);
+        console.log('¿Es serie?', esSerie);
+        
+        // Mostrar/ocultar secciones
+        if (episodiosSection) {
+            episodiosSection.style.display = esSerie ? 'block' : 'none';
             
-            // Si es serie, asegurarse de limpiar el contenedor de líneas no serializadas
-            if (isSerie) {
-                document.getElementById('lineasNoSerializadasContainer').innerHTML = '';
+            if (esSerie) {
+                // Si es una serie, verificar si ya hay bloques
+                const bloquesContainer = document.getElementById('bloquesEpisodiosContainer');
+                if (bloquesContainer && bloquesContainer.children.length === 0) {
+                    console.log('Agregando bloque de episodio por defecto');
+                    // Agregar un bloque de episodios automáticamente
+                    addBloqueEpisodios();
+                }
+            } else {
+                // Si no es serie, limpiar los bloques de episodios
+                const bloquesContainer = document.getElementById('bloquesEpisodiosContainer');
+                if (bloquesContainer) {
+                    console.log('Limpiando bloques de episodios');
+                    bloquesContainer.innerHTML = '';
+                    contadorBloques = 0; // Reiniciar el contador de bloques
+                }
             }
-        });
+        }
+        
+        if (lineasNoSerializadasSection) {
+            const mostrarLineasNoSerializadas = !esSerie;
+            lineasNoSerializadasSection.style.display = mostrarLineasNoSerializadas ? 'block' : 'none';
+            
+            // Si es serie, limpiar el contenedor de líneas no serializadas
+            if (esSerie) {
+                const lineasContainer = document.getElementById('lineasNoSerializadasContainer');
+                if (lineasContainer) {
+                    console.log('Limpiando líneas no serializadas');
+                    lineasContainer.innerHTML = '';
+                }
+            }
+        }
+    }
+    
+    // Configurar el evento change
+    if (tipoFormato) {
+        tipoFormato.addEventListener('change', actualizarVisibilidadSecciones);
+        // Ejecutar una vez al cargar para establecer el estado inicial
+        actualizarVisibilidadSecciones();
     }
 
     // Add exhibicion
@@ -280,11 +430,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Initialize with one exhibicion
-    addExhibicion();
-    
-    // Cargar la lista de autores
+        // Cargar la lista de autores
     cargarAutores();
+    
+    // Cargar la lista de países
+    cargarPaises();
+    
+    // Cargar la lista de empresas productoras
+    cargarProductoras();
 });
 
 // Add a new exhibicion
@@ -302,57 +455,109 @@ function addExhibicion() {
     const removeBtn = exhibicionItem.querySelector('.btn-remove');
     if (removeBtn) {
         removeBtn.addEventListener('click', function() {
-            // Only remove if there's more than one exhibicion
-            const exhibiciones = document.querySelectorAll('.exhibicion-item');
-            if (exhibiciones.length > 1) {
-                exhibicionItem.remove();
-            } else {
-                alert('Debe haber al menos una exhibición.');
-            }
+            exhibicionItem.remove();
         });
     }
     
     // Agregar el ítem al contenedor
     exhibicionesContainer.appendChild(exhibicionItem);
     
-    // Inicializar Select2 con la misma configuración que la inicial
-    $(exhibicionItem).find('.select2').select2({
-        tags: true,
-        tokenSeparators: [','], // Solo usar coma como separador
-        createTag: function(params) {
-            // Eliminar espacios al principio y al final, pero permitirlos en el medio
-            const term = $.trim(params.term);
-            
-            // No permitir valores vacíos
-            if (term === '') {
+    // Inicializar Select2 para el campo de canal
+    const canalSelect = exhibicionItem.querySelector('.canalExhibicion');
+    if (canalSelect) {
+        $(canalSelect).select2({
+            tags: true,
+            placeholder: 'Ingrese el nombre del canal o plataforma...',
+            allowClear: true,
+            createTag: function(params) {
+                const term = $.trim(params.term);
+                if (term === '') return null;
+                return {
+                    id: term,
+                    text: term,
+                    newTag: true
+                };
+            }
+        });
+    }
+    
+    // Inicializar Select2 para el campo de idioma de exhibición
+    const idiomaSelect = exhibicionItem.querySelector('.idiomaExhibicion');
+    if (idiomaSelect) {
+        // Limpiar opciones existentes
+        idiomaSelect.innerHTML = '<option value="">Seleccione un idioma...</option>';
+        
+        // Agregar idiomas al select
+        listaIdeomasGlobal.forEach(idioma => {
+            const option = document.createElement('option');
+            option.value = idioma;
+            option.textContent = idioma;
+            idiomaSelect.appendChild(option);
+        });
+        
+        // Inicializar Select2
+        $(idiomaSelect).select2({
+            placeholder: 'Seleccione un idioma...',
+            allowClear: true,
+            width: '100%',
+            matcher: function(params, data) {
+                if ($.trim(params.term) === '') return data;
+                const searchTerm = params.term.toLowerCase();
+                const text = data.text.toLowerCase();
+                if (text.indexOf(searchTerm) > -1) return data;
                 return null;
             }
+        });
+    }
+    
+    // Inicializar Select2 para el campo de país de exhibición
+    const paisSelect = exhibicionItem.querySelector('.paisExhibicion');
+    if (paisSelect) {
+        // Cargar países en el select
+        cargarPaises().then(paises => {
+            // Limpiar opciones existentes
+            paisSelect.innerHTML = '<option value="">Seleccione o busque un país...</option>';
             
-            return {
-                id: term,
-                text: term,
-                newTag: true
-            };
-        },
-        // Permitir búsqueda con espacios
-        matcher: function(params, data) {
-            // Si no hay términos de búsqueda, devolver todos los resultados
-            if ($.trim(params.term) === '') {
-                return data;
-            }
+            // Agregar países al select
+            paises.forEach(pais => {
+                const option = document.createElement('option');
+                option.value = pais;
+                option.textContent = pais;
+                paisSelect.appendChild(option);
+            });
             
-            // Convertir a minúsculas para búsqueda sin distinción entre mayúsculas y minúsculas
-            const searchTerm = params.term.toLowerCase();
-            const text = data.text.toLowerCase();
-            
-            // Buscar coincidencias parciales
-            if (text.indexOf(searchTerm) > -1) {
-                return data;
-            }
-            
-            return null;
-        }
-    });
+            // Inicializar Select2
+            $(paisSelect).select2({
+                placeholder: 'Seleccione o busque un país...',
+                allowClear: true,
+                tags: true,
+                createTag: function(params) {
+                    const term = $.trim(params.term);
+                    if (term === '') return null;
+                    return {
+                        id: term,
+                        text: term,
+                        newTag: true
+                    };
+                },
+                matcher: function(params, data) {
+                    if ($.trim(params.term) === '') return data;
+                    const searchTerm = params.term.toLowerCase();
+                    const text = data.text.toLowerCase();
+                    if (text.indexOf(searchTerm) > -1) return data;
+                    return null;
+                }
+            });
+        }).catch(error => {
+            console.error('Error al cargar países para exhibición:', error);
+            // Inicializar Select2 sin opciones en caso de error
+            $(paisSelect).select2({
+                placeholder: 'Error al cargar países',
+                allowClear: true,
+                tags: true
+            });
+        });
+    }
 }
 
 // Add a new bloque de episodios
@@ -380,7 +585,18 @@ function addBloqueEpisodios() {
     if (removeBtn) {
         removeBtn.addEventListener('click', function() {
             if (confirm('¿Está seguro de eliminar este bloque de episodios?')) {
+                // Eliminar el bloque
                 bloqueEpisodios.remove();
+                
+                // Verificar si quedan bloques
+                const bloquesRestantes = document.querySelectorAll('.bloque-episodios').length;
+                console.log('Bloques restantes después de eliminar:', bloquesRestantes);
+                
+                // Si no quedan bloques, reiniciar el contador
+                if (bloquesRestantes === 0) {
+                    contadorBloques = 0;
+                    console.log('Se reinició el contador de bloques a 0');
+                }
             }
         });
     }
@@ -419,11 +635,17 @@ function addBloqueEpisodios() {
         individuales.style.display = 'block';
     }
     
-    // Add initial linea de participación
-    const addLineaBtn = bloqueEpisodios.querySelector('.btn-small');
+    // Configurar el botón de agregar línea de participación
+    const addLineaBtn = bloqueEpisodios.querySelector('.btn-add-linea');
     if (addLineaBtn) {
-        addLineaBtn.addEventListener('click', function() {
-            addLineaParticipacion(this);
+        // Usar event delegation para manejar los clics en los botones de agregar línea
+        bloqueEpisodios.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('btn-add-linea')) {
+                e.preventDefault();
+                e.stopPropagation();
+                addLineaParticipacion(e.target);
+                return false;
+            }
         });
     }
     
@@ -522,7 +744,25 @@ function generateEpisodiosIndividuales(container, desde, hasta) {
 
 // Add linea de participación
 function addLineaParticipacion(button) {
-    const container = button.closest('.bloque-participacion').querySelector('.lineas-participacion-container');
+    if (!button) {
+        console.error('No se proporcionó un botón válido');
+        return;
+    }
+    
+    // Buscar el contenedor de líneas de participación más cercano
+    const subbloque = button.closest('.subbloque');
+    if (!subbloque) {
+        console.error('No se encontró el subbloque de participación');
+        return;
+    }
+    
+    const container = subbloque.querySelector('.lineas-participacion');
+    if (!container) {
+        console.error('No se encontró el contenedor de líneas de participación');
+        return;
+    }
+    
+    console.log('Agregando línea de participación al contenedor:', container);
     addLineaParticipacionToContainer(container);
 }
 
@@ -536,22 +776,60 @@ function addLineaParticipacionToContainer(container) {
         // Configurar el select de roles
         const rolSelect = newLine.querySelector('.rol');
         if (rolSelect) {
-            const roles = ['Autor', 'Compositor', 'Director', 'Guionista', 'Productor'];
+            // Limpiar opciones existentes
+            rolSelect.innerHTML = '';
+            
+            // Usar roles cargados o los predeterminados
+            const roles = listaRolesGlobal.length > 0 ? listaRolesGlobal : 
+                ['Director', 'Guionista', 'Actor', 'Productor', 'Músico', 'Fotógrafo'];
+                
+            // Agregar opción vacía
+            const emptyOption = document.createElement('option');
+            emptyOption.value = '';
+            emptyOption.textContent = 'Seleccione un rol...';
+            rolSelect.appendChild(emptyOption);
+            
+            // Agregar roles
             roles.forEach(rol => {
                 const option = document.createElement('option');
                 option.value = rol;
                 option.textContent = rol;
                 rolSelect.appendChild(option);
             });
+            
+            // Inicializar Select2 para el select de roles (selección única)
+            $(rolSelect).select2({
+                placeholder: 'Seleccione un rol',
+                allowClear: true,
+                tags: false,
+                multiple: false,
+                createTag: function(params) {
+                    // No permitir crear nuevos tags
+                    return null;
+                }
+            });
         }
         
-        // Configurar el select de autores
-        const autorSelect = newLine.querySelector('.autor');
+        // Agregar la línea al contenedor primero para que el DOM esté listo
+        container.appendChild(newLine);
+        
+        // Configurar el select de autores después de agregar al DOM
+        const autorSelect = container.querySelector('.linea-participacion:last-child .autor');
         if (autorSelect) {
             // Asegurarse de que los datos de autores estén cargados
             if (listaAutoresGlobal.length === 0) {
                 cargarAutores();
             } else {
+                // Limpiar opciones existentes
+                autorSelect.innerHTML = '';
+                
+                // Agregar opción vacía
+                const emptyOption = document.createElement('option');
+                emptyOption.value = '';
+                emptyOption.textContent = 'Seleccione un autor...';
+                autorSelect.appendChild(emptyOption);
+                
+                // Agregar autores
                 listaAutoresGlobal.forEach(autor => {
                     const option = document.createElement('option');
                     option.value = autor;
@@ -563,38 +841,42 @@ function addLineaParticipacionToContainer(container) {
                 $(autorSelect).select2({
                     tags: true,
                     createTag: createTag,
-                    matcher: matcher
+                    matcher: matcher,
+                    placeholder: 'Seleccione o ingrese un autor',
+                    allowClear: true
                 });
             }
         }
         
         // Agregar manejador de eventos para el botón de eliminar
-        const removeBtn = newLine.querySelector('.remove-linea');
+        const removeBtn = container.querySelector('.linea-participacion:last-child .remove-linea');
         if (removeBtn) {
-            removeBtn.addEventListener('click', function() {
-                removeLineaParticipacion(this);
+            removeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const linea = this.closest('.linea-participacion');
+                if (linea) {
+                    // Destruir Select2 antes de eliminar
+                    const autorSelect = linea.querySelector('.autor');
+                    if (autorSelect && autorSelect.select2) {
+                        $(autorSelect).select2('destroy');
+                    }
+                    linea.remove();
+                }
             });
         }
-        
-        container.appendChild(newLine);
     }
 }
 
 // Función para agregar línea de participación no serializada
 function addLineaParticipacionNoSerializada() {
     const container = document.getElementById('lineasNoSerializadasContainer');
-    if (container) {
-        // Crear un contenedor de líneas de participación si no existe
-        let lineasContainer = container.querySelector('.lineas-participacion-container');
-        if (!lineasContainer) {
-            lineasContainer = document.createElement('div');
-            lineasContainer.className = 'lineas-participacion-container';
-            container.appendChild(lineasContainer);
-        }
-        
-        // Agregar la línea de participación
-        addLineaParticipacionToContainer(lineasContainer);
+    if (!container) {
+        console.error('No se encontró el contenedor de líneas no serializadas');
+        return;
     }
+    
+    // Usar el contenedor directamente sin buscar un contenedor interno
+    addLineaParticipacionToContainer(container);
 }
 
 // Remove linea de participación
@@ -645,21 +927,371 @@ function showMessage(message, isError = false) {
     }, 5000);
 }
 
+// Función para cargar la lista de idiomas
+let listaIdeomasGlobal = [];
+
+async function cargarIdiomas() {
+    try {
+        const response = await fetch('assets/idioma.json');
+        if (!response.ok) {
+            throw new Error('No se pudo cargar la lista de idiomas');
+        }
+        const data = await response.json();
+        listaIdeomasGlobal = data.map(item => item.Idioma);
+        console.log('Idiomas cargados:', listaIdeomasGlobal);
+        
+        // Actualizar los selects de idioma
+        actualizarSelectsIdiomas();
+        
+        return listaIdeomasGlobal;
+    } catch (error) {
+        console.error('Error al cargar los idiomas:', error);
+        // Valores por defecto en caso de error
+        listaIdeomasGlobal = [
+            'Español', 
+            'Inglés', 
+            'Francés', 
+            'Alemán', 
+            'Italiano', 
+            'Portugués',
+            'Chino',
+            'Japonés',
+            'Ruso',
+            'Árabe'
+        ];
+        
+        // Actualizar los selects de idioma con valores por defecto
+        actualizarSelectsIdiomas();
+        
+        return listaIdeomasGlobal;
+    }
+}
+
+// Función para actualizar los selects de idioma en el formulario
+function actualizarSelectsIdiomas() {
+    // Actualizar el select de idioma principal
+    const selectIdioma = document.getElementById('idioma');
+    if (selectIdioma) {
+        // Guardar el valor seleccionado actual
+        const valorActual = selectIdioma.value;
+        
+        // Limpiar opciones existentes
+        selectIdioma.innerHTML = '<option value="">Seleccione un idioma...</option>';
+        
+        // Agregar idiomas
+        listaIdeomasGlobal.forEach(idioma => {
+            const option = document.createElement('option');
+            option.value = idioma;
+            option.textContent = idioma;
+            selectIdioma.appendChild(option);
+        });
+        
+        // Restaurar el valor seleccionado si existe
+        if (valorActual) {
+            selectIdioma.value = valorActual;
+        }
+    }
+    
+    // Actualizar los selects de idioma en las exhibiciones existentes
+    document.querySelectorAll('.idiomaExhibicion').forEach(select => {
+        // Solo actualizar si no es un Select2 ya inicializado
+        if (!select.classList.contains('select2-hidden-accessible')) {
+            const valorActual = select.value;
+            
+            // Limpiar opciones existentes
+            select.innerHTML = '<option value="">Seleccione un idioma...</option>';
+            
+            // Agregar idiomas
+            listaIdeomasGlobal.forEach(idioma => {
+                const option = document.createElement('option');
+                option.value = idioma;
+                option.textContent = idioma;
+                select.appendChild(option);
+            });
+            
+            // Restaurar el valor seleccionado si existe
+            if (valorActual) {
+                select.value = valorActual;
+            }
+        }
+    });
+}
+
+// Función para cargar la lista de roles
+let listaRolesGlobal = [];
+
+async function cargarRoles() {
+    try {
+        const response = await fetch('assets/rol.json');
+        if (!response.ok) {
+            throw new Error('No se pudo cargar la lista de roles');
+        }
+        const data = await response.json();
+        listaRolesGlobal = data.map(item => item.Rol);
+        console.log('Roles cargados:', listaRolesGlobal);
+        return listaRolesGlobal;
+    } catch (error) {
+        console.error('Error al cargar los roles:', error);
+        // Valores por defecto en caso de error
+        listaRolesGlobal = [
+            'Director', 
+            'Guionista', 
+            'Actor', 
+            'Productor', 
+            'Músico', 
+            'Fotógrafo'
+        ];
+        return listaRolesGlobal;
+    }
+}
+
+// Llamar a las funciones de carga cuando se cargue el DOM
+document.addEventListener('DOMContentLoaded', function() {
+    cargarRoles();
+    cargarIdiomas();
+});
+
+// Función para cargar la lista de empresas productoras
+function cargarProductoras() {
+    // Mostrar indicador de carga
+    const selectProductora = document.getElementById('empresaProductora');
+    if (selectProductora) {
+        const loadingOption = new Option('Cargando empresas...', '', true, true);
+        loadingOption.disabled = true;
+        selectProductora.innerHTML = '';
+        selectProductora.add(loadingOption);
+    }
+
+    return fetch('assets/productoras.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo cargar la lista de empresas productoras');
+            }
+            return response.json();
+        })
+        .then(productoras => {
+            // Guardar la lista de productoras globalmente
+            listaProductorasGlobal = productoras.map(p => p.Productora);
+            
+            // Ordenar productoras alfabéticamente (ignorando mayúsculas y tildes)
+            const collator = new Intl.Collator('es', {sensitivity: 'base'});
+            const productorasOrdenadas = [...listaProductorasGlobal].sort(collator.compare);
+            
+            // Actualizar el select
+            if (selectProductora) {
+                // Limpiar opciones existentes
+                selectProductora.innerHTML = '';
+                
+                // Agregar productoras al select
+                productorasOrdenadas.forEach(productora => {
+                    const option = new Option(productora, productora);
+                    selectProductora.add(option);
+                });
+                
+                // Inicializar Select2 si no está ya inicializado
+                if (!$(selectProductora).hasClass('select2-hidden-accessible')) {
+                    $(selectProductora).select2({
+                        placeholder: 'Seleccione o agregue empresas...',
+                        allowClear: true,
+                        multiple: true,
+                        tags: true,
+                        createTag: function(params) {
+                            const term = $.trim(params.term);
+                            if (term === '') {
+                                return null;
+                            }
+                            return {
+                                id: term,
+                                text: term,
+                                newTag: true
+                            };
+                        },
+                        matcher: function(params, data) {
+                            // Si no hay término de búsqueda, mostrar todos los resultados
+                            if ($.trim(params.term) === '') {
+                                return data;
+                            }
+                            
+                            // Normalizar términos para búsqueda sin distinción de mayúsculas ni tildes
+                            const normalize = text => 
+                                text.toLowerCase()
+                                    .normalize('NFD')
+                                    .replace(/[\u0300-\u036f]/g, '');
+                            
+                            const searchTerm = normalize(params.term);
+                            const text = normalize(data.text);
+                            
+                            // Buscar coincidencias parciales
+                            if (text.includes(searchTerm)) {
+                                return data;
+                            }
+                            
+                            return null;
+                        }
+                    });
+                }
+            }
+            
+            return productorasOrdenadas;
+        })
+        .catch(error => {
+            console.error('Error al cargar empresas productoras:', error);
+            showMessage('Error al cargar la lista de empresas productoras. Por favor, intente más tarde.', true);
+            
+            // Restaurar opción por defecto en caso de error
+            if (selectProductora) {
+                selectProductora.innerHTML = '';
+                const defaultOption = new Option('Error al cargar empresas', '', true, true);
+                defaultOption.disabled = true;
+                selectProductora.add(defaultOption);
+                
+                // Permitir escribir manualmente
+                const manualOption = new Option('Escribir manualmente...', 'manual', false, false);
+                selectProductora.add(manualOption);
+            }
+            
+            return [];
+        });
+}
+
+// Función para cargar la lista de países
+function cargarPaises() {
+    // Mostrar indicador de carga
+    const selectPais = document.getElementById('paisProduccion');
+    if (selectPais) {
+        const loadingOption = new Option('Cargando países...', '', true, true);
+        loadingOption.disabled = true;
+        selectPais.innerHTML = '';
+        selectPais.add(loadingOption);
+    }
+
+    return fetch('assets/paises.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo cargar la lista de países');
+            }
+            return response.json();
+        })
+        .then(paises => {
+            // Guardar la lista de países globalmente
+            listaPaisesGlobal = paises.map(pais => pais.País);
+            
+            // Ordenar países alfabéticamente (ignorando mayúsculas y tildes)
+            const collator = new Intl.Collator('es', {sensitivity: 'base'});
+            const paisesOrdenados = [...listaPaisesGlobal].sort(collator.compare);
+            
+            // Actualizar el select
+            if (selectPais) {
+                // Limpiar opciones existentes
+                selectPais.innerHTML = '';
+                
+                // Agregar países al select
+                paisesOrdenados.forEach(pais => {
+                    const option = new Option(pais, pais);
+                    selectPais.add(option);
+                });
+                
+                // Inicializar Select2 si no está ya inicializado
+                if (!$(selectPais).hasClass('select2-hidden-accessible')) {
+                    $(selectPais).select2({
+                        placeholder: 'Seleccione o agregue países...',
+                        allowClear: true,
+                        multiple: true,
+                        tags: true,
+                        createTag: function(params) {
+                            const term = $.trim(params.term);
+                            if (term === '') {
+                                return null;
+                            }
+                            return {
+                                id: term,
+                                text: term,
+                                newTag: true
+                            };
+                        },
+                        matcher: function(params, data) {
+                            // Si no hay término de búsqueda, mostrar todos los resultados
+                            if ($.trim(params.term) === '') {
+                                return data;
+                            }
+                            
+                            // Normalizar términos para búsqueda sin distinción de mayúsculas ni tildes
+                            const normalize = text => 
+                                text.toLowerCase()
+                                    .normalize('NFD')
+                                    .replace(/[\u0300-\u036f]/g, '');
+                            
+                            const searchTerm = normalize(params.term);
+                            const text = normalize(data.text);
+                            
+                            // Buscar coincidencias parciales
+                            if (text.includes(searchTerm)) {
+                                return data;
+                            }
+                            
+                            return null;
+                        }
+                    });
+                }
+            }
+            
+            return paisesOrdenados;
+        })
+        .catch(error => {
+            console.error('Error al cargar países:', error);
+            showMessage('Error al cargar la lista de países. Por favor, intente más tarde.', true);
+            
+            // Restaurar opción por defecto en caso de error
+            if (selectPais) {
+                selectPais.innerHTML = '';
+                const defaultOption = new Option('Error al cargar países', '', true, true);
+                defaultOption.disabled = true;
+                selectPais.add(defaultOption);
+                
+                // Permitir escribir manualmente
+                const manualOption = new Option('Escribir manualmente...', 'manual', false, false);
+                selectPais.add(manualOption);
+            }
+            
+            return [];
+        });
+}
+
 // Función para obtener el valor de un elemento de forma segura
 function getElementValue(id, defaultValue = '') {
     const element = document.getElementById(id);
-    return element ? element.value : defaultValue;
+    if (!element) return defaultValue;
+    
+    // Manejar campos de selección múltiple (Select2)
+    if ($(element).hasClass('select2-hidden-accessible') && $(element).prop('multiple')) {
+        return $(element).select2('data').map(item => item.text);
+    }
+    
+    // Para campos normales
+    return element.value || defaultValue;
+}
+
+// Función para convertir un valor a string, manejando arrays
+function valueToString(value) {
+    if (Array.isArray(value)) {
+        return value.join(', ');
+    }
+    return value || '';
 }
 
 // Función para recopilar los datos del formulario en formato JSON
 function collectFormData() {
     try {
+        // Obtener valores con manejo de arrays para selecciones múltiples
+        const empresaProductora = getElementValue('empresaProductora');
+        const paisProduccion = getElementValue('paisProduccion');
+        
         // Datos generales con manejo de elementos nulos
         const generalData = {
             titulo_original: getElementValue('tituloOriginal'),
             tipo_formato: getElementValue('tipoFormato'),
-            empresa_productora: getElementValue('empresaProductora'),
-            pais_produccion: getElementValue('paisProduccion'),
+            empresa_productora: valueToString(empresaProductora),
+            pais_produccion: valueToString(paisProduccion),
             anio_produccion: getElementValue('anioProduccion'),
             idioma: getElementValue('idioma'),
             actores: getElementValue('actores'),
@@ -701,15 +1333,29 @@ function collectFormData() {
         
         // Si no hay bloques de episodios, verificar si hay líneas de participación no serializadas
         if (bloquesEpisodios.length === 0) {
+            console.log('Buscando líneas de participación no serializadas...');
             // Obtener líneas de participación no serializadas
             const lineasNoSerializadas = [];
-            const lineasContainer = document.querySelector('#lineasNoSerializadasContainer .lineas-participacion-container');
+            const lineasContainer = document.getElementById('lineasNoSerializadasContainer');
             
             if (lineasContainer) {
-                lineasContainer.querySelectorAll('.linea-participacion').forEach(linea => {
-                    const rol = Array.from(linea.querySelectorAll('.rol option:checked')).map(opt => opt.value).join(', ');
-                    const autor = linea.querySelector('.autor')?.value || '';
-                    const porcentaje = linea.querySelector('.porcentaje')?.value || '';
+                console.log('Contenedor de líneas no serializadas encontrado');
+                
+                // Buscar líneas directamente en el contenedor
+                const lineas = lineasContainer.querySelectorAll('.linea-participacion');
+                console.log(`Se encontraron ${lineas.length} líneas de participación`);
+                
+                lineas.forEach((linea, index) => {
+                    const rolSelect = linea.querySelector('.rol');
+                    const rol = rolSelect ? rolSelect.value : '';
+                    
+                    const autorSelect = linea.querySelector('.autor');
+                    const autor = autorSelect ? autorSelect.value : '';
+                    
+                    const porcentajeInput = linea.querySelector('.porcentaje');
+                    const porcentaje = porcentajeInput ? porcentajeInput.value : '';
+                    
+                    console.log(`Línea ${index + 1}:`, { rol, autor, porcentaje });
                     
                     if (rol && autor && porcentaje) {
                         lineasNoSerializadas.push({ rol, autor, porcentaje });
@@ -718,6 +1364,7 @@ function collectFormData() {
                 
                 // Si hay líneas de participación, agregarlas a los resultados
                 if (lineasNoSerializadas.length > 0) {
+                    console.log(`Agregando ${lineasNoSerializadas.length} líneas no serializadas a los resultados`);
                     lineasNoSerializadas.forEach(linea => {
                         const filaNoSerializada = { ...primeraFila };
                         filaNoSerializada.rol = linea.rol;
@@ -725,7 +1372,11 @@ function collectFormData() {
                         filaNoSerializada.porcentaje = linea.porcentaje;
                         resultados.push(filaNoSerializada);
                     });
+                } else {
+                    console.log('No se encontraron líneas de participación válidas');
                 }
+            } else {
+                console.log('No se encontró el contenedor de líneas no serializadas');
             }
             
             return resultados;
@@ -733,50 +1384,73 @@ function collectFormData() {
         
         // Procesar bloques de episodios
         bloquesEpisodios.forEach((bloque) => {
-            const desde = parseInt(bloque.querySelector('.desdeEpisodio')?.value) || 0;
-            const hasta = parseInt(bloque.querySelector('.hastaEpisodio')?.value) || 0;
+            const desde = parseInt(bloque.querySelector('.desdeEpisodio')?.value) || 1;
+            const hasta = parseInt(bloque.querySelector('.hastaEpisodio')?.value) || 1;
             const temporada = bloque.querySelector('.temporada')?.value || '1';
+            
+            console.log(`Procesando bloque: temporada ${temporada}, episodios ${desde} a ${hasta}`);
             
             // Obtener títulos de episodios
             const titulos = {};
             bloque.querySelectorAll('.titulo-episodio').forEach(input => {
                 const num = input.getAttribute('data-episodio');
-                if (num) titulos[num] = input.value;
+                if (num) {
+                    titulos[num] = input.value;
+                    console.log(`Título para episodio ${num}:`, input.value);
+                }
             });
             
             // Obtener líneas de participación
             const lineas = [];
-            bloque.querySelectorAll('.linea-participacion').forEach(linea => {
-                const rol = Array.from(linea.querySelectorAll('.rol option:checked')).map(opt => opt.value).join(', ');
-                const autor = linea.querySelector('.autor')?.value || '';
-                const porcentaje = linea.querySelector('.porcentaje')?.value || '';
-                
-                if (rol && autor && porcentaje) {
-                    lineas.push({ rol, autor, porcentaje });
-                }
-            });
+            const lineasContainer = bloque.querySelector('.lineas-participacion');
+            if (lineasContainer) {
+                lineasContainer.querySelectorAll('.linea-participacion').forEach(linea => {
+                    const rolSelect = linea.querySelector('.rol');
+                    const rol = rolSelect ? rolSelect.value : '';
+                    const autorSelect = linea.querySelector('.autor');
+                    const autor = autorSelect ? autorSelect.value : '';
+                    const porcentajeInput = linea.querySelector('.porcentaje');
+                    const porcentaje = porcentajeInput ? porcentajeInput.value : '';
+                    
+                    console.log('Línea encontrada:', {rol, autor, porcentaje});
+                    
+                    if (rol && autor && porcentaje) {
+                        lineas.push({ rol, autor, porcentaje });
+                    }
+                });
+            }
+            
+            console.log(`Líneas de participación encontradas:`, lineas);
             
             // Crear una entrada por cada episodio y línea de participación
             if (lineas.length > 0) {
                 for (let i = desde; i <= hasta; i++) {
                     lineas.forEach(linea => {
                         const filaEpisodio = {
-                            // Solo incluir datos específicos del episodio
+                            ...primeraFila, // Incluir todos los datos generales
                             temporada: temporada,
                             num_episodio: i,
-                            titulo_episodio: titulos[i] || `Episodio ${i}`,
+                            titulo_episodio: titulos[i.toString()] || `Episodio ${i}`,
                             rol: linea.rol,
                             autor: linea.autor,
                             porcentaje: linea.porcentaje
                         };
                         
-                        // Agregar exhibiciones a cada fila de episodio
-                        if (exhibiciones.length > 0) {
-                            Object.assign(filaEpisodio, exhibiciones[0]);
-                        }
-                        
+                        console.log('Agregando fila de episodio:', filaEpisodio);
                         resultados.push(filaEpisodio);
                     });
+                }
+            } else {
+                // Si no hay líneas de participación, crear una entrada por episodio igualmente
+                for (let i = desde; i <= hasta; i++) {
+                    const filaEpisodio = {
+                        ...primeraFila,
+                        temporada: temporada,
+                        num_episodio: i,
+                        titulo_episodio: titulos[i.toString()] || `Episodio ${i}`
+                    };
+                    console.log('Agregando fila de episodio sin líneas:', filaEpisodio);
+                    resultados.push(filaEpisodio);
                 }
             }
         });
@@ -789,13 +1463,106 @@ function collectFormData() {
     }
 }
 
+// Función para validar los porcentajes de participación por rol
+function validarPorcentajesParticipacion() {
+    const porcentajesPorRol = {};
+    const errores = [];
+    
+    // Obtener todas las líneas de participación (tanto en bloques de episodios como en no serializadas)
+    const lineasParticipacion = document.querySelectorAll('.linea-participacion');
+    
+    // Procesar cada línea de participación
+    lineasParticipacion.forEach((linea, index) => {
+        const rolSelect = linea.querySelector('.rol');
+        const porcentajeInput = linea.querySelector('.porcentaje');
+        
+        if (rolSelect && porcentajeInput) {
+            const rol = rolSelect.value;
+            const porcentaje = parseFloat(porcentajeInput.value) || 0;
+            
+            if (rol) {
+                if (!porcentajesPorRol[rol]) {
+                    porcentajesPorRol[rol] = 0;
+                }
+                porcentajesPorRol[rol] += porcentaje;
+            }
+        }
+    });
+    
+    // Verificar si algún rol supera el 100%
+    for (const [rol, total] of Object.entries(porcentajesPorRol)) {
+        if (total > 100) {
+            errores.push(`La suma de porcentaje para el rol ${rol} supera el 100% (${total.toFixed(2)}%).`);
+        }
+    }
+    
+    return {
+        valido: errores.length === 0,
+        errores: errores
+    };
+}
+
+// Función para verificar si hay al menos una línea de participación
+function tieneLineasDeParticipacion() {
+    // Verificar en bloques de episodios
+    const lineasEnBloques = document.querySelectorAll('.bloque-episodios .linea-participacion').length > 0;
+    
+    // Verificar en sección de no serializados
+    const lineasNoSerializadas = document.querySelectorAll('#lineasNoSerializadasContainer .linea-participacion').length > 0;
+    
+    return lineasEnBloques || lineasNoSerializadas;
+}
+
+// Función para mostrar mensaje de error de validación
+function mostrarErrorValidacion(mensaje) {
+    // Usar SweetAlert2 si está disponible, de lo contrario usar alert nativo
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: 'Error',
+            text: mensaje,
+            icon: 'error',
+            confirmButtonText: 'Entendido'
+        });
+    } else {
+        alert(mensaje);
+    }
+}
+
+// Función para mostrar errores de validación
+function mostrarErroresValidacion(errores) {
+    // Usar SweetAlert2 si está disponible, de lo contrario usar alert nativo
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: 'Error de validación',
+            html: errores.join('<br><br>'),
+            icon: 'error',
+            confirmButtonText: 'Entendido'
+        });
+    } else {
+        alert(errores.join('\n\n'));
+    }
+}
+
 // Función para enviar los datos al servidor
 async function submitFormData(event) {
     event.preventDefault();
-    
+
+    // Verificar si hay al menos una línea de participación
+    if (!tieneLineasDeParticipacion()) {
+        mostrarErrorValidacion('Debe agregar al menos una línea de participación antes de enviar el formulario.');
+        return;
+    }
+
+    // Validar porcentajes de participación
+    const validacion = validarPorcentajesParticipacion();
+    if (!validacion.valido) {
+        mostrarErroresValidacion(validacion.errores);
+        return;
+    }
+
     const submitButton = document.querySelector('button[type="submit"]');
     const originalButtonText = submitButton ? submitButton.textContent : 'Enviar';
-    
+
     try {
         // Mostrar indicador de carga
         if (submitButton) {
@@ -868,7 +1635,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Configurar manejador para el botón de agregar línea no serializada
         const addLineaNoSerializadaBtn = document.getElementById('addLineaNoSerializada');
         if (addLineaNoSerializadaBtn) {
-            addLineaNoSerializadaBtn.addEventListener('click', addLineaParticipacionNoSerializada);
+            addLineaNoSerializadaBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Botón de agregar línea no serializada clickeado');
+                addLineaParticipacionNoSerializada();
+            });
         }
         // Configurar Select2 para los selects existentes
         $('.select2').select2({
@@ -897,5 +1668,16 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Manejar el envío del formulario
         form.addEventListener('submit', submitFormData);
+        
+        // Manejar el botón de limpiar formulario
+        const limpiarBtn = form.querySelector('button[type="reset"]');
+        if (limpiarBtn) {
+            limpiarBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('¿Está seguro que desea limpiar todo el formulario? Se perderán todos los datos ingresados.')) {
+                    limpiarFormulario();
+                }
+            });
+        }
     }
 });
