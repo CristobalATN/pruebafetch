@@ -270,12 +270,16 @@ select[multiple] {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    position: relative;
+    top: 2px; /* Ajuste fino para alinear con el texto */
 }
 
 .help-tooltip {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     cursor: help;
+    height: 24px; /* Altura fija para mejor alineación */
 }
 
 .help-icon {
@@ -474,6 +478,38 @@ select[multiple] {
 }
 
 /* Responsive */
+/* Estilos para la etiqueta de opcional */
+.optional-badge {
+    display: inline-block;
+    background-color: #e5e7eb;
+    color: #4b5563;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+/* Estilos para el texto de ayuda */
+.help-text {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Estilos para el encabezado de la sección */
+.section-header > div {
+    flex: 1;
+}
+
+.section-header h2 {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
