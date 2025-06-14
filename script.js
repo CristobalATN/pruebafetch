@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Initialize when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Prevenir caracteres no numéricos en campos de tipo número
     function handleNumericInput(e) {
         // Solo aplicar a inputs de tipo número o con clase 'porcentaje'
@@ -377,25 +377,11 @@ document.addEventListener('DOMContentLoaded', function() {
         actualizarVisibilidadSecciones();
     }
 
-    // Add exhibicion
-    const addExhibicionBtn = document.getElementById('addExhibicion');
-    const exhibicionesContainer = document.getElementById('exhibicionesContainer');
-    
-    if (addExhibicionBtn && exhibicionesContainer) {
-        addExhibicionBtn.addEventListener('click', function() {
-            addExhibicion();
-        });
-    }
+    // Configurar el botón de agregar exhibición
+    // El evento se configura más adelante en el código para evitar duplicados
 
-    // Add bloque de episodios
-    const addBloqueEpisodiosBtn = document.getElementById('addBloqueEpisodios');
-    const bloquesEpisodiosContainer = document.getElementById('bloquesEpisodiosContainer');
-    
-    if (addBloqueEpisodiosBtn && bloquesEpisodiosContainer) {
-        addBloqueEpisodiosBtn.addEventListener('click', function() {
-            addBloqueEpisodios();
-        });
-    }
+    // Configurar el botón de agregar bloque de episodios
+    // El evento se configura más adelante en el código para evitar duplicados
 
     // Validar que solo se ingresen números en los campos de porcentaje
     document.addEventListener('input', function(e) {
@@ -442,95 +428,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Add a new exhibicion
 function addExhibicion() {
-    const exhibicionesContainer = document.getElementById('exhibicionesContainer');
-    if (!exhibicionesContainer) return;
-    
-    const template = document.getElementById('exhibicionTemplate');
-    if (!template) return;
-    
-    const clone = template.content.cloneNode(true);
-    const exhibicionItem = clone.querySelector('.exhibicion-item');
-    
-    // Add remove button functionality
-    const removeBtn = exhibicionItem.querySelector('.btn-remove');
-    if (removeBtn) {
-        removeBtn.addEventListener('click', function() {
-            exhibicionItem.remove();
-        });
-    }
-    
-    // Agregar el ítem al contenedor
-    exhibicionesContainer.appendChild(exhibicionItem);
-    
-    // Inicializar Select2 para el campo de canal
-    const canalSelect = exhibicionItem.querySelector('.canalExhibicion');
-    if (canalSelect) {
-        $(canalSelect).select2({
-            tags: true,
-            placeholder: 'Ingrese el nombre del canal o plataforma...',
-            allowClear: true,
-            createTag: function(params) {
-                const term = $.trim(params.term);
-                if (term === '') return null;
-                return {
-                    id: term,
-                    text: term,
-                    newTag: true
-                };
-            }
-        });
-    }
-    
-    // Inicializar Select2 para el campo de idioma de exhibición
-    const idiomaSelect = exhibicionItem.querySelector('.idiomaExhibicion');
-    if (idiomaSelect) {
-        // Limpiar opciones existentes
-        idiomaSelect.innerHTML = '<option value="">Seleccione un idioma...</option>';
+    try {
+        const exhibicionesContainer = document.getElementById('exhibicionesContainer');
+        if (!exhibicionesContainer) {
+            console.error('No se encontró el contenedor de exhibiciones');
+            return;
+        }
         
-        // Agregar idiomas al select
-        listaIdeomasGlobal.forEach(idioma => {
-            const option = document.createElement('option');
-            option.value = idioma;
-            option.textContent = idioma;
-            idiomaSelect.appendChild(option);
-        });
+        const template = document.getElementById('exhibicionTemplate');
+        if (!template) {
+            console.error('No se encontró la plantilla de exhibición');
+            return;
+        }
         
-        // Inicializar Select2
-        $(idiomaSelect).select2({
-            placeholder: 'Seleccione un idioma...',
-            allowClear: true,
-            width: '100%',
-            matcher: function(params, data) {
-                if ($.trim(params.term) === '') return data;
-                const searchTerm = params.term.toLowerCase();
-                const text = data.text.toLowerCase();
-                if (text.indexOf(searchTerm) > -1) return data;
-                return null;
-            }
-        });
-    }
-    
-    // Inicializar Select2 para el campo de país de exhibición
-    const paisSelect = exhibicionItem.querySelector('.paisExhibicion');
-    if (paisSelect) {
-        // Cargar países en el select
-        cargarPaises().then(paises => {
-            // Limpiar opciones existentes
-            paisSelect.innerHTML = '<option value="">Seleccione o busque un país...</option>';
-            
-            // Agregar países al select
-            paises.forEach(pais => {
-                const option = document.createElement('option');
-                option.value = pais;
-                option.textContent = pais;
-                paisSelect.appendChild(option);
+        const clone = template.content.cloneNode(true);
+        const exhibicionItem = clone.querySelector('.exhibicion-item');
+        if (!exhibicionItem) {
+            console.error('No se pudo clonar el ítem de exhibición');
+            return;
+        }
+        
+        // Agregar el ítem al contenedor primero para que los select2 funcionen correctamente
+        exhibicionesContainer.appendChild(exhibicionItem);
+        
+        // Agregar funcionalidad de eliminación
+        const removeBtn = exhibicionItem.querySelector('.btn-remove');
+        if (removeBtn) {
+            removeBtn.addEventListener('click', function() {
+                exhibicionItem.remove();
             });
-            
-            // Inicializar Select2
-            $(paisSelect).select2({
-                placeholder: 'Seleccione o busque un país...',
-                allowClear: true,
+        } else {
+            console.warn('No se encontró el botón de eliminar en la plantilla de exhibición');
+        }
+        
+        // Inicializar Select2 para el campo de canal
+        const canalSelect = exhibicionItem.querySelector('.canalExhibicion');
+        if (canalSelect) {
+            $(canalSelect).select2({
                 tags: true,
+                placeholder: 'Ingrese el nombre del canal o plataforma...',
+                allowClear: true,
                 createTag: function(params) {
                     const term = $.trim(params.term);
                     if (term === '') return null;
@@ -539,7 +476,29 @@ function addExhibicion() {
                         text: term,
                         newTag: true
                     };
-                },
+                }
+            });
+        }
+        
+        // Inicializar Select2 para el campo de idioma de exhibición
+        const idiomaSelect = exhibicionItem.querySelector('.idiomaExhibicion');
+        if (idiomaSelect) {
+            // Limpiar opciones existentes
+            idiomaSelect.innerHTML = '<option value="">Seleccione un idioma...</option>';
+            
+            // Agregar idiomas al select
+            listaIdeomasGlobal.forEach(idioma => {
+                const option = document.createElement('option');
+                option.value = idioma;
+                option.textContent = idioma;
+                idiomaSelect.appendChild(option);
+            });
+            
+            // Inicializar Select2
+            $(idiomaSelect).select2({
+                placeholder: 'Seleccione un idioma...',
+                allowClear: true,
+                width: '100%',
                 matcher: function(params, data) {
                     if ($.trim(params.term) === '') return data;
                     const searchTerm = params.term.toLowerCase();
@@ -548,15 +507,67 @@ function addExhibicion() {
                     return null;
                 }
             });
-        }).catch(error => {
-            console.error('Error al cargar países para exhibición:', error);
-            // Inicializar Select2 sin opciones en caso de error
-            $(paisSelect).select2({
-                placeholder: 'Error al cargar países',
-                allowClear: true,
-                tags: true
+        }
+        
+        // Inicializar Select2 para el campo de país de exhibición
+        const paisSelect = exhibicionItem.querySelector('.paisExhibicion');
+        if (paisSelect) {
+            // Cargar países en el select
+            cargarPaises().then(paises => {
+                // Limpiar opciones existentes
+                paisSelect.innerHTML = '<option value="">Seleccione o busque un país...</option>';
+                
+                // Agregar países al select
+                paises.forEach(pais => {
+                    const option = document.createElement('option');
+                    option.value = pais;
+                    option.textContent = pais;
+                    paisSelect.appendChild(option);
+                });
+                
+                // Inicializar Select2
+                $(paisSelect).select2({
+                    placeholder: 'Seleccione o busque un país...',
+                    allowClear: true,
+                    tags: true,
+                    createTag: function(params) {
+                        const term = $.trim(params.term);
+                        if (term === '') return null;
+                        return {
+                            id: term,
+                            text: term,
+                            newTag: true
+                        };
+                    },
+                    matcher: function(params, data) {
+                        if ($.trim(params.term) === '') return data;
+                        const searchTerm = params.term.toLowerCase();
+                        const text = data.text.toLowerCase();
+                        if (text.indexOf(searchTerm) > -1) return data;
+                        return null;
+                    }
+                });
+            }).catch(error => {
+                console.error('Error al cargar países para exhibición:', error);
+                // Inicializar Select2 sin opciones en caso de error
+                $(paisSelect).select2({
+                    placeholder: 'Error al cargar países',
+                    allowClear: true,
+                    tags: true
+                });
             });
-        });
+        }
+        
+        // Enfocar el primer campo para mejor experiencia de usuario
+        const primerCampo = exhibicionItem.querySelector('input, select');
+        if (primerCampo) {
+            setTimeout(() => {
+                primerCampo.focus();
+            }, 100);
+        }
+    } catch (error) {
+        console.error('Error al agregar exhibición:', error);
+        showMessage('Ocurrió un error al agregar la exhibición. Por favor, inténtelo de nuevo.', true);
     }
 }
 
@@ -724,23 +735,339 @@ function addBloqueEpisodios() {
     updateEpisodios();
 }
 
-// Generate episodios individuales
+// Generate episodios individuales en formato de tabla con acordeones
 function generateEpisodiosIndividuales(container, desde, hasta) {
-    const containerDiv = container.querySelector('.episodios-individuales');
-    if (!containerDiv) return;
+    const tablaContainer = container.querySelector('.tabla-episodios-container');
+    const tbody = container.querySelector('.tabla-episodios tbody');
     
-    containerDiv.innerHTML = '';
+    if (!tablaContainer || !tbody) return;
     
+    // Limpiar la tabla
+    tbody.innerHTML = '';
+    
+    // Generar filas de la tabla
     for (let i = desde; i <= hasta; i++) {
-        const div = document.createElement('div');
-        div.className = 'form-group';
-        div.innerHTML = `
-            <label for="episodio-${i}">Episodio ${i}</label>
-            <input type="text" id="episodio-${i}" class="titulo-episodio" data-episodio="${i}" placeholder="Título del episodio ${i}">
+        const tr = document.createElement('tr');
+        tr.className = 'episodio-fila';
+        tr.innerHTML = `
+            <td colspan="2">
+                <div class="episodio-header" data-episodio="${i}">
+                    <div class="episodio-header-content">
+                        <span class="episodio-numero">Episodio ${i}</span>
+                        <span class="episodio-titulo-preview">Sin título</span>
+                        <span class="episodio-contador-titulos">0 títulos traducidos</span>
+                    </div>
+                    <button type="button" class="btn btn-link btn-sm toggle-episodio" data-episodio="${i}">
+                        <i class="toggle-icon">▼</i>
+                    </button>
+                </div>
+                
+                <div class="episodio-content" style="display: none;" data-episodio="${i}">
+                    <div class="form-group">
+                        <label>Título del episodio</label>
+                        <input type="text" class="form-control titulo-episodio" 
+                               data-episodio="${i}" 
+                               placeholder="Título del episodio ${i}">
+                    </div>
+                    
+                    <!-- Sección de títulos alternativos -->
+                    <div class="titulos-alternativos">
+                        <div class="subbloque">
+                            <div class="subbloque-header">
+                                <h5>Otros títulos del episodio</h5>
+                                <button type="button" class="btn btn-small btn-add-titulo-alternativo" data-episodio="${i}">
+                                    + Agregar Título
+                                </button>
+                            </div>
+                            <div class="titulos-alternativos-lista">
+                                <!-- Los títulos alternativos se agregarán aquí -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
         `;
-        containerDiv.appendChild(div);
+        tbody.appendChild(tr);
+    }
+    
+    // Inicializar eventos de los episodios
+    initializeEpisodioEvents(tbody);
+    
+    // Mostrar la tabla
+    tablaContainer.style.display = 'block';
+}
+
+// Función para inicializar los eventos de los episodios
+function initializeEpisodioEvents(container) {
+    // Toggle para mostrar/ocultar contenido del episodio
+    container.querySelectorAll('.toggle-episodio').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const episodioNum = this.getAttribute('data-episodio');
+            const episodioContent = container.querySelector(`.episodio-content[data-episodio="${episodioNum}"]`);
+            const isHidden = episodioContent.style.display === 'none';
+            
+            episodioContent.style.display = isHidden ? 'block' : 'none';
+            const icon = this.querySelector('.toggle-icon');
+            icon.textContent = isHidden ? '▼' : '▶';
+        });
+    });
+    
+    // Actualizar título preview al cambiar el título del episodio
+    container.querySelectorAll('.titulo-episodio').forEach(input => {
+        input.addEventListener('input', function() {
+            const episodioNum = this.getAttribute('data-episodio');
+            const tituloPreview = container.querySelector(`.episodio-header[data-episodio="${episodioNum}"] .episodio-titulo-preview`);
+            tituloPreview.textContent = this.value ? `- ${this.value}` : '';
+        });
+    });
+    
+    // Inicializar eventos de los botones de títulos alternativos
+    initializeTitulosAlternativos(container);
+}
+
+// Inicializar eventos para los títulos alternativos
+function initializeTitulosAlternativos(container) {
+    // Toggle para mostrar/ocultar títulos alternativos
+    container.querySelectorAll('.toggle-titulos').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const episodioNum = this.getAttribute('data-episodio');
+            const titulosSection = this.closest('tr').querySelector('.titulos-alternativos');
+            const isHidden = titulosSection.style.display === 'none';
+            
+            titulosSection.style.display = isHidden ? 'block' : 'none';
+            this.textContent = isHidden ? '− Ocultar títulos alternativos' : '+ Mostrar títulos alternativos';
+        });
+    });
+    
+    // Agregar título alternativo
+    container.querySelectorAll('.btn-add-titulo-alternativo').forEach(btn => {
+        btn.addEventListener('click', function() {
+            addTituloAlternativo(this);
+        });
+    });
+}
+
+// Función para actualizar el contador de títulos alternativos
+function actualizarContadorTitulos(episodioNum) {
+    const header = document.querySelector(`.episodio-header[data-episodio="${episodioNum}"]`);
+    if (!header) return;
+    
+    const contador = header.querySelector('.episodio-contador-titulos');
+    const count = header.closest('tr').querySelectorAll('.titulo-alternativo').length;
+    contador.textContent = count === 0 ? '0 títulos traducidos' : `${count} título${count !== 1 ? 's' : ''} traducido${count !== 1 ? 's' : ''}`;
+}
+
+// Función para agregar un título alternativo
+function addTituloAlternativo(button) {
+    const episodioNum = button.getAttribute('data-episodio');
+    const container = button.closest('.titulos-alternativos');
+    const listaTitulos = container.querySelector('.titulos-alternativos-lista');
+    const template = document.getElementById('tituloAlternativoTemplate');
+    
+    if (!template || !listaTitulos) return;
+    
+    const clone = template.content.cloneNode(true);
+    const tituloAlt = clone.querySelector('.titulo-alternativo');
+    
+    // Agregar el título alternativo a la lista
+    listaTitulos.appendChild(tituloAlt);
+    
+    // Inicializar Select2 para los nuevos selects
+    $(tituloAlt).find('.select2').select2({
+        width: '100%',
+        allowClear: true
+    });
+    
+    // Configurar botón de eliminar
+    const btnEliminar = tituloAlt.querySelector('.btn-remove');
+    if (btnEliminar) {
+        btnEliminar.addEventListener('click', function() {
+            tituloAlt.remove();
+            actualizarContadorTitulos(episodioNum);
+        });
+    }
+    
+    // Obtener referencias a los selects
+    const idiomaSelect = tituloAlt.querySelector('.idioma-alternativo');
+    const paisSelect = tituloAlt.querySelector('.pais-alternativo');
+    
+    // Función para configurar los selects con valores por defecto
+    const configurarSelects = () => {
+        // Verificar si ya tenemos los datos cargados
+        const idiomasDisponibles = listaIdeomasGlobal && listaIdeomasGlobal.length > 0 ? 
+                                 listaIdeomasGlobal : 
+                                 (window.listaIdeomasGlobal || []);
+        
+        const paisesDisponibles = listaPaisesGlobal && listaPaisesGlobal.length > 0 ? 
+                                listaPaisesGlobal : 
+                                (window.listaPaisesGlobal || []);
+        
+        console.log('Idiomas disponibles:', idiomasDisponibles);
+        console.log('Países disponibles:', paisesDisponibles);
+        
+        // Configurar idioma
+        if (idiomaSelect && idiomasDisponibles.length > 0) {
+            // Limpiar opciones existentes
+            idiomaSelect.innerHTML = '<option value="">Seleccione un idioma...</option>';
+            
+            // Agregar idiomas
+            idiomasDisponibles.forEach(idioma => {
+                const option = document.createElement('option');
+                option.value = idioma;
+                option.textContent = idioma;
+                idiomaSelect.appendChild(option);
+            });
+            
+            // Establecer valor por defecto (Inglés si existe, o el primero)
+            const idiomaDefault = idiomasDisponibles.includes('Inglés') ? 'Inglés' : 
+                                 idiomasDisponibles.length > 0 ? idiomasDisponibles[0] : null;
+            if (idiomaDefault) {
+                $(idiomaSelect).val(idiomaDefault).trigger('change');
+                console.log('Idioma predeterminado establecido:', idiomaDefault);
+            }
+        }
+        
+        // Configurar país
+        if (paisSelect && paisesDisponibles.length > 0) {
+            // Limpiar opciones existentes
+            paisSelect.innerHTML = '<option value="">Seleccione un país...</option>';
+            
+            // Agregar países
+            paisesDisponibles.forEach(pais => {
+                const option = document.createElement('option');
+                option.value = pais;
+                option.textContent = pais;
+                paisSelect.appendChild(option);
+            });
+            
+            // Establecer valor por defecto (Estados Unidos si existe, o el primero)
+            const paisDefault = paisesDisponibles.includes('Estados Unidos') ? 'Estados Unidos' : 
+                               paisesDisponibles.length > 0 ? paisesDisponibles[0] : null;
+            if (paisDefault) {
+                $(paisSelect).val(paisDefault).trigger('change');
+                console.log('País predeterminado establecido:', paisDefault);
+            }
+        }
+    };
+    
+    // Intentar configurar con los datos ya cargados
+    if ((listaIdeomasGlobal && listaIdeomasGlobal.length > 0) || 
+        (window.listaIdeomasGlobal && window.listaIdeomasGlobal.length > 0) ||
+        (listaPaisesGlobal && listaPaisesGlobal.length > 0) ||
+        (window.listaPaisesGlobal && window.listaPaisesGlobal.length > 0)) {
+        console.log('Datos ya cargados, configurando selects...');
+        configurarSelects();
+    } else {
+        console.log('Cargando datos para títulos alternativos...');
+        // Si no hay datos cargados, cargarlos y luego configurar
+        Promise.all([
+            cargarIdiomas(),
+            cargarPaises()
+        ]).then(() => {
+            console.log('Datos cargados, configurando selects...');
+            configurarSelects();
+        }).catch(error => {
+            console.error('Error al cargar datos para títulos alternativos:', error);
+        });
+    }
+    
+    // Actualizar el contador
+    actualizarContadorTitulos(episodioNum);
+}
+
+// Función para eliminar un título alternativo
+function removeTituloAlternativo(button) {
+    if (confirm('¿Está seguro de eliminar este título alternativo?')) {
+        const tituloAlt = button.closest('.titulo-alternativo');
+        if (tituloAlt) {
+            tituloAlt.remove();
+        }
     }
 }
+
+// Función para actualizar los selects de países
+function actualizarSelectsPaises(container) {
+    const selects = container ? container.querySelectorAll('.pais-alternativo') : document.querySelectorAll('.pais-alternativo');
+    
+    selects.forEach(select => {
+        // Guardar el valor actual
+        const currentValue = select.value;
+        
+        // Limpiar opciones existentes
+        select.innerHTML = '<option value="">Seleccione un país...</option>';
+        
+        // Asegurarse de que listaPaisesGlobal esté disponible
+        const paises = (listaPaisesGlobal && listaPaisesGlobal.length > 0) ? listaPaisesGlobal : 
+                     (window.listaPaisesGlobal && window.listaPaisesGlobal.length > 0) ? window.listaPaisesGlobal : [];
+        
+        console.log('Países disponibles en actualizarSelectsPaises:', paises);
+        
+        // Agregar países
+        if (paises && paises.length > 0) {
+            paises.forEach(pais => {
+                const option = document.createElement('option');
+                option.value = pais;
+                option.textContent = pais;
+                select.appendChild(option);
+            });
+        }
+        
+        // Restaurar el valor si existe
+        if (currentValue) {
+            select.value = currentValue;
+        }
+        
+        // Actualizar Select2 si está inicializado
+        if ($(select).hasClass('select2-hidden-accessible')) {
+            $(select).trigger('change.select2');
+        }
+    });
+}
+
+// Función para manejar el evento de generar tabla
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.classList.contains('btn-generar-tabla')) {
+        const button = e.target;
+        const bloqueEpisodios = button.closest('.bloque-episodios');
+        const desdeEpisodio = bloqueEpisodios.querySelector('.desdeEpisodio');
+        const hastaEpisodio = bloqueEpisodios.querySelector('.hastaEpisodio');
+        
+        // Escuchar cambios en los inputs de rango de episodios
+        if (desdeEpisodio && hastaEpisodio) {
+            // Validar que el valor de 'hasta' no sea menor que 'desde'
+            desdeEpisodio.addEventListener('change', function() {
+                if (parseInt(hastaEpisodio.value) < parseInt(this.value)) {
+                    hastaEpisodio.value = this.value;
+                }
+            });
+            
+            hastaEpisodio.addEventListener('change', function() {
+                if (parseInt(this.value) < parseInt(desdeEpisodio.value)) {
+                    this.value = desdeEpisodio.value;
+                }
+            });
+        }
+        
+        if (!desdeEpisodio || !hastaEpisodio) return;
+        
+        const desde = parseInt(desdeEpisodio.value) || 1;
+        let hasta = parseInt(hastaEpisodio.value) || 1;
+        
+        // Asegurarse de que 'hasta' sea mayor o igual a 'desde'
+        if (hasta < desde) {
+            hasta = desde;
+            hastaEpisodio.value = hasta;
+        }
+        
+        // Limitar a un máximo de 50 episodios por bloque para evitar problemas de rendimiento
+        if ((hasta - desde + 1) > 50) {
+            alert('Por favor, limita el rango a un máximo de 50 episodios por bloque.');
+            return;
+        }
+        
+        generateEpisodiosIndividuales(bloqueEpisodios, desde, hasta);
+    }
+});
 
 // Add linea de participación
 function addLineaParticipacion(button) {
@@ -887,8 +1214,11 @@ function removeLineaParticipacion(button) {
     }
 }
 
-// URL de la API de Power Automate
+// URLs de las APIs
 const POWER_AUTOMATE_URL = 'https://default0c13096209bc40fc8db89d043ff625.1a.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/b4efa70c80654ec488236ec10a4fb4b4/triggers/manual/paths/invoke';
+const EXHIBICION_INTERNACIONAL_URL = 'https://default0c13096209bc40fc8db89d043ff625.1a.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/a2618e60a1c84211bbf231439de40d30/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-0c130962-09bc-40fc-8db8-9d043ff6251a&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dMhu-Au_gR4ozbNEFHHs5gUChZjfs-GEmby9R-RIF8c';
+const TITULOS_ALTERNATIVOS_URL = 'https://default0c13096209bc40fc8db89d043ff625.1a.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b930873b18a42acab095d29f2d032f3/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-0c130962-09bc-40fc-8db8-9d043ff6251a&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=jEJn56kt5hndekcqoMEgakGiAGjyqHYB6dJPMvOqV5U';
+
 const POWER_AUTOMATE_PARAMS = {
     'api-version': '1',
     'tenantId': 'tId',
@@ -897,6 +1227,206 @@ const POWER_AUTOMATE_PARAMS = {
     'sv': '1.0',
     'sig': 'F1kVR1aS2F84dre8fnUgdPwgBO1UK4uxCl4BIASpkRg'
 };
+
+// Función para recopilar y enviar datos de exhibición internacional
+async function enviarExhibicionesInternacionales() {
+    try {
+        console.log('Iniciando recopilación de datos de exhibición internacional...');
+        const exhibiciones = [];
+        const exhibicionItems = document.querySelectorAll('.exhibicion-item');
+        const formId = document.getElementById('obraForm')?.id || 'formulario-sin-id';
+        let exhibicionesValidas = 0;
+        
+        // Recopilar datos de cada exhibición
+        exhibicionItems.forEach((item, index) => {
+            try {
+                // Obtener referencias a los elementos del formulario
+                const tituloInput = item.querySelector('.otroTitulo');
+                const idiomaSelect = item.querySelector('.idiomaExhibicion');
+                const paisSelect = item.querySelector('.paisExhibicion');
+                const canalSelect = item.querySelector('.canalExhibicion');
+                
+                // Verificar que todos los elementos existan
+                if (!tituloInput || !idiomaSelect || !paisSelect || !canalSelect) {
+                    console.warn(`Exhibición ${index + 1} ignorada: Faltan elementos del formulario`);
+                    return; // Pasar a la siguiente iteración
+                }
+                
+                // Función para obtener el valor de un campo Select2 o input normal
+                const getCleanValue = (element) => {
+                    // Si es un Select2
+                    if ($(element).hasClass('select2-hidden-accessible')) {
+                        try {
+                            const select2Data = $(element).select2('data');
+                            const value = select2Data && select2Data[0] ? select2Data[0].text : '';
+                            // Si es el valor por defecto de Select2, devolver vacío
+                            return (value === 'Buscar o agregar...' || value === 'Seleccione...') ? '' : value.trim();
+                        } catch (e) {
+                            console.warn('Error al obtener valor de Select2:', e);
+                            return element.value?.trim() || '';
+                        }
+                    }
+                    // Si es un input normal
+                    return element.value?.trim() || '';
+                };
+
+                // Obtener valores usando la función helper
+                const titulo = tituloInput.value?.trim() || '';
+                const idioma = getCleanValue(idiomaSelect);
+                const pais = getCleanValue(paisSelect);
+                const canal = getCleanValue(canalSelect);
+                
+                console.log(`Exhibición ${index + 1}:`, { titulo, idioma, pais, canal });
+                
+                // Verificar campos obligatorios (solo título para este caso)
+                const camposObligatorios = [titulo];
+                const camposObligatoriosLlenos = camposObligatorios.every(campo => 
+                    typeof campo === 'string' && campo.trim().length > 0
+                );
+                
+                // Solo agregar si los campos obligatorios están completos
+                if (camposObligatoriosLlenos) {
+                    exhibiciones.push({
+                        titulo,
+                        idioma: idioma || '',
+                        pais: pais || '',
+                        canal: canal || '',
+                        apartado_form: 'exhibicion_internacional'
+                    });
+                    exhibicionesValidas++;
+                    console.log(`Exhibición ${index + 1} agregada correctamente`);
+                } else {
+                    console.warn(`Exhibición ${index + 1} ignorada: Faltan campos obligatorios`, 
+                        { titulo, idioma, pais, canal });
+                }
+            } catch (error) {
+                console.error(`Error al procesar la exhibición ${index + 1}:`, error);
+            }
+        });
+        
+        if (exhibiciones.length === 0) {
+            console.log('No hay datos de exhibición internacional completos para enviar');
+            return { 
+                success: true, 
+                message: 'No hay datos de exhibición para enviar', 
+                count: 0,
+                exhibicionesValidas: 0,
+                totalExaminadas: exhibicionItems.length
+            };
+        }
+        
+        console.log(`Enviando ${exhibiciones.length} de ${exhibicionItems.length} exhibiciones internacionales...`);
+        
+        // Validar que haya al menos una exhibición válida
+        if (exhibiciones.length === 0) {
+            console.log('No hay exhibiciones válidas para enviar');
+            return { 
+                success: true, 
+                message: 'No hay exhibiciones válidas para enviar', 
+                count: 0,
+                exhibicionesValidas: 0,
+                totalExaminadas: exhibicionItems.length
+            };
+        }
+        
+        // Obtener el título original de la obra
+        const tituloObra = document.getElementById('tituloOriginal')?.value || 'Sin título';
+        console.log('Título de la obra obtenido:', tituloObra); // Para depuración
+        
+        // Crear un array con todas las exhibiciones válidas
+        const requestData = exhibiciones.map(exhibicion => ({
+            titulo: exhibicion.titulo || '',
+            titulo_original: tituloObra,  // Agregar el título original de la obra
+            idioma: exhibicion.idioma || '',
+            pais: exhibicion.pais || '',
+            canal: exhibicion.canal || '',
+            apartado_form: exhibicion.apartado_form || 'exhibicion_internacional'
+        }));
+        
+        console.log('Enviando exhibiciones:', requestData);
+        
+        // Mostrar información de depuración detallada
+        console.log('=== INFORMACIÓN DE DEPURACIÓN ===');
+        console.log('URL de envío:', EXHIBICION_INTERNACIONAL_URL);
+        console.log('Headers:', {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json'
+        });
+        console.log('Datos a enviar (JSON):', JSON.stringify(requestData, null, 2));
+        console.log('Datos a enviar (raw):', requestData);
+        console.log('=== FIN DE INFORMACIÓN DE DEPURACIÓN ===');
+        
+        try {
+            // Enviar datos al servidor
+            const response = await fetch(EXHIBICION_INTERNACIONAL_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                },
+                // Enviar el array de exhibiciones
+                body: JSON.stringify(requestData)
+            });
+            
+            console.log('Respuesta del servidor (cruda):', response);
+            
+            // Procesar la respuesta del servidor
+            let responseData = {};
+            const responseText = await response.text();
+            
+            console.log('=== RESPUESTA DEL SERVIDOR ===');
+            console.log('Status:', response.status, response.statusText);
+            console.log('Headers:', Object.fromEntries(response.headers.entries()));
+            
+            // Intentar parsear la respuesta como JSON si no está vacía
+            if (responseText && responseText.trim() !== '') {
+                try {
+                    responseData = JSON.parse(responseText);
+                } catch (e) {
+                    console.warn('No se pudo parsear la respuesta como JSON:', e);
+                }
+            }
+            
+            console.log('Datos de respuesta:', responseData);
+            console.log('Texto de respuesta:', responseText || '(Vacío)');
+            console.log('=== FIN DE RESPUESTA ===');
+            
+            if (!response.ok) {
+                throw new Error(`Error en el servidor: ${response.status} - ${response.statusText}`);
+            }
+            
+            console.log('Datos de exhibición internacional enviados correctamente. Total de exhibiciones:', exhibicionesValidas);
+            return { 
+                success: true, 
+                message: 'Datos guardados correctamente', 
+                count: exhibicionesValidas,
+                responseData: responseData || {}
+            };
+            
+        } catch (error) {
+            console.error('Error en la petición fetch:', error);
+            return {
+                success: false,
+                message: error.message || 'Error al enviar datos de exhibición internacional',
+                error: error.toString(),
+                exhibicionesValidas: 0,
+                totalExaminadas: exhibicionItems.length
+            };
+        }
+        
+    } catch (error) {
+        console.error('Error en enviarExhibicionesInternacionales:', error);
+        return {
+            success: false,
+            message: error.message || 'Error al enviar datos de exhibición internacional',
+            error: error.toString(),
+            exhibicionesValidas: 0,
+            totalExaminadas: exhibicionItems.length
+        };
+    }
+}
 
 // Función para mostrar mensajes al usuario
 function showMessage(message, isError = false) {
@@ -1022,7 +1552,9 @@ let listaRolesGlobal = [];
 
 async function cargarRoles() {
     try {
-        const response = await fetch('assets/rol.json');
+        // Agregar timestamp para evitar caché
+        const timestamp = new Date().getTime();
+        const response = await fetch(`assets/rol.json?v=${timestamp}`);
         if (!response.ok) {
             throw new Error('No se pudo cargar la lista de roles');
         }
@@ -1045,10 +1577,170 @@ async function cargarRoles() {
     }
 }
 
-// Llamar a las funciones de carga cuando se cargue el DOM
+// Función para actualizar la visibilidad de las secciones según el formato seleccionado
+function actualizarVisibilidadSecciones() {
+    const tipoFormato = document.getElementById('tipoFormato');
+    const episodiosSection = document.getElementById('episodiosSection');
+    const lineasNoSerializadasSection = document.getElementById('lineasNoSerializadasSection');
+    
+    if (!tipoFormato || !episodiosSection || !lineasNoSerializadasSection) return;
+    
+    const formatoSeleccionado = tipoFormato.value;
+    const esSerieOTelenovela = formatoSeleccionado === 'Serie' || formatoSeleccionado === 'Telenovela';
+    
+    // Mostrar/ocultar secciones según el formato
+    episodiosSection.style.display = esSerieOTelenovela ? 'block' : 'none';
+    lineasNoSerializadasSection.style.display = esSerieOTelenovela ? 'none' : 'block';
+    
+    // Si no hay formato seleccionado, ocultar ambas secciones
+    if (!formatoSeleccionado) {
+        episodiosSection.style.display = 'none';
+        lineasNoSerializadasSection.style.display = 'none';
+    }
+}
+
+// Mapeo de formatos a géneros disponibles
+const formatosGeneros = {
+    'Largometraje': ['Ficción', 'Documental'],
+    'Cortometraje': ['Ficción', 'Documental'],
+    'Serie': ['Ficción'],
+    'Telenovela': ['Ficción'],
+    'Serie documental': ['Noticias', 'Reportaje', 'Documental']
+};
+
+// Función para actualizar las opciones del select de género y la visibilidad de las secciones
+function actualizarGeneros(formatoSeleccionado) {
+    const generoSelect = document.getElementById('genero');
+    if (!generoSelect) return;
+    
+    // Limpiar opciones actuales
+    generoSelect.innerHTML = '';
+    
+    if (!formatoSeleccionado) {
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Seleccione un formato primero';
+        generoSelect.disabled = true;
+        generoSelect.appendChild(defaultOption);
+        
+        // Actualizar visibilidad de secciones
+        actualizarVisibilidadSecciones();
+        return;
+    }
+    
+    // Agregar opción por defecto
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = 'Seleccione un género...';
+    generoSelect.appendChild(defaultOption);
+    
+    // Agregar opciones según el formato seleccionado
+    const generos = formatosGeneros[formatoSeleccionado] || [];
+    generos.forEach(genero => {
+        const option = document.createElement('option');
+        option.value = genero;
+        option.textContent = genero;
+        generoSelect.appendChild(option);
+    });
+    
+    // Habilitar el select
+    generoSelect.disabled = false;
+    
+    // Actualizar visibilidad de secciones
+    actualizarVisibilidadSecciones();
+}
+
+// Asignar el manejador de envío del formulario
 document.addEventListener('DOMContentLoaded', function() {
+    // Cargar datos iniciales
     cargarRoles();
     cargarIdiomas();
+    cargarProductoras();
+    cargarPaises();
+    
+    // Inicializar el select de género
+    actualizarGeneros();
+    
+    // Event listener para cambios en el select de formato
+    const tipoFormato = document.getElementById('tipoFormato');
+    if (tipoFormato) {
+        tipoFormato.addEventListener('change', function() {
+            actualizarGeneros(this.value);
+        });
+    }
+    
+    // Configurar validación de campos de nombres
+    setupNameValidation();
+    
+    const form = document.getElementById('obraForm');
+    if (form) {
+        // Configurar manejador para el botón de agregar línea no serializada
+        const addLineaNoSerializadaBtn = document.getElementById('addLineaNoSerializada');
+        if (addLineaNoSerializadaBtn) {
+            addLineaNoSerializadaBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Botón de agregar línea no serializada clickeado');
+                addLineaParticipacionNoSerializada();
+            });
+        }
+        
+        // Configurar Select2 para los selects existentes
+        $('.select2').select2({
+            tags: true,
+            createTag: function(params) {
+                const term = params.term.trim();
+                if (term === '') {
+                    return null;
+                }
+                return {
+                    id: term,
+                    text: term,
+                    newTag: true
+                };
+            },
+            matcher: function(params, data) {
+                if ($.trim(params.term) === '') {
+                    return data;
+                }
+                if (data.text.toLowerCase().includes(params.term.toLowerCase())) {
+                    return data;
+                }
+                return null;
+            }
+        });
+        
+        // Manejar el envío del formulario
+        form.addEventListener('submit', submitFormData);
+        
+        // Manejar el botón de limpiar formulario
+        const limpiarBtn = form.querySelector('button[type="reset"]');
+        if (limpiarBtn) {
+            limpiarBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('¿Está seguro que desea limpiar todo el formulario? Se perderán todos los datos ingresados.')) {
+                    limpiarFormulario();
+                }
+            });
+        }
+    }
+    
+    // Inicializar eventos para los botones de exhibiciones
+    const addExhibicionBtn = document.getElementById('addExhibicion');
+    if (addExhibicionBtn) {
+        addExhibicionBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            addExhibicion();
+        });
+    }
+    
+    // Inicializar eventos para los botones de bloques de episodios
+    const addBloqueBtn = document.getElementById('addBloqueEpisodios');
+    if (addBloqueBtn) {
+        addBloqueBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            addBloqueEpisodios();
+        });
+    }
 });
 
 // Función para cargar la lista de empresas productoras
@@ -1154,6 +1846,9 @@ function cargarProductoras() {
         });
 }
 
+// Lista global de países (ya declarada al inicio del archivo)
+// let listaPaisesGlobal = [];
+
 // Función para cargar la lista de países
 function cargarPaises() {
     // Mostrar indicador de carga
@@ -1175,6 +1870,8 @@ function cargarPaises() {
         .then(paises => {
             // Guardar la lista de países globalmente
             listaPaisesGlobal = paises.map(pais => pais.País);
+            window.listaPaisesGlobal = listaPaisesGlobal; // Asegurar disponibilidad global
+            console.log('Países cargados:', listaPaisesGlobal);
             
             // Ordenar países alfabéticamente (ignorando mayúsculas y tildes)
             const collator = new Intl.Collator('es', {sensitivity: 'base'});
@@ -1277,6 +1974,103 @@ function valueToString(value) {
         return value.join(', ');
     }
     return value || '';
+}
+
+// Función para recopilar los títulos alternativos de los episodios
+function recopilarTitulosAlternativos() {
+    const titulosAlternativos = [];
+    const tituloOriginal = document.getElementById('tituloObra')?.value || '';
+    
+    // Obtener todos los bloques de episodios
+    const bloquesEpisodios = document.querySelectorAll('.bloque-episodios');
+    
+    bloquesEpisodios.forEach((bloque, bloqueIndex) => {
+        // Obtener el contenedor de episodios
+        const contenedorEpisodios = bloque.querySelector('.episodios-container');
+        if (!contenedorEpisodios) return;
+        
+        // Obtener todos los episodios en este bloque
+        const episodios = contenedorEpisodios.querySelectorAll('.episodio-content');
+        
+        episodios.forEach(episodio => {
+            // Obtener el número de episodio
+            const header = episodio.closest('.episodio-accordion')?.querySelector('.episodio-header');
+            const nroEpisodio = header?.querySelector('.episodio-numero')?.textContent.trim() || '';
+            const tituloEpisodio = header?.querySelector('.episodio-titulo')?.value || '';
+            
+            // Obtener títulos alternativos de este episodio
+            const titulosContainer = episodio.querySelector('.titulos-alternativos-lista');
+            if (!titulosContainer) return;
+            
+            const titulosItems = titulosContainer.querySelectorAll('.titulo-alternativo');
+            
+            titulosItems.forEach(tituloItem => {
+                const tituloAlt = tituloItem.querySelector('.otro-titulo')?.value || '';
+                const idiomaSelect = tituloItem.querySelector('.idioma-alternativo');
+                const idioma = idiomaSelect?.selectedOptions[0]?.text || '';
+                const paisSelect = tituloItem.querySelector('.pais-alternativo');
+                const pais = paisSelect?.selectedOptions[0]?.text || '';
+                
+                // Solo agregar si todos los campos requeridos están completos
+                if (tituloAlt && idioma && pais) {
+                    titulosAlternativos.push({
+                        titulo_original: tituloOriginal,
+                        nro_episodio: nroEpisodio,
+                        titulo_episodio: tituloEpisodio,
+                        titulo_alternativo: tituloAlt,
+                        idioma: idioma,
+                        pais: pais,
+                        apartado_form: 'otros_titulos_episodios'
+                    });
+                }
+            });
+        });
+    });
+    
+    return titulosAlternativos;
+}
+
+// Función para enviar los títulos alternativos al servidor
+async function enviarTitulosAlternativos() {
+    try {
+        const titulos = recopilarTitulosAlternativos();
+        
+        // Si no hay títulos alternativos, no es necesario enviar nada
+        if (titulos.length === 0) {
+            console.log('No hay títulos alternativos para enviar');
+            return { 
+                success: true, 
+                message: 'No hay títulos alternativos para enviar' 
+            };
+        }
+        
+        console.log('Enviando títulos alternativos:', titulos);
+        
+        const response = await fetch(TITULOS_ALTERNATIVOS_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(titulos),
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Error al enviar títulos alternativos: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        console.log('Títulos alternativos enviados exitosamente:', data);
+        return { 
+            success: true, 
+            data 
+        };
+    } catch (error) {
+        console.error('Error al enviar títulos alternativos:', error);
+        return { 
+            success: false, 
+            error: error.message || 'Error desconocido al enviar títulos alternativos' 
+        };
+    }
 }
 
 // Función para recopilar los datos del formulario en formato JSON
@@ -1543,9 +2337,15 @@ function mostrarErroresValidacion(errores) {
     }
 }
 
-// Función para enviar los datos al servidor
+// Función para manejar el envío del formulario
 async function submitFormData(event) {
     event.preventDefault();
+
+    // Validar campos de nombres (actores, directores, guionistas)
+    if (!validarCamposNombres()) {
+        mostrarErrorValidacion('Por favor, corrija el formato de los nombres en los campos de actores, directores o guionistas. Deben estar separados por ", " (coma y espacio).');
+        return;
+    }
 
     // Verificar si hay al menos una línea de participación
     if (!tieneLineasDeParticipacion()) {
@@ -1570,14 +2370,18 @@ async function submitFormData(event) {
             submitButton.textContent = 'Enviando...';
         }
         
-        // Recopilar datos del formulario
+        // Iniciar el envío de exhibiciones internacionales y títulos alternativos en paralelo
+        const envioExhibiciones = enviarExhibicionesInternacionales();
+        const envioTitulos = enviarTitulosAlternativos();
+        
+        // Recopilar datos del formulario principal
         const formData = collectFormData();
         
         if (formData.length === 0) {
             throw new Error('No hay datos para enviar. Por favor, complete al menos un episodio.');
         }
         
-        console.log('Datos a enviar:', formData);
+        console.log('Datos del formulario principal a enviar:', formData);
         
         // Construir URL con parámetros
         const url = new URL(POWER_AUTOMATE_URL);
@@ -1585,18 +2389,87 @@ async function submitFormData(event) {
             url.searchParams.append(key, value);
         });
         
-        console.log('URL de la solicitud:', url.toString()); // Para depuración
+        console.log('URL de la solicitud principal:', url.toString());
         
-        // Enviar datos al servidor
+        // Enviar datos principales al servidor
         const response = await fetch(url.toString(), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
             },
             body: JSON.stringify(formData),
-            mode: 'cors' // Importante para peticiones entre dominios
+            mode: 'cors'
         });
+        
+        // Procesar respuesta del envío principal
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Error en la respuesta del servidor (principal):', response.status, errorText);
+            throw new Error(`Error en el servidor: ${response.status} - ${errorText}`);
+        }
+        
+        // Esperar a que terminen los envíos en paralelo (o fallen)
+        try {
+            const [resultadoExhibiciones, resultadotitulos] = await Promise.allSettled([
+                envioExhibiciones,
+                envioTitulos
+            ]);
+
+            const mensajes = [];
+            
+            // Procesar resultado de exhibiciones internacionales
+            if (resultadoExhibiciones.status === 'fulfilled' && resultadoExhibiciones.value) {
+                const resExhib = resultadoExhibiciones.value;
+                if (!resExhib.success) {
+                    console.warn('Advertencia en el envío de exhibiciones:', resExhib.message);
+                    mensajes.push('Hubo un problema al guardar la información de exhibición internacional.');
+                } else if (resExhib.count > 0) {
+                    console.log(`Se enviaron ${resExhib.count} exhibiciones internacionales correctamente`);
+                    mensajes.push(`Se registraron ${resExhib.count} exhibiciones internacionales.`);
+                }
+            } else if (resultadoExhibiciones.status === 'rejected') {
+                console.error('Error al procesar el envío de exhibiciones:', resultadoExhibiciones.reason);
+                mensajes.push('Hubo un problema al guardar la información de exhibición internacional.');
+            }
+            
+            // Procesar resultado de títulos alternativos
+            if (resultadotitulos.status === 'fulfilled' && resultadotitulos.value) {
+                const resTitulos = resultadotitulos.value;
+                if (!resTitulos.success) {
+                    console.warn('Advertencia en el envío de títulos alternativos:', resTitulos.error || resTitulos.message);
+                    mensajes.push('Hubo un problema al guardar la información de títulos alternativos.');
+                } else if (resTitulos.message) {
+                    console.log(resTitulos.message);
+                } else if (resTitulos.data) {
+                    console.log('Títulos alternativos enviados correctamente:', resTitulos.data);
+                    mensajes.push('Se registraron los títulos alternativos correctamente.');
+                }
+            } else if (resultadotitulos.status === 'rejected') {
+                console.error('Error al procesar el envío de títulos alternativos:', resultadotitulos.reason);
+                mensajes.push('Hubo un problema al guardar la información de títulos alternativos.');
+            }
+            
+            // Mostrar mensaje consolidado
+            if (mensajes.length > 0) {
+                showMessage(
+                    `¡Formulario enviado correctamente! ` +
+                    (mensajes.length > 0 ? '\n\n' + mensajes.join('\n') : ''),
+                    false
+                );
+            } else {
+                showMessage('¡Formulario enviado correctamente!', false);
+            }
+        } catch (error) {
+            console.error('Error al procesar los envíos adicionales:', error);
+            showMessage(
+                '¡Formulario enviado correctamente! ' +
+                '\n\nSin embargo, hubo problemas al guardar información adicional. ' +
+                'Por favor, contacte al soporte si necesita ayuda.', 
+                false
+            );
+        }
         
         if (!response.ok) {
             let errorMessage = `Error en la respuesta del servidor: ${response.status} ${response.statusText}`;
@@ -1628,56 +2501,78 @@ async function submitFormData(event) {
     }
 }
 
-// Asignar el manejador de envío del formulario
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('obraForm');
-    if (form) {
-        // Configurar manejador para el botón de agregar línea no serializada
-        const addLineaNoSerializadaBtn = document.getElementById('addLineaNoSerializada');
-        if (addLineaNoSerializadaBtn) {
-            addLineaNoSerializadaBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                console.log('Botón de agregar línea no serializada clickeado');
-                addLineaParticipacionNoSerializada();
-            });
-        }
-        // Configurar Select2 para los selects existentes
-        $('.select2').select2({
-            tags: true,
-            createTag: function(params) {
-                const term = params.term.trim();
-                if (term === '') {
-                    return null;
-                }
-                return {
-                    id: term,
-                    text: term,
-                    newTag: true
-                };
-            },
-            matcher: function(params, data) {
-                if ($.trim(params.term) === '') {
-                    return data;
-                }
-                if (data.text.toLowerCase().includes(params.term.toLowerCase())) {
-                    return data;
-                }
-                return null;
-            }
-        });
+// Función para formatear nombres separados por comas
+function formatNames(input) {
+    // Eliminar espacios múltiples y espacios alrededor de comas
+    let value = input.value
+        .replace(/\s*,\s*/g, ', ')  // Reemplazar comas con o sin espacios por coma + espacio
+        .replace(/\s+/g, ' ')        // Reemplazar múltiples espacios por uno solo
+        .replace(/,\s*$/, '');      // Eliminar coma al final si existe
+    
+    // Actualizar el valor del input
+    input.value = value;
+    
+    // Mostrar mensaje de formato incorrecto si hay comas sin espacio
+    const hasInvalidFormat = /,[^ ]/.test(input.value) || /[^ ],/.test(input.value);
+    
+    if (hasInvalidFormat) {
+        input.classList.add('invalid-format');
         
-        // Manejar el envío del formulario
-        form.addEventListener('submit', submitFormData);
-        
-        // Manejar el botón de limpiar formulario
-        const limpiarBtn = form.querySelector('button[type="reset"]');
-        if (limpiarBtn) {
-            limpiarBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (confirm('¿Está seguro que desea limpiar todo el formulario? Se perderán todos los datos ingresados.')) {
-                    limpiarFormulario();
-                }
-            });
+        // Crear o actualizar el mensaje de error
+        let errorMsg = input.nextElementSibling;
+        if (!errorMsg || !errorMsg.classList.contains('format-error')) {
+            errorMsg = document.createElement('div');
+            errorMsg.className = 'format-error';
+            input.parentNode.insertBefore(errorMsg, input.nextSibling);
         }
+        errorMsg.textContent = 'Por favor, separe los nombres con ", " (coma y espacio)';
+        return false;
+    } else {
+        input.classList.remove('invalid-format');
+        const errorMsg = input.nextElementSibling;
+        if (errorMsg && errorMsg.classList.contains('format-error')) {
+            errorMsg.remove();
+        }
+        return true;
     }
-});
+}
+
+// Función para configurar la validación de campos de nombres
+function setupNameValidation() {
+    const nameFields = ['actores', 'directores', 'guionistas'];
+    
+    nameFields.forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+        if (input) {
+            // Validar al perder el foco
+            input.addEventListener('blur', function() {
+                formatNames(this);
+            });
+            
+            // Validar al presionar Enter
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    formatNames(this);
+                }
+            });
+        }
+    });
+}
+
+// Función para validar el formato de los campos de nombres antes del envío
+function validarCamposNombres() {
+    const nameFields = ['actores', 'directores', 'guionistas'];
+    let valido = true;
+    
+    nameFields.forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+        if (input && input.value.trim() !== '') {
+            if (!formatNames(input)) {
+                valido = false;
+            }
+        }
+    });
+    
+    return valido;
+}
