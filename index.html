@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -29,12 +30,16 @@
                         <option value="">Seleccione...</option>
                         <option value="Largometraje">Largometraje</option>
                         <option value="Cortometraje">Cortometraje</option>
-                        <option value="Telefilm">Telefilm</option>
-                        <option value="Culebrón / Serie cómica">Culebrón / Serie cómica</option>
-                        <option value="Serie (de televisión)">Serie (de televisión)</option>
+                        <option value="Serie">Serie</option>
                         <option value="Telenovela">Telenovela</option>
-                        <option value="Documentary/Factual Series">Documentary/Factual Series</option>
-                        <option value="Programa de televisión">Programa de televisión</option>
+                        <option value="Serie documental">Serie documental</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="genero">Género <span class="required">*</span></label>
+                    <select id="genero" required disabled>
+                        <option value="">Seleccione un formato primero</option>
                     </select>
                 </div>
 
@@ -120,7 +125,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-secondary" id="addLineaNoSerializada">+ Agregar Línea</button>
+                    <button type="button" class="btn btn-secondary btn-add" id="addLineaNoSerializada"><i class="fas fa-plus"></i> Agregar Línea</button>
                 </div>
                 <div id="lineasNoSerializadasContainer">
                     <!-- Líneas de participación se agregarán aquí dinámicamente -->
@@ -131,7 +136,7 @@
             <section class="form-section" id="episodiosSection" style="display: none;">
                 <div class="section-header">
                     <h2>Bloques de Episodios</h2>
-                    <button type="button" class="btn btn-secondary" id="addBloqueEpisodios">+ Agregar Bloque</button>
+                    <button type="button" class="btn btn-secondary btn-add" id="addBloqueEpisodios"><i class="fas fa-plus"></i> Agregar Bloque</button>
                 </div>
                 <div id="bloquesEpisodiosContainer">
                     <!-- Bloques de episodios se agregarán aquí dinámicamente -->
@@ -140,8 +145,8 @@
 
 
             <div class="form-actions">
-                <button type="submit" id="submitButton" class="btn btn-primary">Enviar Declaración</button>
-                <button type="reset" class="btn btn-secondary">Limpiar Formulario</button>
+                <button type="submit" id="submitButton" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Enviar Declaración</button>
+                <button type="reset" class="btn btn-secondary"><i class="fas fa-eraser"></i> Limpiar Formulario</button>
             </div>
         </form>
     </div>
@@ -182,7 +187,9 @@
                     </select>
                 </div>
             </div>
-            <button type="button" class="btn-remove">Eliminar</button>
+            <button type="button" class="btn-remove">
+                <i class="fas fa-times"></i> Eliminar
+            </button>
         </div>
     </template>
 
@@ -195,7 +202,7 @@
                         <span class="help-icon">?</span>
                         <div class="tooltip-content">
                             <h4>Instrucciones para declarar episodios:</h4>
-                            <p>En cada bloque de episodios, registra el intervalo de capítulos que comparten los mismos autores, roles y porcentajes de participación.</p>
+                            <p>En cada bloque de episodios, registra el intervalo de episodios que comparten los mismos autores, roles y porcentajes de participación.</p>
                             <p>Esto te permitirá agrupar episodios con características similares y simplificar la declaración.</p>
                             <p>Si existen episodios con distinta participación de autores o porcentajes, crea un nuevo bloque para reflejar esa diferencia.</p>
                         </div>
@@ -206,7 +213,6 @@
             
             <!-- Subbloque 1: Intervalo de episodios -->
             <div class="subbloque">
-                <h4>Intervalo de episodios</h4>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Temporada</label>
@@ -219,6 +225,25 @@
                     <div class="form-group">
                         <label>Hasta episodio</label>
                         <input type="number" class="hastaEpisodio" min="1">
+                    </div>
+                    <div class="form-group" style="align-self: flex-end;">
+                        <button type="button" class="btn btn-secondary btn-small btn-generar-tabla">Generar Tabla</button>
+                    </div>
+                </div>
+                
+                <div class="tabla-episodios-container" style="margin-top: 1rem; display: none;">
+                    <div class="table-responsive">
+                        <table class="tabla-episodios">
+                            <thead>
+                                <tr>
+                                    <th>Episodio</th>
+                                    <th>Título</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Las filas de la tabla se generarán aquí dinámicamente -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -244,14 +269,6 @@
                     <!-- Líneas de participación se agregarán aquí dinámicamente -->
                 </div>
             </div>
-            
-            <!-- Subbloque 3: Títulos de episodios -->
-            <div class="subbloque">
-                <h4>Títulos de episodios</h4>
-                <div class="episodios-individuales">
-                    <!-- Campos individuales de episodios se generarán dinámicamente -->
-                </div>
-            </div>
         </div>
     </template>
 
@@ -275,7 +292,37 @@
                     <input type="number" class="porcentaje" min="0" max="100" step="0.01" required>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn-remove" onclick="removeLineaParticipacion(this)">Eliminar</button>
+                    <button type="button" class="btn-remove" onclick="removeLineaParticipacion(this)">
+                        <i class="fas fa-times"></i> Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tituloAlternativoTemplate">
+        <div class="titulo-alternativo">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Otro título</label>
+                    <input type="text" class="otro-titulo form-control" placeholder="Título alternativo">
+                </div>
+                <div class="form-group">
+                    <label>Idioma</label>
+                    <select class="idioma-alternativo select2" style="width: 100%;">
+                        <!-- Se cargarán dinámicamente -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>País</label>
+                    <select class="pais-alternativo select2" style="width: 100%;">
+                        <!-- Se cargarán dinámicamente -->
+                    </select>
+                </div>
+                <div class="form-group" style="align-self: flex-end;">
+                    <button type="button" class="btn-remove" onclick="removeTituloAlternativo(this)">
+                        <i class="fas fa-times"></i> Eliminar
+                    </button>
                 </div>
             </div>
         </div>
