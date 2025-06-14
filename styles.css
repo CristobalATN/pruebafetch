@@ -1,21 +1,46 @@
 :root {
-    --primary-color: #2563eb;
-    --primary-hover: #1d4ed8;
-    --secondary-color: #6b7280;
-    --secondary-hover: #4b5563;
-    --success-color: #10b981;
-    --danger-color: #ef4444;
-    --danger-hover: #dc2626;
-    --border-color: #e5e7eb;
-    --input-bg: #ffffff;
-    --text-color: #1f2937;
-    --text-muted: #6b7280;
-    --bg-color: #f9fafb;
+    /* Colores institucionales */
+    --primary-color: #097137;
+    --primary-hover: #075c2d;
+    --primary-light: #e8f5eb;
+    --primary-lightest: #f0f9f3;
+    --secondary-color: #575656;
+    --secondary-hover: #454545;
+    --success-color: #097137;
+    --danger-color: #dc3545;
+    --danger-hover: #bb2d3b;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+    
+    /* Colores de fondo y texto */
+    --bg-color: #f8f9fa;
     --card-bg: #ffffff;
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --radius: 0.375rem;
+    --text-color: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --input-bg: #ffffff;
+    
+    /* Sombras */
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
+    --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.05);
+    
+    /* Bordes */
+    --radius-sm: 0.25rem;
+    --radius: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-full: 9999px;
+    
+    /* Transiciones */
     --transition: all 0.2s ease-in-out;
+    
+    /* Espaciado */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing: 1rem;
+    --spacing-md: 1.25rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
 }
 
 * {
@@ -24,29 +49,720 @@
     box-sizing: border-box;
 }
 
+/* Tipografía y estilos base */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Colores institucionales */
+    --primary-color: #097137;
+    --primary-hover: #075c2d;
+    --primary-light: #e8f5eb;
+    --primary-lightest: #f0f9f3;
+    --secondary-color: #575656;
+    --secondary-hover: #454545;
+    --success-color: #097137;
+    --danger-color: #dc3545;
+    --danger-hover: #bb2d3b;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+    
+    /* Colores de fondo y texto */
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --input-bg: #ffffff;
+    
+    /* Sombras */
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    
+    /* Bordes */
+    --radius-sm: 0.25rem;
+    --radius: 0.5rem;
+    --radius-lg: 0.75rem;
+    
+    /* Transiciones */
+    --transition: all 0.2s ease-in-out;
+    
+    /* Espaciado */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+}
+
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--bg-color);
-    padding: 1rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    padding: 1.5rem 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+}
+
+h1 { 
+    font-size: 1.75rem; 
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+h2 { 
+    font-size: 1.5rem; 
+    color: var(--secondary-color);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-light);
+}
+h3 { 
+    font-size: 1.25rem; 
+    margin-bottom: 1rem;
+}
+h4 { 
+    font-size: 1.1rem; 
+    margin-bottom: 0.75rem;
+}
+h5 { 
+    font-size: 1rem; 
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Contenedor principal */
 .container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: var(--spacing-lg);
     background-color: var(--card-bg);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
 }
 
-.header-with-logo {
+/* Secciones del formulario */
+.form-section {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing);
+    border: 1px solid var(--border-color);
+}
+
+.form-section:not(:last-child) {
+    margin-bottom: var(--spacing);
+}
+
+/* Encabezados */
+.section-header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Grupos de formulario */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+    color: var(--secondary-color);
+    font-size: 0.875rem;
+}
+
+/* Inputs y selects */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="time"],
+input[type="password"],
+textarea,
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea,
+.select2-container .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    transition: var(--transition);
+    box-shadow: none;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus,
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default.select2-container--focus .select2-selection--single {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(9, 113, 55, 0.15);
+    outline: 0;
+}
+
+/* Placeholder */
+::placeholder {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #fff;
     text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: var(--primary-color);
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Botón principal - Verde */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+/* Botón secundario - Gris */
+.btn-secondary {
+    background-color: #f1f3f5;
+    border-color: #dee2e6;
+    color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+    color: var(--secondary-hover);
+}
+
+/* Botón de peligro - Rojo */
+.btn-danger {
+    background-color: #fff0f0;
+    border-color: #ffd6d6;
+    color: var(--danger-color);
+}
+
+.btn-danger:hover {
+    background-color: #ffe0e0;
+    border-color: #ffb8b8;
+    color: var(--danger-hover);
+}
+
+/* Botón con ícono */
+.btn i {
+    margin-right: 0.5rem;
+    font-size: 0.9em;
+}
+
+.btn-icon-right i {
+    margin-right: 0;
+    margin-left: 0.5rem;
+}
+
+.btn-icon-only {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon-only i {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+/* Botón de envío */
+.btn-submit {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 2rem 0.75rem 1.5rem;
+    font-size: 1.0625rem;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(9, 113, 55, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-submit::before {
+    content: '\f1d8'; /* Icono de envío de Font Awesome */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-right: 0.5rem;
+    font-size: 1.1em;
+}
+
+.btn-submit:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(9, 113, 55, 0.25);
+}
+
+/* Botón de eliminar */
+.btn-remove {
+    background-color: #fff5f5;
+    color: #dc3545;
+    border: 1px solid #f8d7da;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    font-size: 0.875rem;
+}
+
+.btn-remove i {
+    margin-right: 0.35rem;
+    font-size: 0.9em;
+}
+
+.btn-remove:hover {
+    background-color: #ffebee;
+    border-color: #f5c6cb;
+    color: #c82333;
+    transform: translateY(-1px);
+}
+
+.btn-remove:active {
+    transform: translateY(0);
+}
+
+/* Botón de limpiar */
+.btn-clear {
+    background-color: #f8f9fa;
+    color: var(--secondary-color);
+    border: 1px solid #dee2e6;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem 0.75rem 1.25rem;
+}
+
+.btn-clear::before {
+    content: '\f12d'; /* Icono de borrar de Font Awesome */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-right: 0.5rem;
+    font-size: 1.1em;
+}
+
+.btn-clear:hover {
+    background-color: #e9ecef;
+    color: var(--secondary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Botón pequeño */
+.btn-sm {
+    padding: 0.375rem 0.875rem 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Botón de agregar */
+.btn-add {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-add::before {
+    content: '\2b'; /* Icono de más de Font Awesome */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-right: 0.5rem;
+}
+
+/* Botón de eliminar */
+.btn-delete {
+    background-color: #fff0f0;
+    color: var(--danger-color);
+    border: 1px solid #ffd6d6;
+}
+
+.btn-delete::before {
+    content: '\f1f8'; /* Icono de basura de Font Awesome */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-right: 0.5rem;
+}
+
+/* Botón de editar */
+.btn-edit {
+    background-color: #f0f5ff;
+    color: #0d6efd;
+    border: 1px solid #cfe2ff;
+}
+
+.btn-edit::before {
+    content: '\303\211'; /* Icono de lápiz de Font Awesome */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-right: 0.5rem;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.75rem;
+    font-size: 1.0625rem;
+    border-radius: var(--radius-full);
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* Grupo de botones */
+.btn-group {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.btn-group .btn {
+    flex: 1;
+}
+
+/* Tarjetas y bloques */
+.card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin-bottom: var(--spacing);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.card-header {
+    padding: 1rem 1.25rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid var(--border-color);
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+/* Bloques de episodios */
+.bloque-episodios {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin-bottom: var(--spacing);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.bloque-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.bloque-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    top: 2px; /* Ajuste fino para alinear con el texto */
+}
+
+.bloque-episodios .subbloque {
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #fff;
+}
+
+.bloque-episodios .subbloque:last-child {
+    border-bottom: none;
+}
+
+/* Líneas de participación */
+.linea-participacion {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.linea-participacion:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(9, 113, 55, 0.1);
+}
+
+/* Formularios en línea */
+.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+/* Mensajes de ayuda y validación */
+.help-text {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--danger-color);
+}
+
+.was-validated .form-control:invalid ~ .invalid-feedback,
+.was-validated .form-control:invalid ~ .invalid-tooltip,
+.form-control.is-invalid ~ .invalid-feedback,
+.form-control.is-invalid ~ .invalid-tooltip {
+    display: block;
+}
+
+/* Estilos responsivos */
+@media (max-width: 992px) {
+    .container {
+        padding: var(--spacing);
+    }
+    
+    .form-section {
+        padding: var(--spacing);
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .form-row > .form-group {
+        width: 100%;
+    }
+    
+    .bloque-episodios .subbloque {
+        padding: var(--spacing);
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .section-header .btn {
+        width: 100%;
+        margin-top: var(--spacing-sm);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --spacing: 0.75rem;
+        --spacing-md: 1rem;
+        --spacing-lg: 1.25rem;
+        --spacing-xl: 1.5rem;
+    }
+    
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    h4 { font-size: 1.1rem; }
+    
+    .bloque-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing);
+    }
+    
+    .bloque-title {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .tooltip-content {
+        width: 260px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .btn + .btn {
+        margin-top: var(--spacing-sm);
+    }
+    
+    .help-tooltip {
+        margin-left: 0;
+        margin-top: var(--spacing-xs);
+    }
+    
+    .bloque-episodios .form-row {
+        gap: var(--spacing);
+    }
+    
+    .form-inline {
+        flex-direction: column;
+        gap: var(--spacing);
+    }
+    
+    .form-inline .btn {
+        margin-top: 0.5rem;
+    }
+}
+
+/* Mejoras de accesibilidad */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Efectos de hover y focus mejorados */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+[tabindex="0"]:focus {
+    outline: 3px solid rgba(9, 113, 55, 0.5);
+    outline-offset: 2px;
+}
+
+/* Mejoras para impresión */
+@media print {
+    body {
+        background: none;
+        color: #000;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+        box-shadow: none;
+    }
+    
+    .btn,
+    .no-print {
+        display: none !important;
+    }
 }
 
 .header-with-logo .logo {
@@ -73,6 +789,341 @@ h1 {
     margin-bottom: 1.5rem;
     color: #111827;
     text-align: center;
+}
+
+/* Tablas */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+}
+
+/* Estilos para tooltips */
+.help-tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    z-index: 1;
+}
+
+.help-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: help;
+    transition: all 0.2s ease;
+}
+
+.help-icon:hover {
+    background-color: var(--primary-hover);
+}
+
+.tooltip-content {
+    visibility: hidden;
+    width: 280px;
+    background-color: white;
+    color: var(--text-color);
+    text-align: left;
+    border-radius: var(--radius);
+    padding: 1rem;
+    position: absolute;
+    z-index: 1000;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s, visibility 0.2s;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color);
+    pointer-events: none;
+}
+
+.tooltip-content h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    font-size: 0.9375rem;
+}
+
+.tooltip-content p {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.tooltip-content p:last-child {
+    margin-bottom: 0;
+}
+
+.help-tooltip:hover .tooltip-content {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Flecha del tooltip */
+.tooltip-content::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+/* Asegurar que el tooltip no se corte por el contenedor */
+.bloque-episodios {
+    position: relative;
+    overflow: visible;
+}
+
+/* Estilos para la sección de títulos alternativos */
+.titulos-alternativos {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+}
+
+.titulos-alternativos .subbloque-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.titulos-alternativos h5 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.titulos-alternativos .btn-add-titulo-alternativo {
+    margin: 0;
+}
+
+.titulo-alternativo {
+    background-color: white;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+}
+
+.titulo-alternativo .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0;
+}
+
+.titulo-alternativo .form-group {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 0;
+}
+
+.titulo-alternativo .form-control,
+.titulo-alternativo .select2-container {
+    width: 100% !important;
+}
+
+.titulo-alternativo .btn-remove {
+    margin-top: 1.5rem;
+}
+
+.toggle-titulos {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.875rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.toggle-titulos:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para los encabezados de episodio */
+.episodio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 0.5rem;
+}
+
+.episodio-header:hover {
+    background-color: #e9ecef;
+}
+
+.episodio-header-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.episodio-numero {
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 80px;
+}
+
+.episodio-titulo-preview {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #495057;
+}
+
+.episodio-contador-titulos {
+    font-size: 0.85rem;
+    color: #6c757d;
+    background-color: #e9ecef;
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+    white-space: nowrap;
+}
+
+.toggle-episodio {
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    color: #6c757d;
+}
+
+.toggle-episodio:hover {
+    color: var(--primary-color);
+}
+
+.toggle-icon {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    font-style: normal;
+    font-size: 0.8em;
+}
+
+.episodio-content {
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    margin-bottom: 1.5rem;
+    background-color: white;
+}
+
+/* Estilos para la tabla de episodios */
+.tabla-episodios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    table-layout: fixed;
+}
+
+.tabla-episodios th,
+.tabla-episodios td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tabla-episodios th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 500;
+}
+
+.tabla-episodios tbody tr:hover {
+    background-color: rgba(9, 113, 55, 0.05);
+}
+
+.tabla-episodios .episodio-numero {
+    font-weight: 600;
+    width: 100px;
+    color: var(--secondary-color);
+}
+
+.tabla-episodios .form-control {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.tabla-episodios .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(9, 113, 55, 0.25);
+    outline: none;
+}
+
+/* Responsive table container */
+.table-responsive {
+    display: block;
+    width: 100%;
+    max-height: 400px; /* Altura fija para el contenedor */
+    overflow-y: auto; /* Scroll vertical */
+    overflow-x: auto; /* Scroll horizontal si es necesario */
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+}
+
+/* Estilo para el encabezado fijo */
+.tabla-episodios thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Asegurar que las celdas de encabezado mantengan su ancho */
+.tabla-episodios th:first-child {
+    width: 100px;
+}
+
+.tabla-episodios th:last-child {
+    width: auto;
+}
+
+/* Botón de generar tabla */
+.btn-generar-tabla {
+    margin-bottom: 0.5rem;
+}
+
+/* Mensaje cuando no hay episodios */
+.tabla-episodios .sin-episodios {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-muted);
+    font-style: italic;
 }
 
 h2 {
@@ -491,6 +1542,27 @@ select[multiple] {
     vertical-align: middle;
 }
 
+/* Estilos para validación de nombres */
+.invalid-format {
+    border-color: #dc3545 !important;
+    background-color: #fff8f8;
+}
+
+.format-error {
+    color: #dc3545;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Estilos para mensajes de error */
+.error-message {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
 /* Estilos para el texto de ayuda */
 .help-text {
     color: #6b7280;
@@ -567,3 +1639,4 @@ select[multiple] {
 ::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
 }
+
