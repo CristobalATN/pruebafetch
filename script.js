@@ -826,7 +826,7 @@ function initializeEpisodioEvents(container) {
 }
 
 // Inicializar eventos para los títulos alternativos
-function initializeTitulosAlternativos(container) {
+async function initializeTitulosAlternativos(container) {
     // Toggle para mostrar/ocultar títulos alternativos
     container.querySelectorAll('.toggle-titulos').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -836,6 +836,11 @@ function initializeTitulosAlternativos(container) {
             
             titulosSection.style.display = isHidden ? 'block' : 'none';
             this.textContent = isHidden ? '− Ocultar títulos alternativos' : '+ Mostrar títulos alternativos';
+            
+            // Si se está mostrando la sección, inicializar los selects si es necesario
+            if (isHidden) {
+                initializeExistingTitulosAlternativos(titulosSection);
+            }
         });
     });
     
@@ -845,6 +850,50 @@ function initializeTitulosAlternativos(container) {
             addTituloAlternativo(this);
         });
     });
+    
+    // Inicializar títulos alternativos existentes
+    initializeExistingTitulosAlternativos(container);
+}
+
+// Función para inicializar títulos alternativos existentes
+async function initializeExistingTitulosAlternativos(container) {
+    const titulosAlternativos = container.querySelectorAll('.titulo-alternativo');
+    
+    if (titulosAlternativos.length === 0) return;
+    
+    try {
+        // Cargar idiomas y países en paralelo
+        await Promise.all([
+            cargarIdiomas(),
+            cargarPaises()
+        ]);
+        
+        // Inicializar cada título alternativo
+        titulosAlternativos.forEach(tituloAlt => {
+            // Inicializar Select2 para los selects existentes
+            $(tituloAlt).find('.select2').select2({
+                width: '100%',
+                allowClear: true
+            });
+            
+            // Configurar botón de eliminar si no está configurado
+            const btnEliminar = tituloAlt.querySelector('.btn-remove');
+            if (btnEliminar && !btnEliminar.hasAttribute('data-initialized')) {
+                btnEliminar.setAttribute('data-initialized', 'true');
+                const episodioNum = btnEliminar.closest('.titulos-alternativos')
+                    .previousElementSibling
+                    .querySelector('.toggle-titulos')
+                    .getAttribute('data-episodio');
+                
+                btnEliminar.addEventListener('click', function() {
+                    tituloAlt.remove();
+                    actualizarContadorTitulos(episodioNum);
+                });
+            }
+        });
+    } catch (error) {
+        console.error('Error al inicializar títulos alternativos existentes:', error);
+    }
 }
 
 // Función para actualizar el contador de títulos alternativos
@@ -858,7 +907,7 @@ function actualizarContadorTitulos(episodioNum) {
 }
 
 // Función para agregar un título alternativo
-function addTituloAlternativo(button) {
+async function addTituloAlternativo(button) {
     const episodioNum = button.getAttribute('data-episodio');
     const container = button.closest('.titulos-alternativos');
     const listaTitulos = container.querySelector('.titulos-alternativos-lista');
@@ -872,11 +921,9 @@ function addTituloAlternativo(button) {
     // Agregar el título alternativo a la lista
     listaTitulos.appendChild(tituloAlt);
     
-    // Inicializar Select2 para los nuevos selects
-    $(tituloAlt).find('.select2').select2({
-        width: '100%',
-        allowClear: true
-    });
+    // Obtener referencias a los selects
+    const idiomaSelect = tituloAlt.querySelector('.idioma-alternativo');
+    const paisSelect = tituloAlt.querySelector('.pais-alternativo');
     
     // Configurar botón de eliminar
     const btnEliminar = tituloAlt.querySelector('.btn-remove');
@@ -887,88 +934,30 @@ function addTituloAlternativo(button) {
         });
     }
     
-    // Obtener referencias a los selects
-    const idiomaSelect = tituloAlt.querySelector('.idioma-alternativo');
-    const paisSelect = tituloAlt.querySelector('.pais-alternativo');
-    
-    // Función para configurar los selects con valores por defecto
-    const configurarSelects = () => {
-        // Verificar si ya tenemos los datos cargados
-        const idiomasDisponibles = listaIdeomasGlobal && listaIdeomasGlobal.length > 0 ? 
-                                 listaIdeomasGlobal : 
-                                 (window.listaIdeomasGlobal || []);
-        
-        const paisesDisponibles = listaPaisesGlobal && listaPaisesGlobal.length > 0 ? 
-                                listaPaisesGlobal : 
-                                (window.listaPaisesGlobal || []);
-        
-        console.log('Idiomas disponibles:', idiomasDisponibles);
-        console.log('Países disponibles:', paisesDisponibles);
-        
-        // Configurar idioma
-        if (idiomaSelect && idiomasDisponibles.length > 0) {
-            // Limpiar opciones existentes
-            idiomaSelect.innerHTML = '<option value="">Seleccione un idioma...</option>';
-            
-            // Agregar idiomas
-            idiomasDisponibles.forEach(idioma => {
-                const option = document.createElement('option');
-                option.value = idioma;
-                option.textContent = idioma;
-                idiomaSelect.appendChild(option);
-            });
-            
-            // Establecer valor por defecto (Inglés si existe, o el primero)
-            const idiomaDefault = idiomasDisponibles.includes('Inglés') ? 'Inglés' : 
-                                 idiomasDisponibles.length > 0 ? idiomasDisponibles[0] : null;
-            if (idiomaDefault) {
-                $(idiomaSelect).val(idiomaDefault).trigger('change');
-                console.log('Idioma predeterminado establecido:', idiomaDefault);
-            }
-        }
-        
-        // Configurar país
-        if (paisSelect && paisesDisponibles.length > 0) {
-            // Limpiar opciones existentes
-            paisSelect.innerHTML = '<option value="">Seleccione un país...</option>';
-            
-            // Agregar países
-            paisesDisponibles.forEach(pais => {
-                const option = document.createElement('option');
-                option.value = pais;
-                option.textContent = pais;
-                paisSelect.appendChild(option);
-            });
-            
-            // Establecer valor por defecto (Estados Unidos si existe, o el primero)
-            const paisDefault = paisesDisponibles.includes('Estados Unidos') ? 'Estados Unidos' : 
-                               paisesDisponibles.length > 0 ? paisesDisponibles[0] : null;
-            if (paisDefault) {
-                $(paisSelect).val(paisDefault).trigger('change');
-                console.log('País predeterminado establecido:', paisDefault);
-            }
-        }
-    };
-    
-    // Intentar configurar con los datos ya cargados
-    if ((listaIdeomasGlobal && listaIdeomasGlobal.length > 0) || 
-        (window.listaIdeomasGlobal && window.listaIdeomasGlobal.length > 0) ||
-        (listaPaisesGlobal && listaPaisesGlobal.length > 0) ||
-        (window.listaPaisesGlobal && window.listaPaisesGlobal.length > 0)) {
-        console.log('Datos ya cargados, configurando selects...');
-        configurarSelects();
-    } else {
-        console.log('Cargando datos para títulos alternativos...');
-        // Si no hay datos cargados, cargarlos y luego configurar
-        Promise.all([
+    try {
+        // Cargar idiomas y países en paralelo
+        await Promise.all([
             cargarIdiomas(),
             cargarPaises()
-        ]).then(() => {
-            console.log('Datos cargados, configurando selects...');
-            configurarSelects();
-        }).catch(error => {
-            console.error('Error al cargar datos para títulos alternativos:', error);
+        ]);
+        
+        // Actualizar los selects con los datos cargados
+        if (idiomaSelect) {
+            actualizarSelectsIdiomas(idiomaSelect);
+        }
+        
+        if (paisSelect) {
+            actualizarSelectsPaises(paisSelect);
+        }
+        
+        // Inicializar Select2 para los nuevos selects
+        $(tituloAlt).find('.select2').select2({
+            width: '100%',
+            allowClear: true
         });
+        
+    } catch (error) {
+        console.error('Error al cargar datos para el título alternativo:', error);
     }
     
     // Actualizar el contador
@@ -985,41 +974,80 @@ function removeTituloAlternativo(button) {
     }
 }
 
-// Función para actualizar los selects de países
-function actualizarSelectsPaises(container) {
-    const selects = container ? container.querySelectorAll('.pais-alternativo') : document.querySelectorAll('.pais-alternativo');
+// Función para actualizar los selects de países en el formulario
+function actualizarSelectsPaises(container = null) {
+    if (!listaPaisesGlobal || listaPaisesGlobal.length === 0) return;
+    
+    // Ordenar países alfabéticamente (ignorando mayúsculas y tildes)
+    const collator = new Intl.Collator('es', {sensitivity: 'base'});
+    const paisesOrdenados = [...listaPaisesGlobal].sort(collator.compare);
+    
+    // Obtener los selects objetivo
+    let selects = [];
+    
+    if (container) {
+        // Si se proporciona un contenedor, buscar solo los selects dentro de él
+        selects = Array.from(container.querySelectorAll('select.pais-alternativo'));
+    } else {
+        // Si no hay contenedor, obtener todos los selects de países excepto el de producción
+        // (que ya se maneja en cargarPaises)
+        selects = Array.from(document.querySelectorAll('select.pais-alternativo'));
+    }
     
     selects.forEach(select => {
-        // Guardar el valor actual
-        const currentValue = select.value;
+        if (!select) return;
+        
+        // Verificar si es un select2
+        const esSelect2 = select.classList.contains('select2');
+        const isMultiple = select.hasAttribute('multiple');
+        const valorActual = isMultiple ? 
+            Array.from(select.selectedOptions).map(opt => opt.value) : 
+            select.value;
         
         // Limpiar opciones existentes
-        select.innerHTML = '<option value="">Seleccione un país...</option>';
+        select.innerHTML = '';
         
-        // Asegurarse de que listaPaisesGlobal esté disponible
-        const paises = (listaPaisesGlobal && listaPaisesGlobal.length > 0) ? listaPaisesGlobal : 
-                     (window.listaPaisesGlobal && window.listaPaisesGlobal.length > 0) ? window.listaPaisesGlobal : [];
-        
-        console.log('Países disponibles en actualizarSelectsPaises:', paises);
-        
-        // Agregar países
-        if (paises && paises.length > 0) {
-            paises.forEach(pais => {
-                const option = document.createElement('option');
-                option.value = pais;
-                option.textContent = pais;
-                select.appendChild(option);
-            });
+        // Agregar opción por defecto solo si no es múltiple
+        if (!isMultiple) {
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Seleccione un país...';
+            select.appendChild(defaultOption);
         }
         
-        // Restaurar el valor si existe
-        if (currentValue) {
-            select.value = currentValue;
+        // Agregar países ordenados
+        paisesOrdenados.forEach(pais => {
+            const option = document.createElement('option');
+            option.value = pais;
+            option.textContent = pais;
+            select.appendChild(option);
+        });
+        
+        // Restaurar el/los valor(es) seleccionado(s) si existe(n)
+        if (isMultiple && Array.isArray(valorActual) && valorActual.length > 0) {
+            $(select).val(valorActual).trigger('change');
+        } else if (valorActual) {
+            select.value = valorActual;
         }
         
-        // Actualizar Select2 si está inicializado
-        if ($(select).hasClass('select2-hidden-accessible')) {
-            $(select).trigger('change.select2');
+        // Si es un select2, inicializarlo o actualizarlo
+        if (esSelect2) {
+            if (!select.classList.contains('select2-hidden-accessible')) {
+                $(select).select2({
+                    width: '100%',
+                    allowClear: true,
+                    placeholder: isMultiple ? 'Seleccione países...' : 'Seleccione un país...',
+                    multiple: isMultiple,
+                    language: {
+                        noResults: function() {
+                            return 'No se encontraron resultados';
+                        }
+                    }
+                });
+            } else {
+                // Si ya es un select2, actualizarlo
+                $(select).trigger('change.select2');
+            }
         }
     });
 }
@@ -1498,35 +1526,19 @@ async function cargarIdiomas() {
 }
 
 // Función para actualizar los selects de idioma en el formulario
-function actualizarSelectsIdiomas() {
-    // Actualizar el select de idioma principal
-    const selectIdioma = document.getElementById('idioma');
-    if (selectIdioma) {
-        // Guardar el valor seleccionado actual
-        const valorActual = selectIdioma.value;
-        
-        // Limpiar opciones existentes
-        selectIdioma.innerHTML = '<option value="">Seleccione un idioma...</option>';
-        
-        // Agregar idiomas
-        listaIdeomasGlobal.forEach(idioma => {
-            const option = document.createElement('option');
-            option.value = idioma;
-            option.textContent = idioma;
-            selectIdioma.appendChild(option);
-        });
-        
-        // Restaurar el valor seleccionado si existe
-        if (valorActual) {
-            selectIdioma.value = valorActual;
-        }
-    }
-    
-    // Actualizar los selects de idioma en las exhibiciones existentes
-    document.querySelectorAll('.idiomaExhibicion').forEach(select => {
-        // Solo actualizar si no es un Select2 ya inicializado
-        if (!select.classList.contains('select2-hidden-accessible')) {
+function actualizarSelectsIdiomas(container = null) {
+    // Si no se proporciona un contenedor, actualizar todos los selects de idioma
+    const containers = container ? [container] : [
+        document.getElementById('idioma'),
+        ...document.querySelectorAll('.idiomaExhibicion, .idioma-alternativo')
+    ].filter(el => el);
+
+    containers.forEach(select => {
+        // Solo actualizar si no es un Select2 ya inicializado o si es un contenedor específico
+        if (select && !select.classList.contains('select2-hidden-accessible')) {
+            // Guardar el valor seleccionado actual
             const valorActual = select.value;
+            const esSelect2 = select.matches('.select2');
             
             // Limpiar opciones existentes
             select.innerHTML = '<option value="">Seleccione un idioma...</option>';
@@ -1542,6 +1554,14 @@ function actualizarSelectsIdiomas() {
             // Restaurar el valor seleccionado si existe
             if (valorActual) {
                 select.value = valorActual;
+            }
+            
+            // Si es un select2, inicializarlo
+            if (esSelect2 && !select.classList.contains('select2-hidden-accessible')) {
+                $(select).select2({
+                    width: '100%',
+                    allowClear: true
+                });
             }
         }
     });
@@ -1846,112 +1866,146 @@ function cargarProductoras() {
         });
 }
 
-// Lista global de países (ya declarada al inicio del archivo)
-// let listaPaisesGlobal = [];
-
 // Función para cargar la lista de países
-function cargarPaises() {
+async function cargarPaises() {
     // Mostrar indicador de carga
     const selectPais = document.getElementById('paisProduccion');
-    if (selectPais) {
-        const loadingOption = new Option('Cargando países...', '', true, true);
-        loadingOption.disabled = true;
-        selectPais.innerHTML = '';
-        selectPais.add(loadingOption);
+    
+    // Verificar si el select existe
+    if (!selectPais) {
+        console.error('No se encontró el elemento select de país de producción');
+        return [];
     }
+    
+    const isSelect2Initialized = $(selectPais).hasClass('select2-hidden-accessible');
+    
+    // Mostrar indicador de carga
+    const loadingOption = new Option('Cargando países...', '', true, true);
+    loadingOption.disabled = true;
+    selectPais.innerHTML = '';
+    selectPais.add(loadingOption);
 
-    return fetch('assets/paises.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('No se pudo cargar la lista de países');
-            }
-            return response.json();
-        })
-        .then(paises => {
-            // Guardar la lista de países globalmente
-            listaPaisesGlobal = paises.map(pais => pais.País);
-            window.listaPaisesGlobal = listaPaisesGlobal; // Asegurar disponibilidad global
-            console.log('Países cargados:', listaPaisesGlobal);
-            
-            // Ordenar países alfabéticamente (ignorando mayúsculas y tildes)
-            const collator = new Intl.Collator('es', {sensitivity: 'base'});
-            const paisesOrdenados = [...listaPaisesGlobal].sort(collator.compare);
-            
-            // Actualizar el select
-            if (selectPais) {
-                // Limpiar opciones existentes
-                selectPais.innerHTML = '';
-                
-                // Agregar países al select
-                paisesOrdenados.forEach(pais => {
-                    const option = new Option(pais, pais);
-                    selectPais.add(option);
-                });
-                
-                // Inicializar Select2 si no está ya inicializado
-                if (!$(selectPais).hasClass('select2-hidden-accessible')) {
-                    $(selectPais).select2({
-                        placeholder: 'Seleccione o agregue países...',
-                        allowClear: true,
-                        multiple: true,
-                        tags: true,
-                        createTag: function(params) {
-                            const term = $.trim(params.term);
-                            if (term === '') {
-                                return null;
-                            }
-                            return {
-                                id: term,
-                                text: term,
-                                newTag: true
-                            };
-                        },
-                        matcher: function(params, data) {
-                            // Si no hay término de búsqueda, mostrar todos los resultados
-                            if ($.trim(params.term) === '') {
-                                return data;
-                            }
-                            
-                            // Normalizar términos para búsqueda sin distinción de mayúsculas ni tildes
-                            const normalize = text => 
-                                text.toLowerCase()
-                                    .normalize('NFD')
-                                    .replace(/[\u0300-\u036f]/g, '');
-                            
-                            const searchTerm = normalize(params.term);
-                            const text = normalize(data.text);
-                            
-                            // Buscar coincidencias parciales
-                            if (text.includes(searchTerm)) {
-                                return data;
-                            }
-                            
-                            return null;
-                        }
-                    });
+    try {
+        // Hacer la petición para obtener los países
+        const response = await fetch('assets/paises.json');
+        if (!response.ok) {
+            throw new Error('No se pudo cargar la lista de países');
+        }
+        
+        const paises = await response.json();
+        
+        // Guardar la lista de países globalmente
+        listaPaisesGlobal = paises.map(pais => pais.País);
+        
+        // Ordenar países alfabéticamente (ignorando mayúsculas y tildes)
+        const collator = new Intl.Collator('es', {sensitivity: 'base'});
+        const paisesOrdenados = [...listaPaisesGlobal].sort(collator.compare);
+        
+        // Guardar el valor actual si existe
+        const currentValues = $(selectPais).val() || [];
+        
+        // Limpiar opciones existentes
+        selectPais.innerHTML = '';
+        
+        // Agregar opción por defecto
+        const defaultOption = new Option('Seleccione países...', '', false, false);
+        selectPais.add(defaultOption);
+        
+        // Agregar países ordenados
+        paisesOrdenados.forEach(pais => {
+            const option = new Option(pais, pais, false, false);
+            selectPais.add(option);
+        });
+        
+        // Si Select2 ya estaba inicializado, destruirlo primero
+        if (isSelect2Initialized) {
+            $(selectPais).select2('destroy');
+        }
+        
+        // Inicializar Select2 con configuración
+        $(selectPais).select2({
+            placeholder: 'Seleccione o agregue países...',
+            allowClear: true,
+            multiple: true,
+            width: '100%',
+            tags: true,
+            createTag: function(params) {
+                const term = $.trim(params.term);
+                if (term === '') {
+                    return null;
+                }
+                return {
+                    id: term,
+                    text: term,
+                    newTag: true
+                };
+            },
+            language: {
+                noResults: function() {
+                    return 'No se encontraron resultados';
                 }
             }
-            
-            return paisesOrdenados;
-        })
-        .catch(error => {
-            console.error('Error al cargar países:', error);
-            showMessage('Error al cargar la lista de países. Por favor, intente más tarde.', true);
-            
-            // Restaurar opción por defecto en caso de error
-            if (selectPais) {
-                selectPais.innerHTML = '';
-                const defaultOption = new Option('Error al cargar países', '', true, true);
-                defaultOption.disabled = true;
-                selectPais.add(defaultOption);
-                
-                // Permitir escribir manualmente
-                const manualOption = new Option('Escribir manualmente...', 'manual', false, false);
-                selectPais.add(manualOption);
-            }
-            
-            return [];
         });
+        
+        // Restaurar valores seleccionados si existen
+        if (currentValues.length > 0) {
+            $(selectPais).val(currentValues).trigger('change');
+        }
+        
+        // Actualizar otros selects de países en el formulario
+        actualizarSelectsPaises();
+        
+        return paisesOrdenados;
+    } catch (error) {
+        console.error('Error al cargar los países:', error);
+        
+        // Valores por defecto en caso de error
+        listaPaisesGlobal = [
+            'Chile', 'Argentina', 'México', 'España', 'Colombia', 
+            'Perú', 'Venezuela', 'Ecuador', 'Guatemala', 'Cuba',
+            'Bolivia', 'República Dominicana', 'Honduras', 'Paraguay', 'El Salvador',
+            'Nicaragua', 'Costa Rica', 'Panamá', 'Uruguay', 'Puerto Rico'
+        ];
+        
+        // Actualizar el select de país de producción con valores por defecto
+        if (selectPais) {
+            selectPais.innerHTML = '';
+            
+            // Agregar opción por defecto
+            const defaultOption = new Option('Seleccione países...', '', false, false);
+            selectPais.add(defaultOption);
+            
+            // Agregar países por defecto
+            listaPaisesGlobal.forEach(pais => {
+                const option = new Option(pais, pais, false, false);
+                selectPais.add(option);
+            });
+            
+            // Inicializar Select2 si no está inicializado
+            if (!isSelect2Initialized) {
+                $(selectPais).select2({
+                    placeholder: 'Seleccione o agregue países...',
+                    allowClear: true,
+                    multiple: true,
+                    width: '100%',
+                    tags: true,
+                    language: {
+                        noResults: function() {
+                            return 'No se encontraron resultados';
+                        }
+                    }
+                });
+            }
+        }
+        
+        // Actualizar otros selects de países en el formulario
+        actualizarSelectsPaises();
+        
+        // Mostrar mensaje de error
+        showMessage('Error al cargar la lista de países. Se han cargado países por defecto.', true);
+        
+        return listaPaisesGlobal;
+    }
 }
 
 // Función para obtener el valor de un elemento de forma segura
@@ -1974,103 +2028,6 @@ function valueToString(value) {
         return value.join(', ');
     }
     return value || '';
-}
-
-// Función para recopilar los títulos alternativos de los episodios
-function recopilarTitulosAlternativos() {
-    const titulosAlternativos = [];
-    const tituloOriginal = document.getElementById('tituloObra')?.value || '';
-    
-    // Obtener todos los bloques de episodios
-    const bloquesEpisodios = document.querySelectorAll('.bloque-episodios');
-    
-    bloquesEpisodios.forEach((bloque, bloqueIndex) => {
-        // Obtener el contenedor de episodios
-        const contenedorEpisodios = bloque.querySelector('.episodios-container');
-        if (!contenedorEpisodios) return;
-        
-        // Obtener todos los episodios en este bloque
-        const episodios = contenedorEpisodios.querySelectorAll('.episodio-content');
-        
-        episodios.forEach(episodio => {
-            // Obtener el número de episodio
-            const header = episodio.closest('.episodio-accordion')?.querySelector('.episodio-header');
-            const nroEpisodio = header?.querySelector('.episodio-numero')?.textContent.trim() || '';
-            const tituloEpisodio = header?.querySelector('.episodio-titulo')?.value || '';
-            
-            // Obtener títulos alternativos de este episodio
-            const titulosContainer = episodio.querySelector('.titulos-alternativos-lista');
-            if (!titulosContainer) return;
-            
-            const titulosItems = titulosContainer.querySelectorAll('.titulo-alternativo');
-            
-            titulosItems.forEach(tituloItem => {
-                const tituloAlt = tituloItem.querySelector('.otro-titulo')?.value || '';
-                const idiomaSelect = tituloItem.querySelector('.idioma-alternativo');
-                const idioma = idiomaSelect?.selectedOptions[0]?.text || '';
-                const paisSelect = tituloItem.querySelector('.pais-alternativo');
-                const pais = paisSelect?.selectedOptions[0]?.text || '';
-                
-                // Solo agregar si todos los campos requeridos están completos
-                if (tituloAlt && idioma && pais) {
-                    titulosAlternativos.push({
-                        titulo_original: tituloOriginal,
-                        nro_episodio: nroEpisodio,
-                        titulo_episodio: tituloEpisodio,
-                        titulo_alternativo: tituloAlt,
-                        idioma: idioma,
-                        pais: pais,
-                        apartado_form: 'otros_titulos_episodios'
-                    });
-                }
-            });
-        });
-    });
-    
-    return titulosAlternativos;
-}
-
-// Función para enviar los títulos alternativos al servidor
-async function enviarTitulosAlternativos() {
-    try {
-        const titulos = recopilarTitulosAlternativos();
-        
-        // Si no hay títulos alternativos, no es necesario enviar nada
-        if (titulos.length === 0) {
-            console.log('No hay títulos alternativos para enviar');
-            return { 
-                success: true, 
-                message: 'No hay títulos alternativos para enviar' 
-            };
-        }
-        
-        console.log('Enviando títulos alternativos:', titulos);
-        
-        const response = await fetch(TITULOS_ALTERNATIVOS_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(titulos),
-        });
-        
-        if (!response.ok) {
-            throw new Error(`Error al enviar títulos alternativos: ${response.statusText}`);
-        }
-        
-        const data = await response.json();
-        console.log('Títulos alternativos enviados exitosamente:', data);
-        return { 
-            success: true, 
-            data 
-        };
-    } catch (error) {
-        console.error('Error al enviar títulos alternativos:', error);
-        return { 
-            success: false, 
-            error: error.message || 'Error desconocido al enviar títulos alternativos' 
-        };
-    }
 }
 
 // Función para recopilar los datos del formulario en formato JSON
@@ -2322,6 +2279,108 @@ function mostrarErrorValidacion(mensaje) {
     }
 }
 
+// Función para recolectar los títulos alternativos de los episodios
+function recolectarTitulosAlternativos() {
+    console.log('=== INICIO recopilación de títulos alternativos ===');
+    const titulosAlternativos = [];
+    const tituloOriginal = document.getElementById('tituloOriginal')?.value || '';
+    console.log('Título original:', tituloOriginal);
+    
+    // Obtener todas las tablas de episodios
+    const tablasEpisodios = document.querySelectorAll('.tabla-episodios');
+    console.log('Tablas de episodios encontradas:', tablasEpisodios.length);
+    
+    tablasEpisodios.forEach((tabla, i) => {
+        console.log(`Procesando tabla ${i+1}/${tablasEpisodios.length}`);
+        
+        // Obtener todas las filas de la tabla (excepto el encabezado)
+        const filas = tabla.querySelectorAll('tbody tr.episodio-fila');
+        console.log(`  Filas de episodios en la tabla: ${filas.length}`);
+        
+        filas.forEach((fila, j) => {
+            console.log(`  Procesando fila ${j+1}/${filas.length}`);
+            
+            // Obtener el número y título del episodio
+            const nroEpisodio = fila.querySelector('.episodio-numero')?.textContent?.trim() || '';
+            const tituloEpisodio = fila.querySelector('.titulo-episodio')?.value?.trim() || '';
+            console.log(`    Nro episodio: ${nroEpisodio}, Título: ${tituloEpisodio}`);
+            
+            // Obtener los títulos alternativos del episodio
+            const titulosAltContainer = fila.querySelector('.titulos-alternativos-lista');
+            if (!titulosAltContainer) {
+                console.log('    No se encontró el contenedor de títulos alternativos');
+                return;
+            }
+            
+            const titulosAlt = titulosAltContainer.querySelectorAll('.titulo-alternativo');
+            console.log(`    Títulos alternativos encontrados: ${titulosAlt.length}`);
+            
+            titulosAlt.forEach((tituloAlt, k) => {
+                console.log(`    Procesando título alternativo ${k+1}/${titulosAlt.length}`);
+                const tituloAlternativo = tituloAlt.querySelector('.otro-titulo')?.value?.trim() || '';
+                const idioma = tituloAlt.querySelector('.idioma-alternativo')?.value?.trim() || '';
+                const pais = tituloAlt.querySelector('.pais-alternativo')?.value?.trim() || '';
+                
+                console.log(`      Título: "${tituloAlternativo}", Idioma: "${idioma}", País: "${pais}"`);
+                
+                // Solo requerimos que exista el título alternativo
+                if (tituloAlternativo) {
+                    const tituloCompleto = {
+                        titulo_original: tituloOriginal,
+                        nro_episodio: nroEpisodio.replace('Episodio ', ''), // Quitar el texto 'Episodio '
+                        titulo_episodio: tituloEpisodio,
+                        titulo_alternativo: tituloAlternativo,
+                        idioma: idioma || 'No especificado', // Valor por defecto si no se especifica
+                        pais: pais || 'No especificado', // Valor por defecto si no se especifica
+                        apartado_form: 'otros_titulos_episodios'
+                    };
+                    console.log('      Añadiendo título alternativo:', tituloCompleto);
+                    titulosAlternativos.push(tituloCompleto);
+                } else {
+                    console.log('      Título alternativo vacío, no se incluirá');
+                }
+            });
+        });
+    });
+    
+    console.log('=== FIN recopilación de títulos alternativos ===');
+    console.log('Total de títulos alternativos encontrados:', titulosAlternativos.length);
+    return titulosAlternativos;
+}
+
+// Función para enviar los títulos alternativos al servidor
+async function enviarTitulosAlternativos() {
+    const titulos = recolectarTitulosAlternativos();
+    
+    // Si no hay títulos alternativos, no es necesario enviar nada
+    if (titulos.length === 0) {
+        console.log('No hay títulos alternativos para enviar');
+        return { success: true };
+    }
+    
+    try {
+        const response = await fetch(TITULOS_ALTERNATIVOS_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(titulos)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Error al enviar títulos alternativos: ${response.status}`);
+        }
+        
+        return { success: true };
+    } catch (error) {
+        console.error('Error al enviar títulos alternativos:', error);
+        return { 
+            success: false, 
+            error: 'Error al enviar los títulos alternativos. Por favor, intente nuevamente.' 
+        };
+    }
+}
+
 // Función para mostrar errores de validación
 function mostrarErroresValidacion(errores) {
     // Usar SweetAlert2 si está disponible, de lo contrario usar alert nativo
@@ -2370,9 +2429,8 @@ async function submitFormData(event) {
             submitButton.textContent = 'Enviando...';
         }
         
-        // Iniciar el envío de exhibiciones internacionales y títulos alternativos en paralelo
+        // Iniciar el envío de exhibiciones internacionales en paralelo
         const envioExhibiciones = enviarExhibicionesInternacionales();
-        const envioTitulos = enviarTitulosAlternativos();
         
         // Recopilar datos del formulario principal
         const formData = collectFormData();
@@ -2410,84 +2468,64 @@ async function submitFormData(event) {
             throw new Error(`Error en el servidor: ${response.status} - ${errorText}`);
         }
         
-        // Esperar a que terminen los envíos en paralelo (o fallen)
+        // Esperar a que termine el envío de exhibiciones (o falle)
+        let resultadoExhibiciones;
+        let titulosResult = { success: true };
+        
         try {
-            const [resultadoExhibiciones, resultadotitulos] = await Promise.allSettled([
-                envioExhibiciones,
-                envioTitulos
-            ]);
-
-            const mensajes = [];
+            // Esperar a que termine el envío de exhibiciones
+            resultadoExhibiciones = await envioExhibiciones;
             
-            // Procesar resultado de exhibiciones internacionales
-            if (resultadoExhibiciones.status === 'fulfilled' && resultadoExhibiciones.value) {
-                const resExhib = resultadoExhibiciones.value;
-                if (!resExhib.success) {
-                    console.warn('Advertencia en el envío de exhibiciones:', resExhib.message);
-                    mensajes.push('Hubo un problema al guardar la información de exhibición internacional.');
-                } else if (resExhib.count > 0) {
-                    console.log(`Se enviaron ${resExhib.count} exhibiciones internacionales correctamente`);
-                    mensajes.push(`Se registraron ${resExhib.count} exhibiciones internacionales.`);
-                }
-            } else if (resultadoExhibiciones.status === 'rejected') {
-                console.error('Error al procesar el envío de exhibiciones:', resultadoExhibiciones.reason);
-                mensajes.push('Hubo un problema al guardar la información de exhibición internacional.');
+            // Si es una serie, enviar títulos alternativos
+            const tipoFormato = document.getElementById('tipoFormato')?.value;
+            if (tipoFormato === 'Serie') {
+                console.log('Enviando títulos alternativos...');
+                titulosResult = await enviarTitulosAlternativos();
+                console.log('Resultado del envío de títulos alternativos:', titulosResult);
             }
             
-            // Procesar resultado de títulos alternativos
-            if (resultadotitulos.status === 'fulfilled' && resultadotitulos.value) {
-                const resTitulos = resultadotitulos.value;
-                if (!resTitulos.success) {
-                    console.warn('Advertencia en el envío de títulos alternativos:', resTitulos.error || resTitulos.message);
-                    mensajes.push('Hubo un problema al guardar la información de títulos alternativos.');
-                } else if (resTitulos.message) {
-                    console.log(resTitulos.message);
-                } else if (resTitulos.data) {
-                    console.log('Títulos alternativos enviados correctamente:', resTitulos.data);
-                    mensajes.push('Se registraron los títulos alternativos correctamente.');
-                }
-            } else if (resultadotitulos.status === 'rejected') {
-                console.error('Error al procesar el envío de títulos alternativos:', resultadotitulos.reason);
-                mensajes.push('Hubo un problema al guardar la información de títulos alternativos.');
+            // Manejar resultados de exhibiciones
+            if (resultadoExhibiciones && !resultadoExhibiciones.success) {
+                console.warn('Advertencia en el envío de exhibiciones:', resultadoExhibiciones.message);
+                showMessage(
+                    `Se completó el envío, pero hubo un problema con las exhibiciones: ${resultadoExhibiciones.message}`,
+                    'warning'
+                );
+            } 
+            // Manejar resultados de títulos alternativos
+            else if (!titulosResult.success) {
+                console.warn('Advertencia en el envío de títulos alternativos:', titulosResult.error);
+                showMessage(
+                    `Se completó el envío, pero hubo un problema con los títulos alternativos: ${titulosResult.error}`,
+                    'warning'
+                );
             }
-            
-            // Mostrar mensaje consolidado
-            if (mensajes.length > 0) {
+            // Mostrar mensaje de éxito general
+            else if (resultadoExhibiciones?.count > 0) {
+                console.log(`Se enviaron ${resultadoExhibiciones.count} exhibiciones internacionales correctamente`);
                 showMessage(
                     `¡Formulario enviado correctamente! ` +
-                    (mensajes.length > 0 ? '\n\n' + mensajes.join('\n') : ''),
+                    `Se registraron ${resultadoExhibiciones.count} exhibiciones internacionales.`,
                     false
                 );
             } else {
+                // Solo mostrar éxito del formulario principal si no hay exhibiciones
                 showMessage('¡Formulario enviado correctamente!', false);
             }
         } catch (error) {
-            console.error('Error al procesar los envíos adicionales:', error);
+            console.error('Error al procesar el envío:', error);
+            // Mostrar advertencia pero no fallar el envío completo
             showMessage(
                 '¡Formulario enviado correctamente! ' +
-                '\n\nSin embargo, hubo problemas al guardar información adicional. ' +
-                'Por favor, contacte al soporte si necesita ayuda.', 
-                false
+                'Sin embargo, hubo un problema al guardar información adicional.', 
+                'warning'
             );
         }
         
-        if (!response.ok) {
-            let errorMessage = `Error en la respuesta del servidor: ${response.status} ${response.statusText}`;
-            try {
-                const errorData = await response.json();
-                errorMessage = errorData.message || JSON.stringify(errorData);
-            } catch (e) {
-                // Si no se puede parsear la respuesta como JSON, usar el mensaje por defecto
-                console.error('No se pudo parsear la respuesta de error:', e);
-            }
-            throw new Error(errorMessage);
-        }
-        
-        // Mostrar mensaje de éxito
-        showMessage('¡Datos enviados correctamente!', false);
-        
-        // Opcional: Limpiar el formulario después de un envío exitoso
-        // document.getElementById('obraForm').reset();
+        // Limpiar el formulario después de 2 segundos
+        setTimeout(() => {
+            limpiarFormulario();
+        }, 2000);
         
     } catch (error) {
         console.error('Error al enviar los datos:', error);
