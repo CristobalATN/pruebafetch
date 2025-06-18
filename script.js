@@ -2417,14 +2417,14 @@ async function verificarRecaptcha() {
         return false;
     }
     
-    // Validar el token con el servidor (opcional, pero recomendado para mayor seguridad)
+    // Validar el token con la función de Azure
     try {
-        const verificationResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+        const verificationResponse = await fetch('https://captchaformav.azurewebsites.net/api/verifyRecaptcha', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
             },
-            body: `secret=6LcNeWQrAAAAAGaAbMnDrVkHb5VIicGc8h6HjbDY&response=${response}`
+            body: JSON.stringify({ token: response })
         });
         
         const data = await verificationResponse.json();
