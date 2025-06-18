@@ -2419,13 +2419,12 @@ async function verificarRecaptcha() {
     
     // Validar el token con el servidor (opcional, pero recomendado para mayor seguridad)
     try {
-        // Clave secreta de prueba para desarrollo local
         const verificationResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: `secret=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe&response=${response}`
+            body: `secret=6LcNeWQrAAAAAGaAbMnDrVkHb5VIicGc8h6HjbDY&response=${response}`
         });
         
         const data = await verificationResponse.json();
@@ -2697,4 +2696,3 @@ function validarCamposNombres() {
     
     return true;
 }
-
