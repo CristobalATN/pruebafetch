@@ -21,7 +21,7 @@
                 <h2>Datos Generales</h2>
                 <div class="form-group">
                     <label for="tituloOriginal">Título original <span class="required">*</span></label>
-                    <input type="text" id="tituloOriginal" required>
+                    <input type="text" id="tituloOriginal" placeholder="Ej: El laberinto del fauno" required>
                 </div>
 
                 <div class="form-group">
@@ -45,7 +45,7 @@
 
                 <div class="form-group">
                     <label for="empresaProductora">Empresa productora <span class="required">*</span></label>
-                    <select id="empresaProductora" class="select2" multiple="multiple" required>
+                    <select id="empresaProductora" class="select2" multiple="multiple" data-placeholder="Seleccione o agregue empresa productora..." required>
                         <!-- Las opciones se cargarán dinámicamente -->
                     </select>
                 </div>
@@ -59,7 +59,7 @@
 
                 <div class="form-group">
                     <label for="anioProduccion">Año de producción <span class="required">*</span></label>
-                    <input type="number" id="anioProduccion" min="1900" max="2100" required>
+                    <input type="number" id="anioProduccion" min="1900" max="2100" placeholder="Ej: 2019" required>
                 </div>
 
                 <div class="form-group">
@@ -79,19 +79,22 @@
 
                 <div class="form-group">
                     <label for="actores">Actores</label>
-                    <input type="text" id="actores" placeholder="Separar nombres con comas">
+                    <input type="text" id="actores" placeholder="Ej: Juan Pérez, María García">
+                    <div class="help-text">Separe los nombres con ", " (coma y espacio)</div>
                 </div>
 
 
                 <div class="form-group">
                     <label for="directores">Directores</label>
-                    <input type="text" id="directores" placeholder="Separar nombres con comas">
+                    <input type="text" id="directores" placeholder="Ej: Pedro Almodóvar, Alejandro Amenábar">
+                    <div class="help-text">Separe los nombres con ", " (coma y espacio)</div>
                 </div>
 
 
                 <div class="form-group">
                     <label for="guionistas">Guionistas</label>
-                    <input type="text" id="guionistas" placeholder="Separar nombres con comas">
+                    <input type="text" id="guionistas" placeholder="Ej: Guillermo del Toro, Pedro Peirano">
+                    <div class="help-text">Separe los nombres con ", " (coma y espacio)</div>
                 </div>
 
             </section>
@@ -136,7 +139,7 @@
             <section class="form-section" id="episodiosSection" style="display: none;">
                 <div class="section-header">
                     <h2>Bloques de Episodios</h2>
-                    <button type="button" class="btn btn-secondary btn-add" id="addBloqueEpisodios"><i class="fas fa-plus"></i> Agregar Bloque</button>
+                    <button type="button" class="btn btn-secondary btn-add" id="addBloqueEpisodios">Agregar Bloque</button>
                 </div>
                 <div id="bloquesEpisodiosContainer">
                     <!-- Bloques de episodios se agregarán aquí dinámicamente -->
@@ -145,6 +148,14 @@
 
 
             <div class="form-actions">
+                <!-- Widget de reCAPTCHA -->
+                <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                    <div id="recaptcha-error" class="error-message" style="display: none; color: #dc3545; margin-top: 5px;">
+                        Por favor, verifica que no eres un robot.
+                    </div>
+                </div>
+                
                 <button type="submit" id="submitButton" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Enviar Declaración</button>
                 <button type="reset" class="btn btn-secondary"><i class="fas fa-eraser"></i> Limpiar Formulario</button>
             </div>
@@ -203,136 +214,81 @@
                         <div class="tooltip-content">
                             <h4>Instrucciones para declarar episodios:</h4>
                             <p>En cada bloque de episodios, registra el intervalo de episodios que comparten los mismos autores, roles y porcentajes de participación.</p>
-                            <p>Esto te permitirá agrupar episodios con características similares y simplificar la declaración.</p>
-                            <p>Si existen episodios con distinta participación de autores o porcentajes, crea un nuevo bloque para reflejar esa diferencia.</p>
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn-remove">Eliminar Bloque</button>
+                <button type="button" class="btn btn-small btn-add-linea">+ Agregar Línea</button>
             </div>
-            
-            <!-- Subbloque 1: Intervalo de episodios -->
-            <div class="subbloque">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Temporada</label>
-                        <input type="number" class="temporada" min="1" placeholder="N°">
-                    </div>
-                    <div class="form-group">
-                        <label>Desde episodio</label>
-                        <input type="number" class="desdeEpisodio" min="1">
-                    </div>
-                    <div class="form-group">
-                        <label>Hasta episodio</label>
-                        <input type="number" class="hastaEpisodio" min="1">
-                    </div>
-                    <div class="form-group" style="align-self: flex-end;">
-                        <button type="button" class="btn btn-secondary btn-small btn-generar-tabla">Generar Tabla</button>
-                    </div>
-                </div>
-                
-                <div class="tabla-episodios-container" style="margin-top: 1rem; display: none;">
-                    <div class="table-responsive">
-                        <table class="tabla-episodios">
-                            <thead>
-                                <tr>
-                                    <th>Episodio</th>
-                                    <th>Título</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Las filas de la tabla se generarán aquí dinámicamente -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Subbloque 2: Líneas de participación -->
-            <div class="subbloque">
-                <div class="subbloque-header">
-                    <div class="bloque-title">
-                        <h4>Líneas de participación</h4>
-                        <div class="help-tooltip">
-                            <span class="help-icon">?</span>
-                            <div class="tooltip-content">
-                                <h4>Instrucciones para declarar líneas de participación:</h4>
-                                <p>En cada línea de participación, registra el rol, autor y porcentaje correspondiente a cada participante en la obra.</p>
-                                <p>Recuerda que la suma de los porcentajes para un mismo rol no puede superar el 100%.</p>
-                                <p>Si necesitas agregar participantes con diferentes roles, crea una nueva línea para cada uno.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-small btn-add-linea">+ Agregar Línea</button>
-                </div>
-                <div class="lineas-participacion">
-                    <!-- Líneas de participación se agregarán aquí dinámicamente -->
-                </div>
+            <div class="lineas-participacion">
+                <!-- Líneas de participación se agregarán aquí dinámicamente -->
             </div>
         </div>
-    </template>
+    </div>
+</template>
 
-    <template id="lineaParticipacionTemplate">
-        <div class="linea-participacion">
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Rol</label>
-                    <select class="rol select2" style="width: 100%;">
-                        <!-- Las opciones se cargarán dinámicamente desde el JSON -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Autor</label>
-                    <select class="autor select2">
-                        <option value="">Buscar o agregar...</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>% Participación <span class="required">*</span></label>
-                    <input type="number" class="porcentaje" min="0" max="100" step="0.01" required>
-                </div>
-                <div class="form-group">
-                    <button type="button" class="btn-remove" onclick="removeLineaParticipacion(this)">
-                        <i class="fas fa-times"></i> Eliminar
-                    </button>
-                </div>
+<template id="lineaParticipacionTemplate">
+    <div class="linea-participacion">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Rol</label>
+                <select class="rol select2" style="width: 100%;">
+                    <!-- Las opciones se cargarán dinámicamente desde el JSON -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Autor</label>
+                <select class="autor select2">
+                    <option value="">Buscar o agregar...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>% Participación <span class="required">*</span></label>
+                <input type="number" class="porcentaje" min="0" max="100" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn-remove" onclick="removeLineaParticipacion(this)">
+                    <i class="fas fa-times"></i> Eliminar
+                </button>
             </div>
         </div>
-    </template>
+    </div>
+</template>
 
-    <template id="tituloAlternativoTemplate">
-        <div class="titulo-alternativo">
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Otro título</label>
-                    <input type="text" class="otro-titulo form-control" placeholder="Título alternativo">
-                </div>
-                <div class="form-group">
-                    <label>Idioma</label>
-                    <select class="idioma-alternativo select2" style="width: 100%;">
-                        <!-- Se cargarán dinámicamente -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>País</label>
-                    <select class="pais-alternativo select2" style="width: 100%;">
-                        <!-- Se cargarán dinámicamente -->
-                    </select>
-                </div>
-                <div class="form-group" style="align-self: flex-end;">
-                    <button type="button" class="btn-remove" onclick="removeTituloAlternativo(this)">
-                        <i class="fas fa-times"></i> Eliminar
-                    </button>
-                </div>
+<template id="tituloAlternativoTemplate">
+    <div class="titulo-alternativo">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Otro título</label>
+                <input type="text" class="otro-titulo form-control" placeholder="Título alternativo">
+            </div>
+            <div class="form-group">
+                <label>Idioma</label>
+                <select class="idioma-alternativo select2" style="width: 100%;">
+                    <!-- Se cargarán dinámicamente -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label>País</label>
+                <select class="pais-alternativo select2" style="width: 100%;">
+                    <!-- Se cargarán dinámicamente -->
+                </select>
+            </div>
+            <div class="form-group" style="align-self: flex-end;">
+                <button type="button" class="btn-remove" onclick="removeTituloAlternativo(this)">
+                    <i class="fas fa-times"></i> Eliminar
+                </button>
             </div>
         </div>
-    </template>
+    </div>
+</template>
 
+<!-- Scripts -->
+<!-- reCAPTCHA -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
