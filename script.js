@@ -248,8 +248,14 @@ document.addEventListener('DOMContentLoaded', function () {
             // Actualizar el valor
             e.target.value = newValue;
             
-            // Restaurar la posición del cursor
-            e.target.setSelectionRange(start, end);
+            // Solo intentar restaurar la posición del cursor si no es un input de tipo 'number'
+            if (e.target.type !== 'number') {
+                try {
+                    e.target.setSelectionRange(start, end);
+                } catch (err) {
+                    console.warn('No se pudo restaurar la posición del cursor:', err);
+                }
+            }
         }
     }
     
@@ -338,12 +344,8 @@ document.addEventListener('DOMContentLoaded', function () {
             
             if (esSerie) {
                 // Si es una serie, verificar si ya hay bloques
-                const bloquesContainer = document.getElementById('bloquesEpisodiosContainer');
-                if (bloquesContainer && bloquesContainer.children.length === 0) {
-                    console.log('Agregando bloque de episodio por defecto');
-                    // Agregar un bloque de episodios automáticamente
-                    addBloqueEpisodios();
-                }
+                // No agregamos bloques automáticamente, el usuario debe hacer clic en 'Agregar Bloque'
+                console.log('Formato de serie seleccionado, mostrando sección de episodios');
             } else {
                 // Si no es serie, limpiar los bloques de episodios
                 const bloquesContainer = document.getElementById('bloquesEpisodiosContainer');
@@ -1246,6 +1248,7 @@ function removeLineaParticipacion(button) {
 const POWER_AUTOMATE_URL = 'https://default0c13096209bc40fc8db89d043ff625.1a.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/b4efa70c80654ec488236ec10a4fb4b4/triggers/manual/paths/invoke';
 const EXHIBICION_INTERNACIONAL_URL = 'https://default0c13096209bc40fc8db89d043ff625.1a.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/a2618e60a1c84211bbf231439de40d30/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-0c130962-09bc-40fc-8db8-9d043ff6251a&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dMhu-Au_gR4ozbNEFHHs5gUChZjfs-GEmby9R-RIF8c';
 const TITULOS_ALTERNATIVOS_URL = 'https://default0c13096209bc40fc8db89d043ff625.1a.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b930873b18a42acab095d29f2d032f3/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-0c130962-09bc-40fc-8db8-9d043ff6251a&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=jEJn56kt5hndekcqoMEgakGiAGjyqHYB6dJPMvOqV5U';
+const NOTIFICACION_EMAIL_URL = 'https://default0c13096209bc40fc8db89d043ff625.1a.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/eff02a9286144933aaf4ad5b3122d933/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-0c130962-09bc-40fc-8db8-9d043ff6251a&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=qpcA0v-sELsWdPR9RYAGE-q62Oj9llGFdiR2p5G44QA';
 
 const POWER_AUTOMATE_PARAMS = {
     'api-version': '1',
@@ -2330,8 +2333,8 @@ function recolectarTitulosAlternativos() {
                         nro_episodio: nroEpisodio.replace('Episodio ', ''), // Quitar el texto 'Episodio '
                         titulo_episodio: tituloEpisodio,
                         titulo_alternativo: tituloAlternativo,
-                        idioma: idioma || 'No especificado', // Valor por defecto si no se especifica
-                        pais: pais || 'No especificado', // Valor por defecto si no se especifica
+                        idioma: idioma || '', // Cadena vacía si no se especifica
+                        pais: pais || '', // Cadena vacía si no se especifica
                         apartado_form: 'otros_titulos_episodios'
                     };
                     console.log('      Añadiendo título alternativo:', tituloCompleto);
@@ -2396,15 +2399,79 @@ function mostrarErroresValidacion(errores) {
     }
 }
 
+// Función para verificar el reCAPTCHA
+async function verificarRecaptcha() {
+    // Esperar a que grecaptcha esté disponible
+    if (typeof grecaptcha === 'undefined') {
+        console.error('reCAPTCHA no está cargado correctamente');
+        return false;
+    }
+
+    const response = grecaptcha.getResponse();
+    if (!response) {
+        // Mostrar mensaje de error
+        const errorElement = document.getElementById('recaptcha-error');
+        if (errorElement) {
+            errorElement.style.display = 'block';
+        }
+        return false;
+    }
+    
+    // Validar el token con el servidor (opcional, pero recomendado para mayor seguridad)
+    try {
+        // Clave secreta de prueba para desarrollo local
+        const verificationResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `secret=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe&response=${response}`
+        });
+        
+        const data = await verificationResponse.json();
+        return data.success;
+    } catch (error) {
+        console.error('Error al verificar el reCAPTCHA:', error);
+        return false;
+    }
+}
+
 // Función para manejar el envío del formulario
 async function submitFormData(event) {
     event.preventDefault();
 
-    // Validar campos de nombres (actores, directores, guionistas)
-    if (!validarCamposNombres()) {
-        mostrarErrorValidacion('Por favor, corrija el formato de los nombres en los campos de actores, directores o guionistas. Deben estar separados por ", " (coma y espacio).');
+    // Ocultar mensajes de error previos
+    const errorElement = document.getElementById('recaptcha-error');
+    if (errorElement) {
+        errorElement.style.display = 'none';
+    }
+
+    // Validar reCAPTCHA
+    try {
+        const esRecaptchaValido = await verificarRecaptcha();
+        if (!esRecaptchaValido) {
+            // Mostrar mensaje de error específico
+            const errorMessage = document.getElementById('recaptcha-error');
+            if (errorMessage) {
+                errorMessage.textContent = 'Por favor, completa la verificación de reCAPTCHA.';
+                errorMessage.style.display = 'block';
+            } else {
+                mostrarErrorValidacion('Por favor, verifica que no eres un robot.');
+            }
+            // Recargar el reCAPTCHA
+            if (typeof grecaptcha !== 'undefined' && grecaptcha.reset) {
+                grecaptcha.reset();
+            }
+            return;
+        }
+    } catch (error) {
+        console.error('Error validando reCAPTCHA:', error);
+        mostrarErrorValidacion('Error al validar el reCAPTCHA. Por favor, recarga la página e inténtalo de nuevo.');
         return;
     }
+
+    // Formatear campos de nombres (actores, directores, guionistas)
+    validarCamposNombres();
 
     // Verificar si hay al menos una línea de participación
     if (!tieneLineasDeParticipacion()) {
@@ -2510,7 +2577,47 @@ async function submitFormData(event) {
                 );
             } else {
                 // Solo mostrar éxito del formulario principal si no hay exhibiciones
-                showMessage('¡Formulario enviado correctamente!', false);
+                showMessage('¡La declaración se ha enviado correctamente!', false);
+                
+                // Enviar notificación por correo
+                try {
+                    const formDataArray = collectFormData();
+                    const formData = formDataArray.length > 0 ? formDataArray[0] : {};
+                    
+                    // Depuración: Mostrar todo el objeto formData
+                    console.log('Datos completos del formulario:', formDataArray);
+                    console.log('Primer objeto del formulario:', formData);
+                    
+                    // Depuración: Ver valores específicos
+                    console.log('Valor de titulo_original:', formData.titulo_original);
+                    console.log('Valor de tipo_formato:', formData.tipo_formato);
+                    
+                    const emailData = {
+                        titulo_original: formData.titulo_original || 'Sin título',
+                        tipo_formato: formData.tipo_formato || 'No especificado',
+                        fecha_declaracion: new Date().toISOString().split('T')[0],
+                        enlace_tablas: 'https://tudominio.com/declaraciones/' + Date.now(),
+                        correo_destinatario: 'tudestinatario@ejemplo.com'
+                    };
+                    
+                    console.log('Datos a enviar por correo:', emailData); // Para depuración
+                    
+                    await fetch(NOTIFICACION_EMAIL_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(emailData)
+                    });
+                    
+                    console.log('Notificación por correo enviada correctamente');
+                } catch (emailError) {
+                    console.error('Error al enviar notificación por correo:', emailError);
+                    // No mostramos error al usuario para no interrumpir el flujo exitoso
+                }
+                
+                // Limpiar el formulario después de un envío exitoso
+                limpiarFormulario();
             }
         } catch (error) {
             console.error('Error al procesar el envío:', error);
@@ -2541,6 +2648,8 @@ async function submitFormData(event) {
 
 // Función para formatear nombres separados por comas
 function formatNames(input) {
+    if (!input || !input.value) return true;
+    
     // Eliminar espacios múltiples y espacios alrededor de comas
     let value = input.value
         .replace(/\s*,\s*/g, ', ')  // Reemplazar comas con o sin espacios por coma + espacio
@@ -2549,30 +2658,7 @@ function formatNames(input) {
     
     // Actualizar el valor del input
     input.value = value;
-    
-    // Mostrar mensaje de formato incorrecto si hay comas sin espacio
-    const hasInvalidFormat = /,[^ ]/.test(input.value) || /[^ ],/.test(input.value);
-    
-    if (hasInvalidFormat) {
-        input.classList.add('invalid-format');
-        
-        // Crear o actualizar el mensaje de error
-        let errorMsg = input.nextElementSibling;
-        if (!errorMsg || !errorMsg.classList.contains('format-error')) {
-            errorMsg = document.createElement('div');
-            errorMsg.className = 'format-error';
-            input.parentNode.insertBefore(errorMsg, input.nextSibling);
-        }
-        errorMsg.textContent = 'Por favor, separe los nombres con ", " (coma y espacio)';
-        return false;
-    } else {
-        input.classList.remove('invalid-format');
-        const errorMsg = input.nextElementSibling;
-        if (errorMsg && errorMsg.classList.contains('format-error')) {
-            errorMsg.remove();
-        }
-        return true;
-    }
+    return true;
 }
 
 // Función para configurar la validación de campos de nombres
@@ -2598,19 +2684,17 @@ function setupNameValidation() {
     });
 }
 
-// Función para validar el formato de los campos de nombres antes del envío
+// Función para formatear los campos de nombres antes del envío
 function validarCamposNombres() {
     const nameFields = ['actores', 'directores', 'guionistas'];
-    let valido = true;
     
     nameFields.forEach(fieldId => {
         const input = document.getElementById(fieldId);
-        if (input && input.value.trim() !== '') {
-            if (!formatNames(input)) {
-                valido = false;
-            }
+        if (input) {
+            formatNames(input);
         }
     });
     
-    return valido;
+    return true;
 }
+
